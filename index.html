@@ -14,247 +14,138 @@
       --line:#e5e7eb;
       --blue:#1e58ff;
       --blueDark:#0b3dd6;
-      --card:#f8fafc;
-      --shadow:0 18px 55px rgba(2,6,23,.10);
+      --shadow:0 18px 55px rgba(2,6,23,.15);
       --radius:18px;
-      --max:1120px;
+      --max:1200px;
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--ink);
     }
-    a{color:inherit; text-decoration:none}
+    a{text-decoration:none;color:inherit}
     .wrap{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
 
-    /* Header */
+    /* HEADER */
     header{
-      position:sticky; top:0; z-index:10;
+      position:sticky;
+      top:0;
+      z-index:20;
       background:#fff;
       border-bottom:1px solid var(--line);
     }
     .top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       padding:14px 0;
+      gap:16px;
     }
-
-    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
     .logo{
-      width:52px; height:52px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
+      height:52px;
       object-fit:contain;
-      display:block;
     }
-    .brand-text{display:flex; flex-direction:column; line-height:1.1}
-    .brand-name{font-weight:900; letter-spacing:-0.2px}
-    .brand-sub{margin-top:3px; font-size:12.5px; color:var(--muted); font-weight:700}
 
-    nav{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
-    nav a{
-      padding:10px 12px;
-      border-radius:12px;
+    nav{
+      display:flex;
+      gap:16px;
       font-weight:800;
-      font-size:14px;
       color:var(--muted);
-      border:1px solid transparent;
     }
-    nav a:hover{
-      color:var(--ink);
-      border-color:var(--line);
-      background:var(--card);
-    }
+    nav a:hover{color:var(--ink)}
 
-    .cta{display:flex; gap:10px; align-items:center}
+    .cta{
+      display:flex;
+      gap:10px;
+    }
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:12px 14px;
+      padding:12px 16px;
       border-radius:14px;
       font-weight:900;
-      font-size:14px;
       border:1px solid var(--line);
       background:#fff;
-      color:var(--ink);
-      transition:140ms ease;
-      white-space:nowrap;
     }
-    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 25px rgba(2,6,23,.08)}
     .btn.primary{
-      border-color:transparent;
       background:var(--blue);
       color:#fff;
+      border:none;
     }
     .btn.primary:hover{background:var(--blueDark)}
-    .btn.ghost{background:#fff;}
 
-    /* FULL-WIDTH HERO IMAGE (no text on top) */
-    .hero-bleed{
+    /* HERO */
+    .hero{
+      position:relative;
       width:100%;
-      height:min(72vh, 620px);
-      background:#f3f4f6;
-      border-bottom:1px solid var(--line);
+      height:80vh;
+      min-height:520px;
+      overflow:hidden;
     }
-    .hero-bleed img{
+
+    .hero img{
+      position:absolute;
+      inset:0;
       width:100%;
       height:100%;
       object-fit:cover;
-      display:block;
     }
 
-    /* Content below hero */
-    .below-hero{
-      padding:26px 0 46px;
-      background:
-        radial-gradient(1000px 500px at 15% 0%, rgba(30,88,255,.10), transparent 60%),
-        linear-gradient(#ffffff, #ffffff);
+    /* blue + dark overlay */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        rgba(30,88,255,.18),
+        rgba(0,0,0,.35)
+      );
     }
 
-    .panel{
-      border:1px solid var(--line);
-      border-radius:calc(var(--radius) + 8px);
-      padding:26px;
-      background:#fff;
-      box-shadow:var(--shadow);
-    }
+    /* CENTER TEXT */
+    .hero-title{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      z-index:2;
 
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      width:fit-content;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:var(--card);
-      color:var(--muted);
-      font-weight:900;
-      font-size:13px;
-    }
-    .kdot{
-      width:9px; height:9px; border-radius:50%;
-      background:var(--blue);
-      box-shadow:0 0 0 6px rgba(30,88,255,.12);
-    }
-
-    h1{
-      margin:14px 0 10px;
-      font-size:clamp(34px, 4.2vw, 56px);
-      line-height:1.03;
+      font-size:clamp(56px, 8vw, 110px);
+      font-weight:1000;
       letter-spacing:-1px;
-      font-weight:950;
-    }
-    .subhead{
-      margin:0;
-      color:var(--muted);
-      font-weight:700;
-      line-height:1.6;
-      font-size:16.5px;
-      max-width:58ch;
+      color:white;
+
+      text-shadow:
+        0 6px 30px rgba(0,0,0,.55),
+        0 0 45px rgba(30,88,255,.45);
     }
 
-    .hero-actions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin:16px 0 14px;
-    }
-
-    .facts{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:10px;
-      margin-top:8px;
-    }
-    .fact{
-      display:flex; justify-content:space-between; gap:12px;
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:var(--card);
-    }
-    .fact-k{color:var(--muted); font-weight:900; font-size:13px}
-    .fact-v{color:var(--ink); font-weight:950; font-size:13.5px; text-align:right}
-    .fact-v a{color:var(--blue); text-decoration:underline; text-underline-offset:3px}
-
-    @media (max-width: 980px){
+    /* MOBILE */
+    @media (max-width:900px){
       nav{display:none}
-      .hero-bleed{height:min(56vh, 520px)}
+      .hero{height:70vh}
     }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
-  <header>
-    <div class="wrap top">
-      <a class="brand" href="#home" aria-label="Philly Originals Home">
-        <img class="logo" src="assets/logo.png" alt="Philly Originals logo"
-             onerror="this.style.display='none'">
-        <div class="brand-text">
-          <div class="brand-name">Philly Originals</div>
-          <div class="brand-sub">Authentic cheesesteaks • Beaver, PA</div>
-        </div>
-      </a>
 
-      <nav aria-label="Site navigation">
-        <a href="#menu">Menu</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#visit">Visit</a>
-        <a href="#contact">Contact</a>
-      </nav>
+<!-- HEADER -->
+<header>
+  <div class="wrap top">
+    <!-- LOGO ONLY -->
+    <img src="assets/logo.png" alt="Philly Originals logo" class="logo">
 
-      <div class="cta">
-        <a class="btn ghost" href="#menu">See Menu</a>
-        <a class="btn primary" href="tel:+17247283011">Call Now</a>
-      </div>
-    </div>
-  </header>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-  <main id="home">
-    <!-- FULL WIDTH HERO IMAGE -->
-    <section class="hero-bleed" aria-label="Cheesesteak hero image">
-      <img src="assets/hero.jpg" alt="A close-up Philly cheesesteak platter"
-           onerror="this.style.display='none'">
-    </section>
-
-    <!-- TEXT BELOW HERO (no obstruction) -->
-    <section class="below-hero">
-      <div class="wrap">
-        <div class="panel">
-          <div class="kicker"><span class="kdot"></span> Locally owned • Est. 1993</div>
-          <h1>Philly Originals</h1>
-          <p class="subhead">
-            Real-deal cheesesteaks and fresh sandwiches. Stop in for lunch or call ahead for fast pickup.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn primary" href="#menu">See Menu</a>
-            <a class="btn ghost" href="tel:+17247283011">Call (724) 728-3011</a>
-            <a class="btn ghost" target="_blank" rel="noopener"
-               href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
-              Get Directions →
-            </a>
-          </div>
-
-          <div class="facts">
-            <div class="fact">
-              <div class="fact-k">Address</div>
-              <div class="fact-v">400 Third St, Beaver, PA 15009</div>
-            </div>
-            <div class="fact">
-              <div class="fact-k">Phone</div>
-              <div class="fact-v"><a href="tel:+17247283011">(724) 728-3011</a></div>
-            </div>
-            <div class="fact">
-              <div class="fact-k">Best move</div>
-              <div class="fact-v">Call ahead for pickup</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+    <div class="cta">
+      <a href="#menu" class="btn">See Menu</a>
+      <a href="tel:+17247283011" class="bt
