@@ -14,86 +14,100 @@
       --line:#e5e7eb;
       --blue:#1e58ff;
       --blueDark:#0b3dd6;
-      --shadow:0 18px 55px rgba(2,6,23,.15);
+      --card:#f8fafc;
+      --shadow:0 18px 55px rgba(2,6,23,.10);
       --radius:18px;
-      --max:1200px;
+      --max:1120px;
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--ink);
     }
-    a{text-decoration:none;color:inherit}
+    a{color:inherit; text-decoration:none}
     .wrap{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
 
-    /* HEADER */
+    /* Header */
     header{
-      position:sticky;
-      top:0;
-      z-index:20;
+      position:sticky; top:0; z-index:10;
       background:#fff;
       border-bottom:1px solid var(--line);
     }
     .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:14px 0;
+      display:flex; align-items:center; justify-content:space-between;
       gap:16px;
+      padding:14px 0;
     }
+
+    /* Brand (LOGO ONLY) */
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
     .logo{
       height:52px;
+      width:auto;
+      max-width:220px;
       object-fit:contain;
+      display:block;
     }
 
-    nav{
-      display:flex;
-      gap:16px;
+    nav{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      padding:10px 12px;
+      border-radius:12px;
       font-weight:800;
+      font-size:14px;
       color:var(--muted);
+      border:1px solid transparent;
     }
-    nav a:hover{color:var(--ink)}
+    nav a:hover{
+      color:var(--ink);
+      border-color:var(--line);
+      background:var(--card);
+    }
 
-    .cta{
-      display:flex;
-      gap:10px;
-    }
+    .cta{display:flex; gap:10px; align-items:center}
     .btn{
-      padding:12px 16px;
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
       border-radius:14px;
       font-weight:900;
+      font-size:14px;
       border:1px solid var(--line);
       background:#fff;
+      color:var(--ink);
+      transition:140ms ease;
+      white-space:nowrap;
     }
+    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 25px rgba(2,6,23,.08)}
     .btn.primary{
+      border-color:transparent;
       background:var(--blue);
       color:#fff;
-      border:none;
     }
     .btn.primary:hover{background:var(--blueDark)}
+    .btn.ghost{background:#fff;}
 
-    /* HERO */
-    .hero{
+    /* HERO (full width image with centered title, nothing else obstructing) */
+    .hero-bleed{
       position:relative;
       width:100%;
-      height:80vh;
-      min-height:520px;
+      height:min(72vh, 620px);
+      background:#f3f4f6;
+      border-bottom:1px solid var(--line);
       overflow:hidden;
     }
-
-    .hero img{
-      position:absolute;
-      inset:0;
+    .hero-bleed img{
       width:100%;
       height:100%;
       object-fit:cover;
+      display:block;
     }
 
-    /* blue + dark overlay */
-    .hero::after{
+    /* gentle dark + blue overlay for readability */
+    .hero-bleed::after{
       content:"";
       position:absolute;
       inset:0;
@@ -101,51 +115,178 @@
         rgba(30,88,255,.18),
         rgba(0,0,0,.35)
       );
+      pointer-events:none;
     }
 
-    /* CENTER TEXT */
+    /* centered hero text */
     .hero-title{
       position:absolute;
       inset:0;
+      z-index:2;
       display:flex;
       align-items:center;
       justify-content:center;
       text-align:center;
-      z-index:2;
+      padding:0 16px;
 
-      font-size:clamp(56px, 8vw, 110px);
+      font-size:clamp(52px, 7.2vw, 112px);
       font-weight:1000;
       letter-spacing:-1px;
-      color:white;
 
+      color:#fff;
       text-shadow:
-        0 6px 30px rgba(0,0,0,.55),
-        0 0 45px rgba(30,88,255,.45);
+        0 8px 30px rgba(0,0,0,.55),
+        0 0 42px rgba(30,88,255,.55);
+
+      pointer-events:none;
     }
 
-    /* MOBILE */
-    @media (max-width:900px){
+    /* Content below hero */
+    .below-hero{
+      padding:26px 0 46px;
+      background:
+        radial-gradient(1000px 500px at 15% 0%, rgba(30,88,255,.10), transparent 60%),
+        linear-gradient(#ffffff, #ffffff);
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:calc(var(--radius) + 8px);
+      padding:26px;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      width:fit-content;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--card);
+      color:var(--muted);
+      font-weight:900;
+      font-size:13px;
+    }
+    .kdot{
+      width:9px; height:9px; border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 6px rgba(30,88,255,.12);
+    }
+
+    h1{
+      margin:14px 0 10px;
+      font-size:clamp(34px, 4.2vw, 56px);
+      line-height:1.03;
+      letter-spacing:-1px;
+      font-weight:950;
+    }
+    .subhead{
+      margin:0;
+      color:var(--muted);
+      font-weight:700;
+      line-height:1.6;
+      font-size:16.5px;
+      max-width:58ch;
+    }
+
+    .hero-actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin:16px 0 14px;
+    }
+
+    .facts{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:8px;
+    }
+    .fact{
+      display:flex; justify-content:space-between; gap:12px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:var(--card);
+    }
+    .fact-k{color:var(--muted); font-weight:900; font-size:13px}
+    .fact-v{color:var(--ink); font-weight:950; font-size:13.5px; text-align:right}
+    .fact-v a{color:var(--blue); text-decoration:underline; text-underline-offset:3px}
+
+    @media (max-width: 980px){
       nav{display:none}
-      .hero{height:70vh}
+      .hero-bleed{height:min(56vh, 520px)}
     }
   </style>
 </head>
 
 <body>
+  <!-- Header -->
+  <header>
+    <div class="wrap top">
+      <!-- LOGO ONLY (replaces Philly Originals text) -->
+      <a class="brand" href="#home" aria-label="Philly Originals Home">
+        <img class="logo" src="assets/logo.png" alt="Philly Originals logo"
+             onerror="this.style.display='none'">
+      </a>
 
-<!-- HEADER -->
-<header>
-  <div class="wrap top">
-    <!-- LOGO ONLY -->
-    <img src="assets/logo.png" alt="Philly Originals logo" class="logo">
+      <nav aria-label="Site navigation">
+        <a href="#menu">Menu</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#visit">Visit</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-    <nav>
-      <a href="#menu">Menu</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#visit">Visit</a>
-      <a href="#contact">Contact</a>
-    </nav>
+      <div class="cta">
+        <a class="btn ghost" href="#menu">See Menu</a>
+        <a class="btn primary" href="tel:+17247283011">Call Now</a>
+      </div>
+    </div>
+  </header>
 
-    <div class="cta">
-      <a href="#menu" class="btn">See Menu</a>
-      <a href="tel:+17247283011" class="bt
+  <main id="home">
+    <!-- FULL WIDTH HERO IMAGE + CENTERED TITLE -->
+    <section class="hero-bleed" aria-label="Cheesesteak hero image">
+      <img src="assets/hero.jpg" alt="A close-up Philly cheesesteak platter"
+           onerror="this.style.display='none'">
+      <div class="hero-title">Philly Originals</div>
+    </section>
+
+    <!-- TEXT BELOW HERO -->
+    <section class="below-hero">
+      <div class="wrap">
+        <div class="panel">
+          <div class="kicker"><span class="kdot"></span> Locally owned • Est. 1993</div>
+          <h1>Philly Originals</h1>
+          <p class="subhead">
+            Real-deal cheesesteaks and fresh sandwiches. Stop in for lunch or call ahead for fast pickup.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#menu">See Menu</a>
+            <a class="btn ghost" href="tel:+17247283011">Call (724) 728-3011</a>
+            <a class="btn ghost" target="_blank" rel="noopener"
+               href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
+              Get Directions →
+            </a>
+          </div>
+
+          <div class="facts">
+            <div class="fact">
+              <div class="fact-k">Address</div>
+              <div class="fact-v">400 Third St, Beaver, PA 15009</div>
+            </div>
+            <div class="fact">
+              <div class="fact-k">Phone</div>
+              <div class="fact-v"><a href="tel:+17247283011">(724) 728-3011</a></div>
+            </div>
+            <div class="fact">
+              <div class="fact-k">Best move</div>
+              <div class="fact-v">Call ahead for pickup</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
