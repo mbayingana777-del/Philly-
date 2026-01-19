@@ -4,26 +4,269 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Philly Originals | Beaver, PA</title>
-  <meta name="description" content="Philly Originals in Beaver, PA. Authentic cheesesteaks. Visit us at 400 Third St or call (724) 728-3011." />
+  <meta name="description" content="Philly Originals in Beaver, PA. Authentic cheesesteaks. 400 Third St. Call (724) 728-3011." />
 
-  <!-- Open Graph -->
+  <!-- Social preview -->
   <meta property="og:title" content="Philly Originals | Beaver, PA" />
-  <meta property="og:description" content="Authentic cheesesteaks. Visit us at 400 Third St in Beaver, PA or call (724) 728-3011." />
+  <meta property="og:description" content="Authentic cheesesteaks. Visit us at 400 Third St or call (724) 728-3011." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/hero.jpg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root{
+      --bg:#07090d;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.55);
+      --line:rgba(255,255,255,.12);
+
+      --blue:#1e58ff;
+      --red:#ff2b3c;
+
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.10);
+      --radius:18px;
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+      --shadow2:0 10px 30px rgba(0,0,0,.42);
+
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(30,88,255,.20), transparent 60%),
+        radial-gradient(700px 450px at 95% 8%, rgba(255,43,60,.16), transparent 60%),
+        radial-gradient(900px 650px at 50% 120%, rgba(255,255,255,.06), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:800; font-size:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      transition:160ms ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.20)}
+    .btn.primary{
+      border:none;
+      background:linear-gradient(135deg,var(--blue),var(--red));
+      box-shadow:0 16px 45px rgba(30,88,255,.20);
+    }
+    .btn.primary:hover{filter:brightness(1.05); box-shadow:0 18px 55px rgba(255,43,60,.18)}
+    .btn.ghost{}
+
+    /* Header */
+    .top{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:blur(16px);
+      background:rgba(7,9,13,.60);
+      border-bottom:1px solid var(--line);
+    }
+    .top-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
+    .logo{
+      width:48px; height:48px; border-radius:12px; object-fit:cover;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow2);
+      display:block;
+    }
+    .brand-name{font-weight:900; letter-spacing:.2px; line-height:1.1}
+    .brand-sub{font-size:12.5px; color:var(--muted2)}
+    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .nav a{
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:700;
+      font-size:14px;
+      color:var(--muted);
+      border:1px solid transparent;
+    }
+    .nav a:hover{color:var(--text); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.10)}
+    .top-cta{display:flex; gap:10px; align-items:center}
+
+    /* Hero */
+    .hero{padding:34px 0 18px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .hero-copy{
+      padding:26px;
+      border-radius:calc(var(--radius) + 8px);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:var(--shadow);
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      width:fit-content;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+    }
+    .kdot{
+      width:8px; height:8px; border-radius:50%;
+      background:linear-gradient(135deg,var(--blue),var(--red));
+      box-shadow:0 0 0 6px rgba(30,88,255,.14);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-weight:950;
+      letter-spacing:-.9px;
+      line-height:1.02;
+      font-size:clamp(34px, 4vw, 54px);
+    }
+    .subhead{margin:0; color:var(--muted); font-size:16.5px; line-height:1.55; max-width:55ch}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 12px}
+
+    .facts{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin:12px 0 10px;
+    }
+    .fact{
+      display:flex; justify-content:space-between; gap:12px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .fact-k{color:var(--muted2); font-weight:800; font-size:13px}
+    .fact-v{color:var(--text); font-weight:900; font-size:13.5px; text-align:right}
+    .fact-v a{color:var(--text); font-weight:950; text-decoration:underline; text-underline-offset:3px}
+
+    /* Hero media (no external images needed) */
+    .hero-media{
+      position:relative;
+      border-radius:calc(var(--radius) + 8px);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.03);
+      box-shadow:var(--shadow);
+      min-height:420px;
+    }
+    .hero-photo-slot{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      padding:24px;
+      background:
+        radial-gradient(900px 500px at 20% 15%, rgba(30,88,255,.25), transparent 55%),
+        radial-gradient(700px 500px at 85% 25%, rgba(255,43,60,.20), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+    .photo-box{
+      width:min(520px, 92%);
+      height:min(300px, 58%);
+      border-radius:22px;
+      border:1px dashed rgba(255,255,255,.28);
+      background:rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:18px;
+    }
+    .photo-box strong{display:block; font-weight:950; margin-bottom:6px}
+    .photo-box span{color:var(--muted); font-weight:700; font-size:13.5px; line-height:1.4}
+
+    .hero-card{
+      position:absolute;
+      left:16px; right:16px; bottom:16px;
+      z-index:2;
+      padding:14px;
+      border-radius:18px;
+      background:rgba(7,9,13,.60);
+      border:1px solid rgba(255,255,255,.16);
+      backdrop-filter:blur(12px);
+    }
+    .hero-card-title{font-weight:950; margin-bottom:10px}
+    .hero-card-row{
+      display:flex; justify-content:space-between; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-weight:800;
+      font-size:13.5px;
+    }
+    .hero-card-row a{color:var(--text); font-weight:950; text-decoration:underline; text-underline-offset:3px}
+
+    /* Sections */
+    .section{padding:26px 0}
+    .section-head{display:flex; justify-content:space-between; gap:14px; align-items:flex-end; margin-bottom:14px}
+    .section-head h2{margin:0; font-size:24px; font-weight:950; letter-spacing:-.4px}
+    .section-head p{margin:0; color:var(--muted2); font-weight:700; font-size:13.5px}
+
+    /* Cards */
+    .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .card{
+      padding:18px;
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.11);
+      box-shadow:0 10px 30px rgba(0,0,0,.28);
+    }
+    .icon{
+      width:42px; height:42px;
+      display:grid; place-items:center;
+      border-radius:14px;
+      background:linear-gradient(135deg, rgba(30,88,255,.22), rgba(255,43,60,.14));
+      border:1px solid rgba(255,255,255,.14);
+      font-weight:950;
+    }
+    .card h3{margin:12px 0 6px; font-size:16px; font-weight:950}
+    .card p{margin:0; color:var(--muted); line-height:1.55; font-size:14px}
+
+    /* Footer */
+    .footer{border-top:1px solid var(--line); padding:28px 0 34px}
+    .footer-inner{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .footer-title{font-weight:950}
+    .footer-sub{margin-top:6px; color:var(--muted)}
+    .footer-sub2{margin-top:10px; color:var(--muted2); font-weight:700; font-size:13px}
+    .footer-links{display:flex; gap:14px; flex-wrap:wrap}
+    .footer-links a{color:var(--muted); font-weight:800}
+    .footer-links a:hover{color:var(--text)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .nav{display:none}
+      .hero-grid{grid-template-columns:1fr}
+      .hero-media{min-height:320px}
+      .cards3{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Top bar -->
   <header class="top">
     <div class="wrap top-inner">
       <a class="brand" href="#home" aria-label="Philly Originals Home">
-        <img class="logo" src="assets/logo.png" alt="Philly Originals logo" />
+        <!-- This will show even without assets. Replace src later when ready. -->
+        <img class="logo" src="assets/logo.png" alt="Philly Originals logo"
+             onerror="this.style.display='none'" />
         <div class="brand-text">
           <div class="brand-name">Philly Originals</div>
           <div class="brand-sub">Authentic cheesesteaks • Beaver, PA</div>
@@ -32,19 +275,17 @@
 
       <nav class="nav">
         <a href="#menu">Menu</a>
-        <a href="#reviews">Reviews</a>
         <a href="#visit">Visit</a>
         <a href="#contact">Contact</a>
       </nav>
 
       <div class="top-cta">
         <a class="btn ghost" href="#menu">See Menu</a>
-        <a class="btn primary" href="tel:+17247283011" aria-label="Call Philly Originals">Call Now</a>
+        <a class="btn primary" href="tel:+17247283011">Call Now</a>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
   <main id="home">
     <section class="hero">
       <div class="wrap hero-grid">
@@ -63,10 +304,10 @@
 
           <div class="hero-actions">
             <a class="btn primary" href="#menu">See Menu</a>
-            <a class="btn ghost" href="tel:+17247283011">Call Now (724) 728-3011</a>
+            <a class="btn ghost" href="tel:+17247283011">Call (724) 728-3011</a>
             <a class="btn ghost" target="_blank" rel="noopener"
                href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
-               Get Directions →
+              Get Directions →
             </a>
           </div>
 
@@ -80,22 +321,23 @@
               <div class="fact-v"><a href="tel:+17247283011">(724) 728-3011</a></div>
             </div>
             <div class="fact">
-              <div class="fact-k">Email deals</div>
-              <div class="fact-v"><a href="#contact">Join list ↓</a></div>
+              <div class="fact-k">Goal</div>
+              <div class="fact-v">More foot traffic + calls</div>
             </div>
-          </div>
-
-          <div class="badges">
-            <span class="badge">🥩 Thin-sliced steak</span>
-            <span class="badge">🧀 Melty cheese</span>
-            <span class="badge">🥖 Fresh roll</span>
           </div>
         </div>
 
         <div class="hero-media">
-          <!-- Replace assets/hero.jpg with your close-up cheesesteak platter image -->
-          <img src="assets/hero.jpg" alt="Philly Originals cheesesteak platter close-up" />
-          <div class="hero-glow"></div>
+          <div class="hero-photo-slot" aria-label="Hero photo slot">
+            <div class="photo-box">
+              <strong>Hero photo slot</strong>
+              <span>
+                Put your cheesesteak platter photo at:<br/>
+                <code style="color:rgba(255,255,255,.82)">assets/hero.jpg</code><br/>
+                (We’ll wire it in next)
+              </span>
+            </div>
+          </div>
 
           <div class="hero-card">
             <div class="hero-card-title">Quick actions</div>
@@ -111,204 +353,65 @@
               </a>
             </div>
             <div class="hero-card-row">
-              <span>Join deals</span>
-              <a href="#contact">Email list →</a>
+              <span>Email deals</span>
+              <a href="#contact">Join list →</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Menu -->
-    <section id="menu" class="section">
+    <section class="section" id="menu">
       <div class="wrap">
         <div class="section-head">
           <h2>Menu</h2>
-          <p>“Order now” calls the shop. Swap in your exact items/prices anytime.</p>
+          <p>Starter section — we’ll replace with your real menu next.</p>
         </div>
 
-        <div class="menu-grid">
-          <div class="menu">
-            <div class="menu-item">
-              <div class="mi-left">
-                <div class="mi-title">Classic Cheesesteak</div>
-                <div class="mi-desc">Thin-sliced steak, melty cheese, toasted roll. Onions/peppers your way.</div>
-              </div>
-              <div class="mi-right">★</div>
-            </div>
-
-            <div class="menu-item">
-              <div class="mi-left">
-                <div class="mi-title">Loaded Cheesesteak</div>
-                <div class="mi-desc">Extra meat/cheese + toppings for the full Philly experience.</div>
-              </div>
-              <div class="mi-right">★</div>
-            </div>
-
-            <div class="menu-item">
-              <div class="mi-left">
-                <div class="mi-title">Hoagies & Sandwiches</div>
-                <div class="mi-desc">Fresh, classic sandwich shop favorites made to order.</div>
-              </div>
-              <div class="mi-right">★</div>
-            </div>
-
-            <div class="menu-item">
-              <div class="mi-left">
-                <div class="mi-title">Sides & Extras</div>
-                <div class="mi-desc">Ask about current specials when you call.</div>
-              </div>
-              <div class="mi-right">★</div>
-            </div>
-
-            <div class="menu-cta">
-              <a class="btn primary" href="tel:+17247283011">Order Now (Call)</a>
-              <a class="btn ghost" target="_blank" rel="noopener"
-                 href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
-                 Get Directions →
-              </a>
-            </div>
+        <div class="cards3">
+          <div class="card">
+            <div class="icon">★</div>
+            <h3>Classic Cheesesteak</h3>
+            <p>Steak, cheese, toasted roll. Built the right way.</p>
           </div>
-
-          <aside class="aside">
-            <div class="aside-card">
-              <div class="aside-title">Quick info</div>
-
-              <div class="aside-row"><span>Phone</span><a href="tel:+17247283011">(724) 728-3011</a></div>
-              <div class="aside-row"><span>Address</span><span>400 Third St</span></div>
-              <div class="aside-row"><span>City</span><span>Beaver, PA 15009</span></div>
-              <div class="aside-row"><span>Best move</span><span>Call ahead</span></div>
-
-              <div class="aside-buttons">
-                <!-- Swap to real links if you have them -->
-                <a class="btn ghost" target="_blank" rel="noopener" href="#">Instagram</a>
-                <a class="btn ghost" target="_blank" rel="noopener" href="#">Facebook</a>
-              </div>
-
-              <div class="aside-note">
-                Want deals + updates? Join the email list below.
-              </div>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- Reviews -->
-    <section id="reviews" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Reviews</h2>
-          <p>Google Reviews (embed). Replace the iframe src with your real Google embed link.</p>
-        </div>
-
-        <div class="reviews-grid">
-          <div class="review-card">
-            <h3>What people are saying</h3>
-            <p class="muted">
-              This section builds trust fast and boosts foot traffic.
-              If you want, I can also add 3 highlighted review quotes above the embed.
-            </p>
-
-            <div class="review-actions">
-              <a class="btn primary" target="_blank" rel="noopener" href="#">
-                Leave a Google Review →
-              </a>
-              <a class="btn ghost" target="_blank" rel="noopener"
-                 href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
-                 See on Maps →
-              </a>
-            </div>
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Call-ahead pickup</h3>
+            <p>Fastest move: call ahead and swing through.</p>
           </div>
-
-          <div class="review-embed">
-            <!-- HOW TO GET THIS:
-                 Google Maps -> Search Philly Originals -> Reviews -> Share -> Embed a map -> copy iframe src
-            -->
-            <iframe
-              title="Philly Originals Google Reviews"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009&output=embed">
-            </iframe>
+          <div class="card">
+            <div class="icon">📍</div>
+            <h3>Downtown Beaver</h3>
+            <p>400 Third St — easy to find, easy to love.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Visit -->
-    <section id="visit" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Visit Philly Originals</h2>
-          <p>400 Third St, Beaver, PA 15009</p>
-        </div>
-
-        <div class="visit-grid">
-          <div class="visit-card">
-            <div class="visit-lines">
-              <div class="vline"><span>Address</span><strong>400 Third St, Beaver, PA 15009</strong></div>
-              <div class="vline"><span>Phone</span><strong><a href="tel:+17247283011">(724) 728-3011</a></strong></div>
-              <div class="vline"><span>Tip</span><strong>Call ahead for fastest pickup</strong></div>
-            </div>
-
-            <div class="visit-actions">
-              <a class="btn primary" target="_blank" rel="noopener"
-                 href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
-                 Open in Google Maps →
-              </a>
-              <a class="btn ghost" href="tel:+17247283011">Call Now</a>
-            </div>
-          </div>
-
-          <div class="map">
-            <iframe
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009&output=embed">
-            </iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact + Email Opt-in -->
-    <section id="contact" class="section">
+    <section class="section" id="contact">
       <div class="wrap">
         <div class="section-head">
           <h2>Contact</h2>
-          <p>Call for orders. Join the email list for deals and updates.</p>
+          <p>We’ll add the email opt-in + Google Sheet hookup next.</p>
         </div>
 
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3>Fastest way: call</h3>
-            <p>For orders and availability, calling is best.</p>
-            <a class="btn primary" href="tel:+17247283011">Call (724) 728-3011</a>
+        <div class="cards3">
+          <div class="card">
+            <div class="icon">☎</div>
+            <h3>Call for orders</h3>
+            <p><a class="btn primary" href="tel:+17247283011" style="margin-top:10px">Call (724) 728-3011</a></p>
           </div>
-
-          <div class="contact-card">
-            <h3>Get deals by email</h3>
-            <p class="muted">Join the list for specials and updates. (This will send to your Google Sheet.)</p>
-
-            <!-- Replace data-endpoint with your Google Apps Script Web App URL -->
-            <form id="leadForm" class="lead-form" data-endpoint="PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE">
-              <div class="lead-row">
-                <input class="lead-input" type="text" name="name" placeholder="Name (optional)" />
-                <input class="lead-input" type="email" name="email" placeholder="Email address" required />
-              </div>
-              <div class="lead-row">
-                <input class="lead-input" type="tel" name="phone" placeholder="Phone (optional)" />
-                <button class="btn primary" type="submit">Join Email List</button>
-              </div>
-              <div class="small-muted" id="leadStatus">
-                We respect your inbox. Unsubscribe anytime.
-              </div>
-            </form>
-
-            <div class="small-muted" style="margin-top:10px;">
-              Want this to also email you? Tell me the exact email address and I’ll wire it in (Apps Script can do both).
-            </div>
+          <div class="card">
+            <div class="icon">🗺</div>
+            <h3>Get directions</h3>
+            <p><a class="btn ghost" target="_blank" rel="noopener"
+                  href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009"
+                  style="margin-top:10px">Open Maps →</a></p>
+          </div>
+          <div class="card">
+            <div class="icon">✉</div>
+            <h3>Email deals</h3>
+            <p>Next step: simple form that logs to Google Sheets.</p>
           </div>
         </div>
       </div>
@@ -325,32 +428,27 @@
 
       <div class="footer-links">
         <a href="#menu">Menu</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#visit">Visit</a>
+        <a href="#visit" onclick="return false;">Visit</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-  <!-- LocalBusiness schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    "name": "Philly Originals",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "400 Third St",
-      "addressLocality": "Beaver",
-      "addressRegion": "PA",
-      "postalCode": "15009",
-      "addressCountry": "US"
-    },
-    "telephone": "+1-724-728-3011",
-    "servesCuisine": ["Cheesesteaks", "Sandwiches"]
-  }
+    // smooth scroll (simple + safe)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        if (!id || id === "#") return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
   </script>
 </body>
 </html>
