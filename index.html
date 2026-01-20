@@ -120,18 +120,23 @@
     }
 
     /* centered hero text */
-  .hero-title{
+ .hero-title{
   position:absolute;
   inset:0;
   z-index:2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:0 16px;
 
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+
+  padding-top:15vh;          /* ⬆ higher (was ~18vh) */
+  padding-left:16px;
+  padding-right:16px;
+
+  text-align:center;
   font-family:'Oswald', system-ui, sans-serif;
-  font-size:clamp(56px, 7vw, 110px);
+
+  font-size:clamp(40px, 5vw, 80px);  /* ⬇ smaller */
   font-weight:700;
   letter-spacing:1px;
 
