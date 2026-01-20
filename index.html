@@ -120,29 +120,34 @@
     }
 
     /* centered hero text */
-    .hero-title{
+  .hero-title{
   position:absolute;
   inset:0;
   z-index:2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:0 16px;
 
+  display:flex;
+  align-items:flex-start;          /* move text up */
+  justify-content:center;
+
+  padding-top:18vh;                /* controls vertical position */
+  padding-left:16px;
+  padding-right:16px;
+
+  text-align:center;
   font-family:'Oswald', system-ui, sans-serif;
-  font-size:clamp(56px, 7vw, 110px);
+
+  font-size:clamp(44px, 5.5vw, 88px);  /* smaller */
   font-weight:700;
   letter-spacing:1px;
 
   color:#ffffff;
-
   text-shadow:
     0 6px 28px rgba(0,0,0,.55),
     0 0 36px rgba(30,88,255,.45);
 
   pointer-events:none;
 }
+
 
 
     /* Content below hero */
