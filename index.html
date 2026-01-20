@@ -34,44 +34,41 @@
     a{color:inherit; text-decoration:none}
     .wrap{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
 
-    /* =========================
-       CHIPOTLE-STYLE: HEADER
-       - sticky
-       - strong primary CTA
-       - clean nav
-    ========================== */
+    /* Header */
     header{
-      position:sticky; top:0; z-index:20;
+      position:sticky; top:0; z-index:10;
       background:#fff;
       border-bottom:1px solid var(--line);
     }
     .top{
       display:flex;
-      align-items:center;
+      align-items:flex-start;            /* logo sits top-left */
       justify-content:space-between;
-      gap:14px;
-      padding:12px 0;
+      gap:16px;
+      padding:14px 0;
     }
 
+    /* Brand (LOGO ONLY) */
     .brand{
       display:flex;
-      align-items:center;
-      gap:10px;
+      align-items:flex-start;
+      gap:12px;
       min-width:auto;
+      padding-top:2px;
     }
     .logo{
-      height:42px;
+      height:44px;
       width:auto;
       max-width:180px;
       object-fit:contain;
       display:block;
     }
 
-    nav{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end}
+    nav{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
     nav a{
       padding:10px 12px;
       border-radius:12px;
-      font-weight:900;
+      font-weight:800;
       font-size:14px;
       color:var(--muted);
       border:1px solid transparent;
@@ -87,7 +84,7 @@
       display:inline-flex; align-items:center; justify-content:center;
       padding:12px 14px;
       border-radius:14px;
-      font-weight:950;
+      font-weight:900;
       font-size:14px;
       border:1px solid var(--line);
       background:#fff;
@@ -104,16 +101,11 @@
     .btn.primary:hover{background:var(--blueDark)}
     .btn.ghost{background:#fff;}
 
-    /* =========================
-       CHIPOTLE-STYLE: HERO
-       - full bleed image
-       - minimal copy (brand only)
-       - primary actions immediately below (not blocking image)
-    ========================== */
+    /* HERO (full width image with centered title) */
     .hero-bleed{
       position:relative;
       width:100%;
-      height:min(70vh, 600px);
+      height:min(72vh, 620px);
       background:#f3f4f6;
       border-bottom:1px solid var(--line);
       overflow:hidden;
@@ -124,16 +116,20 @@
       object-fit:cover;
       display:block;
     }
+
+    /* gentle overlay for readability */
     .hero-bleed::after{
       content:"";
       position:absolute;
       inset:0;
       background:linear-gradient(
-        rgba(30,88,255,.14),
+        rgba(30,88,255,.16),
         rgba(0,0,0,.34)
       );
       pointer-events:none;
     }
+
+    /* hero title: smaller + higher */
     .hero-title{
       position:absolute;
       inset:0;
@@ -145,7 +141,7 @@
       padding:0 16px;
 
       font-family:'Oswald', system-ui, sans-serif;
-      font-size:clamp(44px, 5.6vw, 92px);
+      font-size:clamp(40px, 5.1vw, 84px);  /* smaller */
       font-weight:700;
       letter-spacing:1px;
 
@@ -154,74 +150,35 @@
         0 6px 28px rgba(0,0,0,.55),
         0 0 32px rgba(30,88,255,.40);
 
-      transform:translateY(-7%);
+      transform:translateY(-10%);          /* higher */
       pointer-events:none;
     }
 
-    /* Quick action bar (Chipotle-style: action first) */
-    .quickbar{
-      background:#fff;
-      border-bottom:1px solid var(--line);
-    }
-    .quickbar-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding:14px 0;
-      flex-wrap:wrap;
-    }
-    .quickbar-left{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:var(--card);
-      color:var(--muted);
-      font-weight:950;
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .dot{
-      width:9px; height:9px; border-radius:50%;
-      background:var(--blue);
-      box-shadow:0 0 0 6px rgba(30,88,255,.12);
-      display:inline-block;
-    }
-    .quickbar-right{display:flex; gap:10px; flex-wrap:wrap}
-
-    /* =========================
-       SECTIONS (clean, purpose-driven)
-    ========================== */
+    /* Section base */
     .section{
       padding:26px 0 46px;
       background:
         radial-gradient(1000px 500px at 15% 0%, rgba(30,88,255,.10), transparent 60%),
         linear-gradient(#ffffff, #ffffff);
     }
+
     .panel{
       border:1px solid var(--line);
       border-radius:calc(var(--radius) + 8px);
-      padding:22px;
+      padding:26px;
       background:#fff;
       box-shadow:var(--shadow);
     }
+
     .section-head{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:14px;
-      margin-bottom:14px;
+      margin-bottom:16px;
       flex-wrap:wrap;
     }
+
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
       width:fit-content;
@@ -230,7 +187,7 @@
       border:1px solid var(--line);
       background:var(--card);
       color:var(--muted);
-      font-weight:950;
+      font-weight:900;
       font-size:13px;
     }
     .kdot{
@@ -238,202 +195,143 @@
       background:var(--blue);
       box-shadow:0 0 0 6px rgba(30,88,255,.12);
     }
+
     .h2{
       margin:10px 0 6px;
-      font-size:clamp(24px, 2.4vw, 32px);
-      font-weight:980;
+      font-size:clamp(26px, 2.6vw, 34px);
+      font-weight:950;
       letter-spacing:-0.6px;
     }
     .subhead{
       margin:0;
       color:var(--muted);
-      font-weight:800;
+      font-weight:700;
       line-height:1.6;
-      font-size:15.5px;
-      max-width:78ch;
+      font-size:16px;
+      max-width:72ch;
     }
 
-    /* =========================
-       MENU (chipotle-like: clear categories, scannable items)
-    ========================== */
-    .menu-grid{
+    /* CHIPOTLE-STYLE CATEGORY GRID */
+    .category-grid{
+      margin-top:18px;
       display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:14px;
-      margin-top:14px;
-    }
-    .menu-card{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:var(--card);
-      padding:16px;
-    }
-    .menu-card h3{
-      margin:0 0 10px;
-      font-size:18px;
-      font-weight:980;
-      letter-spacing:-0.3px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--muted);
-      font-weight:950;
-      font-size:12.5px;
-      white-space:nowrap;
-    }
-    .pill i{
-      width:8px; height:8px; border-radius:50%;
-      background:var(--blue);
-      display:inline-block;
-      box-shadow:0 0 0 5px rgba(30,88,255,.12);
-    }
-    .menu-list{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:10px;
-    }
-    .menu-item{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px 12px;
-    }
-    .menu-item .name{
-      font-weight:980;
-      margin:0;
-      font-size:14.5px;
-    }
-    .menu-item .desc{
-      margin:4px 0 0;
-      color:var(--muted);
-      font-weight:800;
-      font-size:13.5px;
-      line-height:1.45;
-    }
-    .divider{
-      height:1px;
-      background:var(--line);
-      margin:14px 0;
-      border-radius:999px;
-    }
-    .menu-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:18px;
     }
 
-    /* =========================
-       VISIT: map + key info
-    ========================== */
-    .visit-grid{
-      display:grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap:14px;
-      margin-top:14px;
-      align-items:stretch;
-    }
-    .visit-card{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:var(--card);
-      padding:16px;
-    }
-    .info-row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
-      margin-bottom:10px;
-      font-weight:900;
-      color:var(--muted);
-      font-size:14px;
-    }
-    .info-row strong{color:var(--ink); font-weight:980}
-    .info-row a{color:var(--blue); text-decoration:underline; text-underline-offset:3px}
-
-    .map{
-      border-radius:18px;
+    .category-tile{
+      position:relative;
+      display:block;
+      border-radius:22px;
       overflow:hidden;
       border:1px solid var(--line);
       background:#fff;
-      min-height:340px;
+      box-shadow:0 10px 28px rgba(2,6,23,.06);
+      transform:translateZ(0);
+      transition:180ms ease;
+      min-height:240px;
     }
-    iframe{border:0; width:100%; height:100%}
 
-    /* =========================
-       CONTACT: email list + call
-    ========================== */
-    .form{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr auto;
-      gap:10px;
-      align-items:end;
-    }
-    label{
-      display:block;
-      font-weight:950;
-      font-size:13px;
-      color:var(--muted);
-      margin-bottom:6px;
-    }
-    input{
+    .category-media{
       width:100%;
-      padding:12px 12px;
-      border-radius:14px;
+      height:240px;
+      background:#f3f4f6;
+      display:block;
+      overflow:hidden;
+    }
+    .category-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1);
+      transition:220ms ease;
+    }
+
+    .category-overlay{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(
+        rgba(255,255,255,0.00),
+        rgba(255,255,255,0.85)
+      );
+    }
+
+    .category-label{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:16px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .category-title{
+      font-family:'Oswald', system-ui, sans-serif;
+      font-size:clamp(22px, 2.2vw, 30px);
+      letter-spacing:0.8px;
+      text-transform:uppercase;
+      margin:0;
+      color:#1b1f2a;
+      line-height:1.05;
+    }
+
+    .category-badge{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
       border:1px solid var(--line);
       background:#fff;
-      font-weight:800;
-      font-size:14px;
-      outline:none;
+      font-weight:900;
+      font-size:13px;
+      color:var(--ink);
+      box-shadow:0 10px 22px rgba(2,6,23,.06);
     }
-    input:focus{border-color:rgba(30,88,255,.45); box-shadow:0 0 0 6px rgba(30,88,255,.12)}
-    .helper{
-      margin-top:10px;
+    .dot{
+      width:9px; height:9px; border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 6px rgba(30,88,255,.12);
+    }
+
+    .category-tile:hover{
+      transform:translateY(-5px);
+      box-shadow:0 22px 55px rgba(2,6,23,.12);
+      border-color:#d7dce5;
+    }
+    .category-tile:hover .category-media img{
+      transform:scale(1.05);
+    }
+
+    .note{
+      margin-top:12px;
       color:var(--muted);
-      font-weight:800;
+      font-weight:700;
       font-size:13.5px;
-      line-height:1.55;
+      line-height:1.6;
     }
 
-    /* Sticky mobile action bar (Chipotle-ish) */
-    .mobilebar{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      background:#fff;
-      border-top:1px solid var(--line);
-      padding:10px 14px;
-      display:none;
-      gap:10px;
-      z-index:30;
+    /* Simple placeholder sections */
+    .mini{
+      color:var(--muted);
+      font-weight:700;
+      line-height:1.65;
     }
-    .mobilebar .btn{flex:1}
 
-    /* Responsive */
     @media (max-width: 980px){
       nav{display:none}
       .hero-bleed{height:min(56vh, 520px)}
-      .menu-grid{grid-template-columns:1fr}
-      .visit-grid{grid-template-columns:1fr}
-      .form{grid-template-columns:1fr}
-      .mobilebar{display:flex}
-      body{padding-bottom:70px}
+      .category-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    }
+    @media (max-width: 640px){
+      .category-grid{grid-template-columns:1fr}
+      .category-media{height:220px}
+      .category-tile{min-height:220px}
     }
   </style>
 </head>
@@ -454,7 +352,7 @@
       </nav>
 
       <div class="cta">
-        <a class="btn ghost" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue" target="_blank" rel="noopener">Order Online</a>
+        <a class="btn ghost" href="#menu">See Menu</a>
         <a class="btn primary" href="tel:+17247283011">Call Now</a>
       </div>
     </div>
@@ -463,249 +361,171 @@
   <main id="home">
     <!-- Hero -->
     <section class="hero-bleed" aria-label="Cheesesteak hero image">
-      <!-- PHOTOS LATER: keep placeholder file name -->
       <img src="assets/hero.jpg" alt="A close-up Philly cheesesteak platter" onerror="this.style.display='none'">
       <div class="hero-title">Philly Originals</div>
     </section>
 
-    <!-- Quick actions (Chipotle: action-first) -->
-    <section class="quickbar" aria-label="Quick actions">
-      <div class="wrap quickbar-inner">
-        <div class="quickbar-left">
-          <span class="tag"><span class="dot"></span> Order fast • Pickup & Takeout</span>
-          <span class="tag"><span class="dot"></span> 400 Third St, Beaver, PA</span>
-        </div>
-        <div class="quickbar-right">
-          <a class="btn primary" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue" target="_blank" rel="noopener">Order Online</a>
-          <a class="btn ghost" href="tel:+17247283011">Call (724) 728-3011</a>
-          <a class="btn ghost" target="_blank" rel="noopener"
-             href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%20PA%2015009">
-            Directions
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- MENU -->
-    <section id="menu" class="section" aria-label="Menu">
+    <!-- MENU CATEGORY SECTION (Chipotle-style) -->
+    <section id="menu" class="section" aria-label="Menu categories">
       <div class="wrap">
         <div class="panel">
           <div class="section-head">
             <div>
               <div class="kicker"><span class="kdot"></span> Menu</div>
-              <div class="h2">Popular picks + full menu</div>
-              <p class="subhead">Prices and options can change. For exact pricing and modifiers, order online or call.</p>
+              <div class="h2">Pick a category</div>
+              <p class="subhead">Tap a category to jump to ordering on Toast. Photos are placeholders for now.</p>
             </div>
 
-            <div class="menu-actions">
-              <a class="btn primary" href="tel:+17247283011">Order by Phone</a>
-              <a class="btn ghost" target="_blank" rel="noopener"
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn primary" target="_blank" rel="noopener"
                  href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-                Order Online (Toast) →
+                Order Online
               </a>
-            </div>
-          </div>
-
-          <div class="menu-grid">
-            <!-- HOAGIES / SANDWICHES -->
-            <div class="menu-card">
-              <h3>
-                Hoagies & Sandwiches
-                <span class="pill"><i></i> Made to order</span>
-              </h3>
-              <ul class="menu-list">
-                <li class="menu-item"><p class="name">Philadelphia Cheesesteak</p><p class="desc">Grilled sirloin steak, provolone cheese.</p></li>
-                <li class="menu-item"><p class="name">Philadelphia Cheesesteak Jr.</p><p class="desc">Grilled sirloin steak, provolone cheese.</p></li>
-                <li class="menu-item"><p class="name">Chicken Cheesesteak</p><p class="desc">Grilled chicken breast, provolone cheese.</p></li>
-                <li class="menu-item"><p class="name">Chicken Cheesesteak Jr.</p><p class="desc">Grilled chicken breast, provolone cheese.</p></li>
-                <li class="menu-item"><p class="name">Buffalo Chicken</p><p class="desc">Buffalo-style chicken hoagie.</p></li>
-                <li class="menu-item"><p class="name">Chicken Cordon Bleu Hoagie</p><p class="desc">Grilled chicken breast, Virginia baked ham, Swiss.</p></li>
-                <li class="menu-item"><p class="name">Italian Hoagie</p><p class="desc">Hard salami, capicola, cotta, mortadella, provolone.</p></li>
-                <li class="menu-item"><p class="name">Turkey Hoagie</p><p class="desc">Smoked & oven roasted turkey, American, veggies.</p></li>
-                <li class="menu-item"><p class="name">Meatball Hoagie</p><p class="desc">Meatballs in marinara, provolone & parmesan.</p></li>
-                <li class="menu-item"><p class="name">Steak & Egg Hoagie</p><p class="desc">Sirloin steak, eggs, provolone, onions, peppers, mushrooms.</p></li>
-                <li class="menu-item"><p class="name">Ham & Egg Hoagie</p><p class="desc">Ham, eggs, grilled onions, mushrooms, peppers, American.</p></li>
-                <li class="menu-item"><p class="name">Chicken Parmesan Hoagie</p><p class="desc">Chicken, provolone & parmesan with marinara.</p></li>
-                <li class="menu-item"><p class="name">Pizza Steak Hoagie</p><p class="desc">Cheesesteak + pizza sauce + onions/peppers/mushrooms.</p></li>
-                <li class="menu-item"><p class="name">Philly Club Hoagie</p><p class="desc">Turkey, ham, bacon, American cheese.</p></li>
-                <li class="menu-item"><p class="name">Ham Hoagie</p><p class="desc">Classic ham hoagie.</p></li>
-                <li class="menu-item"><p class="name">Ham Hoagie Jr.</p><p class="desc">Junior size classic ham hoagie.</p></li>
-                <li class="menu-item"><p class="name">Tuna Hoagie</p><p class="desc">Albacore tuna, American, veggies.</p></li>
-                <li class="menu-item"><p class="name">Peppers & Egg Hoagie</p><p class="desc">Eggs, onions, mushrooms, peppers, American.</p></li>
-                <li class="menu-item"><p class="name">Vegetarian Hoagie</p><p class="desc">Cream cheese, sunflower seeds, guacamole, raisins, Swiss, veggies.</p></li>
-                <li class="menu-item"><p class="name">Grilled Vegetarian Hoagie</p><p class="desc">Grilled veggies, provolone, lettuce & tomato.</p></li>
-                <li class="menu-item"><p class="name">Veggie Marinara</p><p class="desc">Grilled veggies with marinara.</p></li>
-                <li class="menu-item"><p class="name">Cheese Hoagie</p><p class="desc">Provolone, Swiss, American, veggies.</p></li>
-                <li class="menu-item"><p class="name">Grilled Cheese</p><p class="desc">Provolone, Swiss & American on Texas toast.</p></li>
-                <li class="menu-item"><p class="name">Beer Battered Fish Sandwich</p><p class="desc">Yuengling battered haddock.</p></li>
-              </ul>
-            </div>
-
-            <!-- SALADS + FRIES + SIDES -->
-            <div class="menu-card">
-              <h3>
-                Salads, Fries & Sides
-                <span class="pill"><i></i> Great add-ons</span>
-              </h3>
-
-              <ul class="menu-list">
-                <li class="menu-item"><p class="name">Steak Salad</p><p class="desc">Steak, red skin potatoes, lettuce, tomato, onions, carrots, cabbage, mozzarella, garlic toast.</p></li>
-                <li class="menu-item"><p class="name">Chicken Salad</p><p class="desc">Chicken, red skin potatoes, lettuce, tomato, carrots, cabbage, mozzarella, garlic toast.</p></li>
-                <li class="menu-item"><p class="name">Tuna Salad</p><p class="desc">Tuna salad option.</p></li>
-                <li class="menu-item"><p class="name">Buffalo Chicken Salad</p><p class="desc">Buffalo chicken over salad.</p></li>
-                <li class="menu-item"><p class="name">Fried Fish Salad</p><p class="desc">Fried fish over salad.</p></li>
-
-                <div class="divider"></div>
-
-                <li class="menu-item"><p class="name">Specialty Fries: Cheese & Steak Fries</p><p class="desc">Fries topped with cheese & steak.</p></li>
-                <li class="menu-item"><p class="name">Specialty Fries: Chicken Cheese Fries</p><p class="desc">Fries topped with chicken & cheese.</p></li>
-                <li class="menu-item"><p class="name">Fish and Fries</p><p class="desc">Fish with fries.</p></li>
-
-                <div class="divider"></div>
-
-                <li class="menu-item"><p class="name">Fries</p></li>
-                <li class="menu-item"><p class="name">Cheese Fries</p></li>
-                <li class="menu-item"><p class="name">Cheese & Bacon Fries</p></li>
-                <li class="menu-item"><p class="name">Red Skin Potatoes</p></li>
-                <li class="menu-item"><p class="name">Onion Rings</p></li>
-                <li class="menu-item"><p class="name">Mozzarella Sticks</p></li>
-                <li class="menu-item"><p class="name">Jalapeño Poppers</p><p class="desc">Stuffed with cream cheese.</p></li>
-                <li class="menu-item"><p class="name">Chicken Fingers (3pc)</p></li>
-                <li class="menu-item"><p class="name">Chicken Fingers (5pc)</p></li>
-                <li class="menu-item"><p class="name">Mac and Cheese Bites</p></li>
-                <li class="menu-item"><p class="name">Pretzels With Cheese</p></li>
-                <li class="menu-item"><p class="name">Party Ring</p></li>
-                <li class="menu-item"><p class="name">Dressing</p></li>
-                <li class="menu-item"><p class="name">2 Homemade Chocolate Chip Cookies</p></li>
-                <li class="menu-item"><p class="name">2 Homemade Sugar Cookies</p></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="menu-actions" style="margin-top:18px;">
-            <a class="btn primary" href="tel:+17247283011">Call to Order</a>
-            <a class="btn ghost" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-              See full ordering options →
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- REVIEWS -->
-    <section id="reviews" class="section" aria-label="Reviews">
-      <div class="wrap">
-        <div class="panel">
-          <div class="section-head">
-            <div>
-              <div class="kicker"><span class="kdot"></span> Reviews</div>
-              <div class="h2">What people are saying</div>
-              <p class="subhead">Add a Google Reviews embed or paste your best quotes here.</p>
-            </div>
-            <div class="menu-actions">
-              <a class="btn ghost" target="_blank" rel="noopener" href="#">View on Google →</a>
-            </div>
-          </div>
-
-          <div class="menu-grid">
-            <div class="menu-card">
-              <h3>⭐ “Best cheesesteak around.” <span class="pill"><i></i> Local favorite</span></h3>
-              <p class="subhead">Replace this with a real review quote (short + punchy). Mention speed, taste, portions.</p>
-            </div>
-            <div class="menu-card">
-              <h3>⭐ “Fast pickup, always hot.” <span class="pill"><i></i> Quick service</span></h3>
-              <p class="subhead">Replace this with a real quote from Google/Facebook.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VISIT -->
-    <section id="visit" class="section" aria-label="Visit">
-      <div class="wrap">
-        <div class="panel">
-          <div class="section-head">
-            <div>
-              <div class="kicker"><span class="kdot"></span> Visit</div>
-              <div class="h2">Find us fast</div>
-              <p class="subhead">Call ahead for pickup or stop in for lunch.</p>
-            </div>
-            <div class="menu-actions">
-              <a class="btn primary" href="tel:+17247283011">Call Now</a>
+              <a class="btn ghost" href="tel:+17247283011">Call (724) 728-3011</a>
               <a class="btn ghost" target="_blank" rel="noopener"
-                 href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%20PA%2015009">
+                 href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
                 Directions →
               </a>
             </div>
           </div>
 
-          <div class="visit-grid">
-            <div class="visit-card">
-              <div class="info-row"><span>Address</span><strong>400 Third St, Beaver, PA 15009</strong></div>
-              <div class="info-row"><span>Phone</span><strong><a href="tel:+17247283011">(724) 728-3011</a></strong></div>
-              <div class="info-row"><span>Order Online</span><strong><a target="_blank" rel="noopener" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">Toast →</a></strong></div>
-              <div class="info-row"><span>Hours</span><strong>Update me</strong></div>
-              <p class="helper">Replace “Hours” with the real schedule. We can also add “Open now” later.</p>
-            </div>
+          <div class="category-grid">
+            <!-- NOTE:
+              Toast page sections we can reliably link to:
+              - #Food (Sandwich / Salads / Specialty Fries / Sides & Extras)
+              - #Beverages
+              If Toast changes their anchors, these still open the correct page.
+            -->
 
-            <div class="map">
-              <iframe
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%20PA%2015009&output=embed">
-              </iframe>
-            </div>
+            <a class="category-tile" target="_blank" rel="noopener"
+               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue#Food"
+               aria-label="Hoagies">
+              <span class="category-media">
+                <img src="assets/cat-hoagies.jpg" alt="Hoagies (placeholder image)" onerror="this.style.display='none'">
+              </span>
+              <span class="category-overlay"></span>
+              <span class="category-label">
+                <h3 class="category-title">Hoagies</h3>
+                <span class="category-badge"><span class="dot"></span> Order</span>
+              </span>
+            </a>
+
+            <a class="category-tile" target="_blank" rel="noopener"
+               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue#Food"
+               aria-label="Sandwiches">
+              <span class="category-media">
+                <img src="assets/cat-sandwiches.jpg" alt="Sandwiches (placeholder image)" onerror="this.style.display='none'">
+              </span>
+              <span class="category-overlay"></span>
+              <span class="category-label">
+                <h3 class="category-title">Sandwiches</h3>
+                <span class="category-badge"><span class="dot"></span> Order</span>
+              </span>
+            </a>
+
+            <a class="category-tile" target="_blank" rel="noopener"
+               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue#Food"
+               aria-label="Salads">
+              <span class="category-media">
+                <img src="assets/cat-salads.jpg" alt="Salads (placeholder image)" onerror="this.style.display='none'">
+              </span>
+              <span class="category-overlay"></span>
+              <span class="category-label">
+                <h3 class="category-title">Salads</h3>
+                <span class="category-badge"><span class="dot"></span> Order</span>
+              </span>
+            </a>
+
+            <a class="category-tile" target="_blank" rel="noopener"
+               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue#Food"
+               aria-label="Fries">
+              <span class="category-media">
+                <img src="assets/cat-fries.jpg" alt="Fries (placeholder image)" onerror="this.style.display='none'">
+              </span>
+              <span class="category-overlay"></span>
+              <span class="category-label">
+                <h3 class="category-title">Fries</h3>
+                <span class="category-badge"><span class="dot"></span> Order</span>
+              </span>
+            </a>
+
+            <a class="category-tile" target="_blank" rel="noopener"
+               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue#Food"
+               aria-label="Sides">
+              <span class="category-media">
+                <img src="assets/cat-sides.jpg" alt="Sides (placeholder image)" onerror="this.style.display='none'">
+              </span>
+              <span class="category-overlay"></span>
+              <span class="category-label">
+                <h3 class="category-title">Sides</h3>
+                <span class="category-badge"><span class="dot"></span> Order</span>
+              </span>
+            </a>
+
+            <a class="category-tile" target="_blank" rel="noopener"
+               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue#Beverages"
+               aria-label="Beverages">
+              <span class="category-media">
+                <img src="assets/cat-beverages.jpg" alt="Beverages (placeholder image)" onerror="this.style.display='none'">
+              </span>
+              <span class="category-overlay"></span>
+              <span class="category-label">
+                <h3 class="category-title">Beverages</h3>
+                <span class="category-badge"><span class="dot"></span> Order</span>
+              </span>
+            </a>
           </div>
+
+          <p class="note">
+            Tip: when you add photos later, just drop images into <b>/assets/</b> with these names:
+            <b>cat-hoagies.jpg</b>, <b>cat-sandwiches.jpg</b>, <b>cat-salads.jpg</b>, <b>cat-fries.jpg</b>, <b>cat-sides.jpg</b>, <b>cat-beverages.jpg</b>.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT (EMAIL LIST) -->
+    <!-- REVIEWS (placeholder) -->
+    <section id="reviews" class="section" aria-label="Reviews">
+      <div class="wrap">
+        <div class="panel">
+          <div class="kicker"><span class="kdot"></span> Reviews</div>
+          <div class="h2">What people are saying</div>
+          <p class="mini">Paste your Google Reviews embed here (iframe) and we’ll style it clean.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT (placeholder) -->
+    <section id="visit" class="section" aria-label="Visit">
+      <div class="wrap">
+        <div class="panel">
+          <div class="kicker"><span class="kdot"></span> Visit</div>
+          <div class="h2">Find us</div>
+          <p class="mini">
+            400 Third St, Beaver, PA 15009<br>
+            <a href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009" target="_blank" rel="noopener"
+               style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">
+              Open in Google Maps →
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (placeholder) -->
     <section id="contact" class="section" aria-label="Contact">
       <div class="wrap">
         <div class="panel">
-          <div class="section-head">
-            <div>
-              <div class="kicker"><span class="kdot"></span> Contact</div>
-              <div class="h2">Get deals by email</div>
-              <p class="subhead">Join the list for specials. (We’ll connect this to Google Sheets next.)</p>
-            </div>
-            <div class="menu-actions">
-              <a class="btn ghost" href="tel:+17247283011">Or call: (724) 728-3011</a>
-            </div>
-          </div>
-
-          <form class="form" onsubmit="event.preventDefault(); alert('Next step: connect this to Google Sheets.');">
-            <div>
-              <label for="first">First name</label>
-              <input id="first" name="first" placeholder="John" required>
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="john@email.com" required>
-            </div>
-            <button class="btn primary" type="submit">Join List</button>
-          </form>
-
-          <div class="helper">
-            Next: you’ll tell me the email + Google Sheet, and we’ll wire this form to save leads to Sheets.
-          </div>
+          <div class="kicker"><span class="kdot"></span> Contact</div>
+          <div class="h2">Call or join the email list</div>
+          <p class="mini">
+            Phone: <a href="tel:+17247283011" style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">(724) 728-3011</a><br>
+            Email signup form goes here next (and we can connect it to Google Sheets).
+          </p>
         </div>
       </div>
     </section>
 
   </main>
-
-  <!-- Mobile sticky action bar -->
-  <div class="mobilebar" aria-label="Mobile actions">
-    <a class="btn primary" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue" target="_blank" rel="noopener">Order</a>
-    <a class="btn ghost" href="tel:+17247283011">Call</a>
-    <a class="btn ghost" target="_blank" rel="noopener"
-       href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%20PA%2015009">
-      Directions
-    </a>
-  </div>
 </body>
 </html>
