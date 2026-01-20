@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Philly Originals | Beaver, PA</title>
   <meta name="description" content="Philly Originals — Authentic cheesesteaks in Beaver, PA. Call (724) 728-3011." />
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Font (Oswald) -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -39,17 +41,25 @@
       border-bottom:1px solid var(--line);
     }
     .top{
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex;
+      align-items:flex-start;            /* logo sits top-left */
+      justify-content:space-between;
       gap:16px;
       padding:14px 0;
     }
 
     /* Brand (LOGO ONLY) */
-    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
+    .brand{
+      display:flex;
+      align-items:flex-start;            /* top-left feel */
+      gap:12px;
+      min-width:auto;
+      padding-top:2px;
+    }
     .logo{
-      height:52px;
+      height:44px;
       width:auto;
-      max-width:220px;
+      max-width:180px;
       object-fit:contain;
       display:block;
     }
@@ -91,7 +101,7 @@
     .btn.primary:hover{background:var(--blueDark)}
     .btn.ghost{background:#fff;}
 
-    /* HERO (full width image with centered title, nothing else obstructing) */
+    /* HERO (full width image with centered title) */
     .hero-bleed{
       position:relative;
       width:100%;
@@ -107,46 +117,45 @@
       display:block;
     }
 
-    /* gentle dark + blue overlay for readability */
+    /* gentle overlay for readability */
     .hero-bleed::after{
       content:"";
       position:absolute;
       inset:0;
       background:linear-gradient(
-        rgba(30,88,255,.18),
-        rgba(0,0,0,.35)
+        rgba(30,88,255,.16),
+        rgba(0,0,0,.34)
       );
       pointer-events:none;
     }
 
-    /* centered hero text */
- .hero-title{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:0 16px;
+    /* hero title: a little smaller + a little higher */
+    .hero-title{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0 16px;
 
-  font-family:'Oswald', system-ui, sans-serif;
-  font-size:clamp(56px, 7vw, 110px);
-  font-weight:700;
-  letter-spacing:1px;
+      font-family:'Oswald', system-ui, sans-serif;
+      font-size:clamp(44px, 5.6vw, 92px);   /* smaller */
+      font-weight:700;
+      letter-spacing:1px;
 
-  color:#ffffff;
-  text-shadow:
-    0 6px 28px rgba(0,0,0,.55),
-    0 0 36px rgba(30,88,255,.45);
+      color:#ffffff;
+      text-shadow:
+        0 6px 28px rgba(0,0,0,.55),
+        0 0 32px rgba(30,88,255,.40);
 
-  pointer-events:none;
-}
+      transform:translateY(-7%);            /* higher */
+      pointer-events:none;
+    }
 
-
-
-    /* Content below hero */
-    .below-hero{
+    /* Section base */
+    .section{
       padding:26px 0 46px;
       background:
         radial-gradient(1000px 500px at 15% 0%, rgba(30,88,255,.10), transparent 60%),
@@ -159,6 +168,15 @@
       padding:26px;
       background:#fff;
       box-shadow:var(--shadow);
+    }
+
+    .section-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
     }
 
     .kicker{
@@ -178,47 +196,114 @@
       box-shadow:0 0 0 6px rgba(30,88,255,.12);
     }
 
-    h1{
-      margin:14px 0 10px;
-      font-size:clamp(34px, 4.2vw, 56px);
-      line-height:1.03;
-      letter-spacing:-1px;
+    .h2{
+      margin:10px 0 6px;
+      font-size:clamp(26px, 2.6vw, 34px);
       font-weight:950;
+      letter-spacing:-0.6px;
     }
     .subhead{
       margin:0;
       color:var(--muted);
       font-weight:700;
       line-height:1.6;
-      font-size:16.5px;
-      max-width:58ch;
+      font-size:16px;
+      max-width:72ch;
     }
 
-    .hero-actions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin:16px 0 14px;
-    }
-
-    .facts{
+    /* MENU */
+    .menu-grid{
       display:grid;
-      grid-template-columns:1fr;
-      gap:10px;
-      margin-top:8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:14px;
+      margin-top:16px;
     }
-    .fact{
-      display:flex; justify-content:space-between; gap:12px;
-      padding:12px 14px;
-      border-radius:16px;
+
+    .menu-card{
       border:1px solid var(--line);
+      border-radius:18px;
       background:var(--card);
+      padding:16px;
     }
-    .fact-k{color:var(--muted); font-weight:900; font-size:13px}
-    .fact-v{color:var(--ink); font-weight:950; font-size:13.5px; text-align:right}
-    .fact-v a{color:var(--blue); text-decoration:underline; text-underline-offset:3px}
+
+    .menu-card h3{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:950;
+      letter-spacing:-0.3px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--muted);
+      font-weight:900;
+      font-size:12.5px;
+    }
+    .pill i{
+      width:8px; height:8px; border-radius:50%;
+      background:var(--blue);
+      display:inline-block;
+      box-shadow:0 0 0 5px rgba(30,88,255,.12);
+    }
+
+    .menu-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+
+    .menu-item{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 12px;
+    }
+    .menu-item .name{
+      font-weight:950;
+      margin:0;
+      font-size:14.5px;
+    }
+    .menu-item .desc{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-weight:700;
+      font-size:13.5px;
+      line-height:1.45;
+    }
+
+    .menu-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    /* Simple placeholder sections */
+    .mini{
+      color:var(--muted);
+      font-weight:700;
+      line-height:1.65;
+    }
+    .divider{
+      height:1px;
+      background:var(--line);
+      margin:18px 0;
+    }
 
     @media (max-width: 980px){
       nav{display:none}
       .hero-bleed{height:min(56vh, 520px)}
+      .menu-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -227,10 +312,8 @@
   <!-- Header -->
   <header>
     <div class="wrap top">
-      <!-- LOGO ONLY (replaces Philly Originals text) -->
       <a class="brand" href="#home" aria-label="Philly Originals Home">
-        <img class="logo" src="assets/logo.png" alt="Philly Originals logo"
-             onerror="this.style.display='none'">
+        <img class="logo" src="assets/logo.png" alt="Philly Originals logo" onerror="this.style.display='none'">
       </a>
 
       <nav aria-label="Site navigation">
@@ -248,49 +331,257 @@
   </header>
 
   <main id="home">
-    <!-- FULL WIDTH HERO IMAGE + CENTERED TITLE -->
+    <!-- Hero -->
     <section class="hero-bleed" aria-label="Cheesesteak hero image">
-      <img src="assets/hero.jpg" alt="A close-up Philly cheesesteak platter"
-           onerror="this.style.display='none'">
+      <img src="assets/hero.jpg" alt="A close-up Philly cheesesteak platter" onerror="this.style.display='none'">
       <div class="hero-title">Philly Originals</div>
     </section>
 
-    <!-- TEXT BELOW HERO -->
-    <section class="below-hero">
+    <!-- MENU SECTION (replaces your old info panel) -->
+    <section id="menu" class="section" aria-label="Menu">
       <div class="wrap">
         <div class="panel">
-          <div class="kicker"><span class="kdot"></span> Locally owned • Est. 1993</div>
-          <h1>Philly Originals</h1>
-          <p class="subhead">
-            Real-deal cheesesteaks and fresh sandwiches. Stop in for lunch or call ahead for fast pickup.
-          </p>
+          <div class="section-head">
+            <div>
+              <div class="kicker"><span class="kdot"></span> Menu</div>
+              <div class="h2">Popular picks + full menu</div>
+              <p class="subhead">No prices here (they change). For exact pricing and modifiers, order online or call.</p>
+            </div>
 
-          <div class="hero-actions">
-            <a class="btn primary" href="#menu">See Menu</a>
-            <a class="btn ghost" href="tel:+17247283011">Call (724) 728-3011</a>
-            <a class="btn ghost" target="_blank" rel="noopener"
-               href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
-              Get Directions →
-            </a>
+            <div class="menu-actions">
+              <a class="btn primary" href="tel:+17247283011">Order by Phone</a>
+              <a class="btn ghost" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+                Order Online (Toast) →
+              </a>
+            </div>
           </div>
 
-          <div class="facts">
-            <div class="fact">
-              <div class="fact-k">Address</div>
-              <div class="fact-v">400 Third St, Beaver, PA 15009</div>
+          <div class="menu-grid">
+            <!-- HOAGIES / SANDWICHES -->
+            <div class="menu-card">
+              <h3>
+                Hoagies & Sandwiches
+                <span class="pill"><i></i> Made to order</span>
+              </h3>
+              <ul class="menu-list">
+                <li class="menu-item">
+                  <p class="name">Philadelphia Cheesesteak</p>
+                  <p class="desc">Grilled sirloin steak, provolone cheese.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Philadelphia Cheesesteak Jr.</p>
+                  <p class="desc">Grilled sirloin steak, provolone cheese.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Chicken Cheesesteak</p>
+                  <p class="desc">Grilled chicken breast, provolone cheese.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Chicken Cheesesteak Jr.</p>
+                  <p class="desc">Grilled chicken breast, provolone cheese.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Buffalo Chicken</p>
+                  <p class="desc">Buffalo-style chicken hoagie.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Chicken Cordon Bleu Hoagie</p>
+                  <p class="desc">Grilled chicken breast, Virginia baked ham, Swiss.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Italian Hoagie</p>
+                  <p class="desc">Hard salami, capicola, cotta, mortadella, provolone.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Turkey Hoagie</p>
+                  <p class="desc">Smoked & oven roasted turkey, American, veggies.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Meatball Hoagie</p>
+                  <p class="desc">Meatballs in marinara, provolone & parmesan.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Steak & Egg Hoagie</p>
+                  <p class="desc">Sirloin steak, eggs, provolone, onions, peppers, mushrooms.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Ham & Egg Hoagie</p>
+                  <p class="desc">Ham, eggs, grilled onions, mushrooms, peppers, American.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Chicken Parmesan Hoagie</p>
+                  <p class="desc">Chicken, provolone & parmesan with marinara.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Pizza Steak Hoagie</p>
+                  <p class="desc">Cheesesteak + pizza sauce + onions/peppers/mushrooms.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Philly Club Hoagie</p>
+                  <p class="desc">Turkey, ham, bacon, American cheese.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Ham Hoagie</p>
+                  <p class="desc">Classic ham hoagie.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Ham Hoagie Jr.</p>
+                  <p class="desc">Junior size classic ham hoagie.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Tuna Hoagie</p>
+                  <p class="desc">Albacore tuna, American, veggies.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Peppers & Egg Hoagie</p>
+                  <p class="desc">Eggs, onions, mushrooms, peppers, American.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Vegetarian Hoagie</p>
+                  <p class="desc">Cream cheese, sunflower seeds, guacamole, raisins, Swiss, veggies.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Grilled Vegetarian Hoagie</p>
+                  <p class="desc">Grilled veggies, provolone, lettuce & tomato.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Veggie Marinara</p>
+                  <p class="desc">Grilled veggies with marinara.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Cheese Hoagie</p>
+                  <p class="desc">Provolone, Swiss, American, veggies.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Grilled Cheese</p>
+                  <p class="desc">Provolone, Swiss & American on Texas toast.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Beer Battered Fish Sandwich</p>
+                  <p class="desc">Yuengling battered haddock.</p>
+                </li>
+              </ul>
             </div>
-            <div class="fact">
-              <div class="fact-k">Phone</div>
-              <div class="fact-v"><a href="tel:+17247283011">(724) 728-3011</a></div>
+
+            <!-- SALADS + FRIES + SIDES -->
+            <div class="menu-card">
+              <h3>
+                Salads, Fries & Sides
+                <span class="pill"><i></i> Great add-ons</span>
+              </h3>
+
+              <ul class="menu-list">
+                <li class="menu-item">
+                  <p class="name">Steak Salad</p>
+                  <p class="desc">Steak, red skin potatoes, lettuce, tomato, onions, carrots, cabbage, mozzarella, garlic toast.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Chicken Salad</p>
+                  <p class="desc">Chicken, red skin potatoes, lettuce, tomato, carrots, cabbage, mozzarella, garlic toast.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Tuna Salad</p>
+                  <p class="desc">Tuna salad option.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Buffalo Chicken Salad</p>
+                  <p class="desc">Buffalo chicken over salad.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Fried Fish Salad</p>
+                  <p class="desc">Fried fish over salad.</p>
+                </li>
+
+                <div class="divider"></div>
+
+                <li class="menu-item">
+                  <p class="name">Specialty Fries: Cheese & Steak Fries</p>
+                  <p class="desc">Fries topped with cheese & steak.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Specialty Fries: Chicken Cheese Fries</p>
+                  <p class="desc">Fries topped with chicken & cheese.</p>
+                </li>
+                <li class="menu-item">
+                  <p class="name">Fish and Fries</p>
+                  <p class="desc">Fish with fries.</p>
+                </li>
+
+                <div class="divider"></div>
+
+                <li class="menu-item"><p class="name">Fries</p></li>
+                <li class="menu-item"><p class="name">Cheese Fries</p></li>
+                <li class="menu-item"><p class="name">Cheese & Bacon Fries</p></li>
+                <li class="menu-item"><p class="name">Red Skin Potatoes</p></li>
+                <li class="menu-item"><p class="name">Onion Rings</p></li>
+                <li class="menu-item"><p class="name">Mozzarella Sticks</p></li>
+                <li class="menu-item"><p class="name">Jalapeño Poppers</p><p class="desc">Stuffed with cream cheese.</p></li>
+                <li class="menu-item"><p class="name">Chicken Fingers (3pc)</p></li>
+                <li class="menu-item"><p class="name">Chicken Fingers (5pc)</p></li>
+                <li class="menu-item"><p class="name">Mac and Cheese Bites</p></li>
+                <li class="menu-item"><p class="name">Pretzels With Cheese</p></li>
+                <li class="menu-item"><p class="name">Party Ring</p></li>
+                <li class="menu-item"><p class="name">Dressing</p></li>
+                <li class="menu-item"><p class="name">2 Homemade Chocolate Chip Cookies</p></li>
+                <li class="menu-item"><p class="name">2 Homemade Sugar Cookies</p></li>
+              </ul>
             </div>
-            <div class="fact">
-              <div class="fact-k">Best move</div>
-              <div class="fact-v">Call ahead for pickup</div>
-            </div>
+          </div>
+
+          <div class="menu-actions" style="margin-top:18px;">
+            <a class="btn primary" href="tel:+17247283011">Call to Order</a>
+            <a class="btn ghost" target="_blank" rel="noopener"
+               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+              See full ordering options →
+            </a>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- REVIEWS (placeholder) -->
+    <section id="reviews" class="section" aria-label="Reviews">
+      <div class="wrap">
+        <div class="panel">
+          <div class="kicker"><span class="kdot"></span> Reviews</div>
+          <div class="h2">What people are saying</div>
+          <p class="mini">Paste your Google Reviews embed here (iframe) and we’ll style it clean.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT (placeholder) -->
+    <section id="visit" class="section" aria-label="Visit">
+      <div class="wrap">
+        <div class="panel">
+          <div class="kicker"><span class="kdot"></span> Visit</div>
+          <div class="h2">Find us</div>
+          <p class="mini">
+            400 Third St, Beaver, PA 15009<br>
+            <a href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009" target="_blank" rel="noopener" style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">
+              Open in Google Maps →
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (placeholder) -->
+    <section id="contact" class="section" aria-label="Contact">
+      <div class="wrap">
+        <div class="panel">
+          <div class="kicker"><span class="kdot"></span> Contact</div>
+          <div class="h2">Call or join the email list</div>
+          <p class="mini">
+            Phone: <a href="tel:+17247283011" style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">(724) 728-3011</a><br>
+            Email signup form goes here next (and we can connect it to Google Sheets).
+          </p>
+        </div>
+      </div>
+    </section>
+
   </main>
 </body>
 </html>
+
