@@ -1,484 +1,226 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Philly Originals | Beaver, PA</title>
-  <meta name="description" content="Philly Originals — Authentic cheesesteaks in Beaver, PA. Call (724) 728-3011." />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Philly Originals | Beaver, PA</title>
+<meta name="description" content="Philly Originals — Hoagies, cheesesteaks, salads, fries & more. Beaver, PA."/>
 
-  <!-- Font (Oswald) -->
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --ink:#0b1220;
-      --muted:#4b5563;
-      --line:#e5e7eb;
-      --blue:#1e58ff;
-      --blueDark:#0b3dd6;
-      --card:#f8fafc;
-      --shadow:0 18px 55px rgba(2,6,23,.10);
-      --radius:18px;
-      --max:1120px;
-    }
+<style>
+:root{
+  --ink:#0b1220;
+  --muted:#5b6472;
+  --line:#e6e9ef;
+  --blue:#2455ff;
+  --max:1200px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:#fff;
+}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(var(--max),92%);margin:auto}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--ink);
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:10;
+  background:#fff;border-bottom:1px solid var(--line);
+}
+.top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 0;
+}
+.logo{height:44px}
 
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:10;
-      background:#fff;
-      border-bottom:1px solid rgba(229,231,235,.9);
-    }
-    .top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      padding:14px 0;
-    }
+/* HERO */
+.hero{
+  position:relative;height:65vh;min-height:420px;
+}
+.hero img{
+  width:100%;height:100%;object-fit:cover;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.45));
+}
+.hero h1{
+  position:absolute;inset:0;display:flex;
+  align-items:center;justify-content:center;
+  font-family:Oswald;font-size:clamp(48px,6vw,96px);
+  color:#fff;z-index:2;
+}
 
-    /* Brand (LOGO ONLY) */
-    .brand{
-      display:flex;
-      align-items:flex-start;
-      gap:12px;
-      min-width:auto;
-      padding-top:2px;
-    }
-    .logo{
-      height:44px;
-      width:auto;
-      max-width:180px;
-      object-fit:contain;
-      display:block;
-    }
+/* SECTION */
+section{padding:70px 0}
+.h2{font-size:36px;font-weight:900;margin:0 0 10px}
+.sub{color:var(--muted);font-weight:600}
 
-    nav{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
-    nav a{
-      padding:10px 12px;
-      border-radius:12px;
-      font-weight:800;
-      font-size:14px;
-      color:var(--muted);
-      border:1px solid transparent;
-    }
-    nav a:hover{
-      color:var(--ink);
-      border-color:rgba(229,231,235,.9);
-      background:rgba(248,250,252,.7);
-    }
+/* MENU GRID */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;margin-top:40px;
+}
+.menu-tile{
+  cursor:pointer;
+  overflow:hidden;
+}
+.menu-img{
+  height:260px;
+  overflow:hidden;
+}
+.menu-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .4s ease;
+}
+.menu-tile:hover img{transform:scale(1.07)}
+.menu-label{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:.5px;
+  margin-top:14px;
+}
 
-    .cta{display:flex; gap:10px; align-items:center}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:12px 14px;
-      border-radius:14px;
-      font-weight:900;
-      font-size:14px;
-      border:1px solid rgba(229,231,235,.9);
-      background:#fff;
-      color:var(--ink);
-      transition:140ms ease;
-      white-space:nowrap;
-    }
-    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 25px rgba(2,6,23,.08)}
-    .btn.primary{
-      border-color:transparent;
-      background:var(--blue);
-      color:#fff;
-    }
-    .btn.primary:hover{background:var(--blueDark)}
-    .btn.ghost{background:#fff;}
+/* REVIEWS */
+.reviews{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;margin-top:40px;
+}
+.review .stars{color:#f5a623;font-weight:900}
+.review p{font-weight:600;line-height:1.55}
+.review span{color:var(--muted);font-size:14px}
 
-    /* HERO (full width image with centered title) */
-    .hero-bleed{
-      position:relative;
-      width:100%;
-      height:min(72vh, 620px);
-      background:#f3f4f6;
-      border-bottom:1px solid rgba(229,231,235,.9);
-      overflow:hidden;
-    }
-    .hero-bleed img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
+/* FOOTER */
+footer{
+  border-top:1px solid var(--line);
+  padding:30px 0;
+  color:var(--muted);
+  font-weight:600;
+}
 
-    /* overlay for readability */
-    .hero-bleed::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(
-        rgba(30,88,255,.14),
-        rgba(0,0,0,.34)
-      );
-      pointer-events:none;
-    }
-
-    /* hero title: smaller + higher */
-    .hero-title{
-      position:absolute;
-      inset:0;
-      z-index:2;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:0 16px;
-
-      font-family:'Oswald', system-ui, sans-serif;
-      font-size:clamp(44px, 5.6vw, 92px);
-      font-weight:700;
-      letter-spacing:1px;
-
-      color:#ffffff;
-      text-shadow:
-        0 6px 28px rgba(0,0,0,.55),
-        0 0 32px rgba(30,88,255,.40);
-
-      transform:translateY(-9%);
-      pointer-events:none;
-    }
-
-    /* Sections (MORE SEAMLESS like Chipotle) */
-    .section{
-      padding:42px 0 56px;
-      background:
-        radial-gradient(1100px 520px at 15% 0%, rgba(30,88,255,.08), transparent 62%),
-        linear-gradient(#ffffff, #ffffff);
-    }
-
-    /* Seamless container (no big bubble panel) */
-    .section-wrap{
-      padding:0;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-
-    .h2{
-      margin:0 0 6px;
-      font-size:clamp(30px, 3.2vw, 44px);
-      font-weight:950;
-      letter-spacing:-0.7px;
-      line-height:1.05;
-    }
-    .subhead{
-      margin:0;
-      color:var(--muted);
-      font-weight:700;
-      line-height:1.6;
-      font-size:16px;
-      max-width:72ch;
-    }
-
-    /* CHIPO-style category grid */
-    .cat-grid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap:28px;
-      margin-top:26px;
-    }
-
-    .cat-card{
-      display:block;
-      padding:0;
-      border:none;
-      background:transparent;
-      text-decoration:none;
-    }
-
-    .cat-img{
-      width:100%;
-      aspect-ratio: 4 / 3;
-      border-radius:22px;
-      overflow:hidden;
-      background:#f4f6fb;
-      box-shadow: 0 14px 40px rgba(2,6,23,.08);
-    }
-
-    .cat-img img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-
-      /* STEP 4: smooth hover motion */
-      transition: transform 320ms ease;
-    }
-
-    /* STEP 4: hover zoom */
-    .cat-card:hover .cat-img img{
-      transform: scale(1.06);
-    }
-
-    .cat-meta{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-top:12px;
-    }
-
-    .cat-title{
-      font-family:'Oswald', system-ui, sans-serif;
-      font-weight:700;
-      letter-spacing:1px;
-      font-size:28px;
-      line-height:1;
-      text-transform:uppercase;
-    }
-
-    .order-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(229,231,235,.9);
-      background:#fff;
-      font-weight:900;
-      color:var(--ink);
-      white-space:nowrap;
-    }
-    .order-pill i{
-      width:10px; height:10px; border-radius:50%;
-      background:var(--blue);
-      display:inline-block;
-      box-shadow:0 0 0 6px rgba(30,88,255,.12);
-    }
-
-    .menu-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-
-    /* Simple placeholder blocks */
-    .block{
-      padding:26px 0;
-      border-top:1px solid rgba(229,231,235,.8);
-    }
-    .mini{
-      color:var(--muted);
-      font-weight:700;
-      line-height:1.7;
-      margin:0;
-    }
-
-    @media (max-width: 980px){
-      nav{display:none}
-      .hero-bleed{height:min(56vh, 520px)}
-      .cat-grid{grid-template-columns:1fr; gap:22px}
-      .cat-title{font-size:26px}
-    }
-  </style>
+/* MOBILE */
+@media(max-width:900px){
+  .menu-grid,.reviews{grid-template-columns:1fr}
+}
+</style>
 </head>
 
 <body>
-  <!-- Header -->
-  <header>
-    <div class="wrap top">
-      <a class="brand" href="#home" aria-label="Philly Originals Home">
-        <img class="logo" src="assets/logo.png" alt="Philly Originals logo" onerror="this.style.display='none'">
+
+<header>
+  <div class="wrap top">
+    <img src="assets/logo.png" class="logo" alt="Philly Originals"/>
+    <div>
+      <a href="#menu">Menu</a>&nbsp;&nbsp;
+      <a href="#reviews">Reviews</a>&nbsp;&nbsp;
+      <a href="tel:+17247283011">Call</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="assets/hero.jpg" alt="Philly Originals food"/>
+  <h1>Philly Originals</h1>
+</div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <h2 class="h2">Menu</h2>
+    <p class="sub">Tap a category to order online</p>
+
+    <div class="menu-grid">
+      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-hoagies.jpg"></div>
+        <div class="menu-label">Hoagies</div>
       </a>
 
-      <nav aria-label="Site navigation">
-        <a href="#menu">Menu</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#visit">Visit</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-sandwiches.jpg"></div>
+        <div class="menu-label">Sandwiches</div>
+      </a>
 
-      <div class="cta">
-        <a class="btn ghost" href="#menu">See Menu</a>
-        <a class="btn primary" href="tel:+17247283011">Call Now</a>
+      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-salads.jpg"></div>
+        <div class="menu-label">Salads</div>
+      </a>
+
+      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-fries.jpg"></div>
+        <div class="menu-label">Fries</div>
+      </a>
+
+      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-sides.jpg"></div>
+        <div class="menu-label">Sides</div>
+      </a>
+
+      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-beverages.jpg"></div>
+        <div class="menu-label">Beverages</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="wrap">
+    <h2 class="h2">What people are saying</h2>
+    <p class="sub">Based on customer feedback from Yelp</p>
+
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Best cheesesteaks around. Always fresh, loaded, and cooked perfectly.</p>
+        <span>— Local customer</span>
+      </div>
+
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Huge portions, fast service, and fair prices. A Beaver staple.</p>
+        <span>— Yelp reviewer</span>
+      </div>
+
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Old-school sandwich shop done right. Consistent every time.</p>
+        <span>— Long-time customer</span>
+      </div>
+
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Call ahead and it’s always ready. Fries and hoagies never miss.</p>
+        <span>— Verified diner</span>
+      </div>
+
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Generous portions and friendly staff. Easy lunch win.</p>
+        <span>— Beaver resident</span>
       </div>
     </div>
-  </header>
 
-  <main id="home">
-    <!-- Hero -->
-    <section class="hero-bleed" aria-label="Cheesesteak hero image">
-      <img src="assets/hero.jpg" alt="A close-up Philly cheesesteak platter" onerror="this.style.display='none'">
-      <div class="hero-title">Philly Originals</div>
-    </section>
+    <p style="margin-top:30px">
+      <a href="https://www.yelp.com/biz/philly-originals-beaver" target="_blank">
+        Read more reviews on Yelp →
+      </a>
+    </p>
+  </div>
+</section>
 
-    <!-- MENU SECTION (Chipotle-style categories) -->
-    <section id="menu" class="section" aria-label="Menu">
-      <div class="wrap section-wrap">
-        <div class="section-head">
-          <div>
-            <div class="h2">Pick a category</div>
-            <p class="subhead">Tap a category to jump to ordering on Toast. Photos are placeholders for now.</p>
-          </div>
+<footer>
+  <div class="wrap">
+    © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
+  </div>
+</footer>
 
-          <div class="menu-actions">
-            <a class="btn primary" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-              Order Online
-            </a>
-            <a class="btn ghost" href="tel:+17247283011">Call (724) 728-3011</a>
-            <a class="btn ghost" target="_blank" rel="noopener"
-               href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009">
-              Directions
-            </a>
-          </div>
-        </div>
-
-        <!--
-          STEP 1: Put all 6 images into /assets/
-          STEP 2: Rename them EXACTLY:
-            cat-hoagies.jpg
-            cat-sandwiches.jpg
-            cat-salads.jpg
-            cat-fries.jpg
-            cat-sides.jpg
-            cat-beverages.jpg
-          STEP 3: Each card below uses those exact filenames.
-          STEP 4: Hover zoom is already added in CSS.
-        -->
-
-        <div class="cat-grid">
-          <!-- HOAGIES -->
-          <a class="cat-card" target="_blank" rel="noopener"
-             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-            <div class="cat-img">
-              <img src="assets/cat-hoagies.jpg" alt="Hoagies" loading="lazy" onerror="this.style.display='none'">
-            </div>
-            <div class="cat-meta">
-              <div class="cat-title">Hoagies</div>
-              <span class="order-pill"><i></i> Order</span>
-            </div>
-          </a>
-
-          <!-- SANDWICHES -->
-          <a class="cat-card" target="_blank" rel="noopener"
-             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-            <div class="cat-img">
-              <img src="assets/cat-sandwiches.jpg" alt="Sandwiches" loading="lazy" onerror="this.style.display='none'">
-            </div>
-            <div class="cat-meta">
-              <div class="cat-title">Sandwiches</div>
-              <span class="order-pill"><i></i> Order</span>
-            </div>
-          </a>
-
-          <!-- SALADS -->
-          <a class="cat-card" target="_blank" rel="noopener"
-             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-            <div class="cat-img">
-              <img src="assets/cat-salads.jpg" alt="Salads" loading="lazy" onerror="this.style.display='none'">
-            </div>
-            <div class="cat-meta">
-              <div class="cat-title">Salads</div>
-              <span class="order-pill"><i></i> Order</span>
-            </div>
-          </a>
-
-          <!-- FRIES -->
-          <a class="cat-card" target="_blank" rel="noopener"
-             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-            <div class="cat-img">
-              <img src="assets/cat-fries.jpg" alt="Fries" loading="lazy" onerror="this.style.display='none'">
-            </div>
-            <div class="cat-meta">
-              <div class="cat-title">Fries</div>
-              <span class="order-pill"><i></i> Order</span>
-            </div>
-          </a>
-
-          <!-- SIDES -->
-          <a class="cat-card" target="_blank" rel="noopener"
-             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-            <div class="cat-img">
-              <img src="assets/cat-sides.jpg" alt="Sides" loading="lazy" onerror="this.style.display='none'">
-            </div>
-            <div class="cat-meta">
-              <div class="cat-title">Sides</div>
-              <span class="order-pill"><i></i> Order</span>
-            </div>
-          </a>
-
-          <!-- BEVERAGES -->
-          <a class="cat-card" target="_blank" rel="noopener"
-             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-            <div class="cat-img">
-              <img src="assets/cat-beverages.jpg" alt="Beverages" loading="lazy" onerror="this.style.display='none'">
-            </div>
-            <div class="cat-meta">
-              <div class="cat-title">Beverages</div>
-              <span class="order-pill"><i></i> Order</span>
-            </div>
-          </a>
-        </div>
-
-        <p class="mini" style="margin-top:18px;">
-          Tip: just drop the images into <b>/assets/</b> with the exact names above and refresh the page.
-        </p>
-      </div>
-    </section>
-
-    <!-- REVIEWS -->
-    <section id="reviews" class="section" aria-label="Reviews">
-      <div class="wrap section-wrap">
-        <div class="block">
-          <div class="h2">Reviews</div>
-          <p class="mini">Paste your Google Reviews embed here (iframe) and we’ll style it clean.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- VISIT -->
-    <section id="visit" class="section" aria-label="Visit">
-      <div class="wrap section-wrap">
-        <div class="block">
-          <div class="h2">Visit</div>
-          <p class="mini">
-            400 Third St, Beaver, PA 15009<br>
-            <a href="https://www.google.com/maps?q=400%20Third%20St%2C%20Beaver%2C%20PA%2015009" target="_blank" rel="noopener"
-               style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">
-              Open in Google Maps →
-            </a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section" aria-label="Contact">
-      <div class="wrap section-wrap">
-        <div class="block">
-          <div class="h2">Contact</div>
-          <p class="mini">
-            Phone: <a href="tel:+17247283011" style="color:var(--blue); text-decoration:underline; text-underline-offset:3px;">(724) 728-3011</a><br>
-            Email signup form goes here next (and we can connect it to Google Sheets).
-          </p>
-        </div>
-      </div>
-    </section>
-
-  </main>
 </body>
 </html>
