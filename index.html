@@ -134,6 +134,15 @@ section{padding:80px 0}
 .h2{font-size:36px;font-weight:900;margin:0 0 10px}
 .sub{color:var(--muted);font-weight:600}
 
+/* Yelp link styling (baked in) */
+.yelp-link{
+  color:var(--blue);
+  font-weight:700;
+}
+.yelp-link:hover{
+  text-decoration:underline;
+}
+
 /* MENU GRID */
 .menu-grid{
   display:grid;
@@ -279,7 +288,17 @@ footer{
 <section id="reviews">
   <div class="wrap">
     <h2 class="h2">What people are saying</h2>
-    <p class="sub">Based on customer feedback</p>
+
+    <!-- Replaced subtitle + baked in behavior -->
+    <p class="sub">
+      <a class="yelp-link"
+         href="https://www.yelp.com/biz/philly-originals-beaver"
+         target="_blank"
+         rel="noopener"
+         onclick="scrollToReviews()">
+        Click here to see our Yelp reviews →
+      </a>
+    </p>
 
     <div class="reviews">
       <div class="review">
@@ -304,6 +323,14 @@ footer{
 <footer>
   © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
 </footer>
+
+<!-- Smooth scroll helper -->
+<script>
+  function scrollToReviews() {
+    const reviews = document.getElementById('reviews');
+    if (reviews) reviews.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
