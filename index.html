@@ -12,9 +12,14 @@
 :root{
   --blue-bg:#eef3ff;
   --blue:#2455ff;
+  --blue2:#1437c9;
   --ink:#0b1220;
   --muted:#5b6472;
   --max:1200px;
+
+  /* Chipotle-ish header vibe */
+  --chipotle-brown:#3a2416;
+  --line:rgba(11,18,32,.10);
 }
 
 *{box-sizing:border-box}
@@ -27,18 +32,69 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{width:min(var(--max),92%);margin:auto}
 
-/* HEADER */
+/* HEADER (Chipotle-style layout) */
 header{
   position:sticky;top:0;z-index:10;
-  background:#fff;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--line);
 }
 .top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:16px 0;
+  gap:18px;
+  padding:14px 0;
 }
-.logo{height:44px}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px;
+}
+.logo{height:44px;display:block}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+.nav a{
+  font-family:Oswald, system-ui, sans-serif;
+  font-weight:700;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  color:var(--chipotle-brown);
+  font-size:18px;
+}
+.nav a:hover{opacity:.75}
+
+.right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px;
+  justify-content:flex-end;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-weight:800;
+  font-size:14px;
+  transition:140ms ease;
+}
+.pill.primary{
+  background:var(--blue);
+  border-color:transparent;
+  color:#fff;
+}
+.pill.primary:hover{background:var(--blue2)}
+.pill:hover{transform:translateY(-1px)}
 
 /* HERO */
 .hero{
@@ -50,6 +106,8 @@ header{
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center; /* centered */
+  display:block;
 }
 .hero::after{
   content:"";
@@ -63,25 +121,18 @@ header{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-family:Oswald;
+  font-family:Oswald, system-ui, sans-serif;
   font-size:clamp(48px,6vw,96px);
-  color:#fff;
+  color:var(--blue);             /* blue title */
   z-index:2;
+  text-shadow:0 10px 40px rgba(0,0,0,.45);
+  transform:translateY(-10%);    /* lifted up */
 }
 
 /* SECTION */
-section{
-  padding:80px 0;
-}
-.h2{
-  font-size:36px;
-  font-weight:900;
-  margin:0 0 10px;
-}
-.sub{
-  color:var(--muted);
-  font-weight:600;
-}
+section{padding:80px 0}
+.h2{font-size:36px;font-weight:900;margin:0 0 10px}
+.sub{color:var(--muted);font-weight:600}
 
 /* MENU GRID */
 .menu-grid{
@@ -90,13 +141,12 @@ section{
   gap:32px;
   margin-top:48px;
 }
-.menu-tile{
-  cursor:pointer;
-}
+.menu-tile{cursor:pointer}
 .menu-img{
   height:260px;
   overflow:hidden;
   border-radius:14px;
+  box-shadow:0 16px 40px rgba(2,6,23,.10);
 }
 .menu-img img{
   width:100%;
@@ -104,18 +154,14 @@ section{
   object-fit:cover;
   transition:transform .45s ease;
 }
-.menu-tile:hover img{
-  transform:scale(1.08);
-}
+.menu-tile:hover img{transform:scale(1.08)}
 .menu-label{
   font-size:28px;
   font-weight:900;
   margin-top:16px;
   color:var(--ink);
 }
-.menu-tile:hover .menu-label{
-  color:var(--blue);
-}
+.menu-tile:hover .menu-label{color:var(--blue)}
 
 /* REVIEWS */
 .reviews{
@@ -128,19 +174,11 @@ section{
   background:#fff;
   padding:28px;
   border-radius:16px;
+  box-shadow:0 14px 34px rgba(2,6,23,.08);
 }
-.review .stars{
-  color:#f5a623;
-  font-weight:900;
-}
-.review p{
-  font-weight:600;
-  line-height:1.6;
-}
-.review span{
-  color:var(--muted);
-  font-size:14px;
-}
+.review .stars{color:#f5a623;font-weight:900}
+.review p{font-weight:600;line-height:1.6}
+.review span{color:var(--muted);font-size:14px}
 
 /* FOOTER */
 footer{
@@ -151,6 +189,10 @@ footer{
 }
 
 /* MOBILE */
+@media(max-width:980px){
+  .nav{display:none}
+  .right{min-width:auto}
+}
 @media(max-width:900px){
   .menu-grid,.reviews{grid-template-columns:1fr}
 }
@@ -161,11 +203,22 @@ footer{
 
 <header>
   <div class="wrap top">
-    <img src="assets/logo.png" class="logo" alt="Philly Originals"/>
-    <div>
-      <a href="#menu">Menu</a>&nbsp;&nbsp;
-      <a href="#reviews">Reviews</a>&nbsp;&nbsp;
-      <a href="tel:+17247283011">Call</a>
+    <a class="brand" href="index.html" aria-label="Philly Originals Home">
+      <img src="assets/logo.png" class="logo" alt="Philly Originals"/>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <!-- Menu goes directly to Toast -->
+      <a href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue" target="_blank" rel="noopener">Menu</a>
+      <!-- New pages (create these files next) -->
+      <a href="catering.html">Catering</a>
+      <a href="rewards.html">Rewards</a>
+      <a href="locations.html">Locations</a>
+    </nav>
+
+    <div class="right">
+      <a class="pill" href="locations.html">Directions</a>
+      <a class="pill primary" href="tel:+17247283011">Call</a>
     </div>
   </div>
 </header>
@@ -183,33 +236,39 @@ footer{
     <p class="sub">Choose a category to order online</p>
 
     <div class="menu-grid">
-      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-        <div class="menu-img"><img src="assets/cat-hoagies.jpg"></div>
+      <a class="menu-tile" target="_blank" rel="noopener"
+         href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-hoagies.jpg" alt="Hoagies"></div>
         <div class="menu-label">Hoagies</div>
       </a>
 
-      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-        <div class="menu-img"><img src="assets/cat-sandwiches.jpg"></div>
+      <a class="menu-tile" target="_blank" rel="noopener"
+         href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-sandwiches.jpg" alt="Sandwiches"></div>
         <div class="menu-label">Sandwiches</div>
       </a>
 
-      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-        <div class="menu-img"><img src="assets/cat-salads.jpg"></div>
+      <a class="menu-tile" target="_blank" rel="noopener"
+         href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-salads.jpg" alt="Salads"></div>
         <div class="menu-label">Salads</div>
       </a>
 
-      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-        <div class="menu-img"><img src="assets/cat-fries.jpg"></div>
+      <a class="menu-tile" target="_blank" rel="noopener"
+         href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-fries.jpg" alt="Fries"></div>
         <div class="menu-label">Fries</div>
       </a>
 
-      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-        <div class="menu-img"><img src="assets/cat-sides.jpg"></div>
+      <a class="menu-tile" target="_blank" rel="noopener"
+         href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-sides.jpg" alt="Sides"></div>
         <div class="menu-label">Sides</div>
       </a>
 
-      <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-        <div class="menu-img"><img src="assets/cat-beverages.jpg"></div>
+      <a class="menu-tile" target="_blank" rel="noopener"
+         href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+        <div class="menu-img"><img src="assets/cat-beverages.jpg" alt="Beverages"></div>
         <div class="menu-label">Beverages</div>
       </a>
     </div>
@@ -248,3 +307,4 @@ footer{
 
 </body>
 </html>
+
