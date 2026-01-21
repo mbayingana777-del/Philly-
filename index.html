@@ -10,18 +10,19 @@
 
 <style>
 :root{
+  --blue-bg:#eef3ff;
+  --blue:#2455ff;
   --ink:#0b1220;
   --muted:#5b6472;
-  --line:#e6e9ef;
-  --blue:#2455ff;
   --max:1200px;
 }
+
 *{box-sizing:border-box}
 body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--ink);
-  background:#fff;
+  background:var(--blue-bg);
 }
 a{text-decoration:none;color:inherit}
 .wrap{width:min(var(--max),92%);margin:auto}
@@ -29,79 +30,124 @@ a{text-decoration:none;color:inherit}
 /* HEADER */
 header{
   position:sticky;top:0;z-index:10;
-  background:#fff;border-bottom:1px solid var(--line);
+  background:#fff;
 }
 .top{
-  display:flex;align-items:flex-start;justify-content:space-between;
-  padding:14px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 0;
 }
 .logo{height:44px}
 
 /* HERO */
 .hero{
-  position:relative;height:65vh;min-height:420px;
+  position:relative;
+  height:65vh;
+  min-height:420px;
 }
 .hero img{
-  width:100%;height:100%;object-fit:cover;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 .hero::after{
-  content:"";position:absolute;inset:0;
+  content:"";
+  position:absolute;
+  inset:0;
   background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.45));
 }
 .hero h1{
-  position:absolute;inset:0;display:flex;
-  align-items:center;justify-content:center;
-  font-family:Oswald;font-size:clamp(48px,6vw,96px);
-  color:#fff;z-index:2;
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Oswald;
+  font-size:clamp(48px,6vw,96px);
+  color:#fff;
+  z-index:2;
 }
 
 /* SECTION */
-section{padding:70px 0}
-.h2{font-size:36px;font-weight:900;margin:0 0 10px}
-.sub{color:var(--muted);font-weight:600}
+section{
+  padding:80px 0;
+}
+.h2{
+  font-size:36px;
+  font-weight:900;
+  margin:0 0 10px;
+}
+.sub{
+  color:var(--muted);
+  font-weight:600;
+}
 
 /* MENU GRID */
 .menu-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:28px;margin-top:40px;
+  gap:32px;
+  margin-top:48px;
 }
 .menu-tile{
   cursor:pointer;
-  overflow:hidden;
 }
 .menu-img{
   height:260px;
   overflow:hidden;
+  border-radius:14px;
 }
 .menu-img img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .4s ease;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .45s ease;
 }
-.menu-tile:hover img{transform:scale(1.07)}
+.menu-tile:hover img{
+  transform:scale(1.08);
+}
 .menu-label{
   font-size:28px;
   font-weight:900;
-  letter-spacing:.5px;
-  margin-top:14px;
+  margin-top:16px;
+  color:var(--ink);
+}
+.menu-tile:hover .menu-label{
+  color:var(--blue);
 }
 
 /* REVIEWS */
 .reviews{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:30px;margin-top:40px;
+  gap:36px;
+  margin-top:48px;
 }
-.review .stars{color:#f5a623;font-weight:900}
-.review p{font-weight:600;line-height:1.55}
-.review span{color:var(--muted);font-size:14px}
+.review{
+  background:#fff;
+  padding:28px;
+  border-radius:16px;
+}
+.review .stars{
+  color:#f5a623;
+  font-weight:900;
+}
+.review p{
+  font-weight:600;
+  line-height:1.6;
+}
+.review span{
+  color:var(--muted);
+  font-size:14px;
+}
 
 /* FOOTER */
 footer{
-  border-top:1px solid var(--line);
-  padding:30px 0;
+  padding:40px 0;
   color:var(--muted);
   font-weight:600;
+  text-align:center;
 }
 
 /* MOBILE */
@@ -134,7 +180,7 @@ footer{
 <section id="menu">
   <div class="wrap">
     <h2 class="h2">Menu</h2>
-    <p class="sub">Tap a category to order online</p>
+    <p class="sub">Choose a category to order online</p>
 
     <div class="menu-grid">
       <a class="menu-tile" href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
@@ -174,52 +220,30 @@ footer{
 <section id="reviews">
   <div class="wrap">
     <h2 class="h2">What people are saying</h2>
-    <p class="sub">Based on customer feedback from Yelp</p>
+    <p class="sub">Based on customer feedback</p>
 
     <div class="reviews">
       <div class="review">
         <div class="stars">★★★★★</div>
-        <p>Best cheesesteaks around. Always fresh, loaded, and cooked perfectly.</p>
+        <p>Best cheesesteaks around. Always fresh and loaded.</p>
         <span>— Local customer</span>
       </div>
-
       <div class="review">
         <div class="stars">★★★★★</div>
-        <p>Huge portions, fast service, and fair prices. A Beaver staple.</p>
+        <p>Huge portions, fast service, fair prices.</p>
         <span>— Yelp reviewer</span>
       </div>
-
       <div class="review">
         <div class="stars">★★★★★</div>
-        <p>Old-school sandwich shop done right. Consistent every time.</p>
-        <span>— Long-time customer</span>
-      </div>
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <p>Call ahead and it’s always ready. Fries and hoagies never miss.</p>
-        <span>— Verified diner</span>
-      </div>
-
-      <div class="review">
-        <div class="stars">★★★★★</div>
-        <p>Generous portions and friendly staff. Easy lunch win.</p>
+        <p>Old-school sandwich shop done right.</p>
         <span>— Beaver resident</span>
       </div>
     </div>
-
-    <p style="margin-top:30px">
-      <a href="https://www.yelp.com/biz/philly-originals-beaver" target="_blank">
-        Read more reviews on Yelp →
-      </a>
-    </p>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
-  </div>
+  © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
 </footer>
 
 </body>
