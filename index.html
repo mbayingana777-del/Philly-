@@ -23,6 +23,7 @@
 }
 
 *{box-sizing:border-box}
+html{scroll-behavior:smooth;}
 body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -106,7 +107,7 @@ header{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center; /* centered */
+  object-position:center;
   display:block;
 }
 .hero::after{
@@ -123,10 +124,10 @@ header{
   justify-content:center;
   font-family:Oswald, system-ui, sans-serif;
   font-size:clamp(48px,6vw,96px);
-  color:var(--blue);             /* blue title */
+  color:var(--blue);
   z-index:2;
   text-shadow:0 10px 40px rgba(0,0,0,.45);
-  transform:translateY(-10%);    /* lifted up */
+  transform:translateY(-10%);
 }
 
 /* SECTION */
@@ -134,14 +135,15 @@ section{padding:80px 0}
 .h2{font-size:36px;font-weight:900;margin:0 0 10px}
 .sub{color:var(--muted);font-weight:600}
 
-/* Yelp link styling (baked in) */
-.yelp-link{
+/* Yelp link styling */
+.sub-link{
+  display:inline-block;
   color:var(--blue);
-  font-weight:700;
-}
-.yelp-link:hover{
+  font-weight:800;
   text-decoration:underline;
+  text-underline-offset:4px;
 }
+.sub-link:hover{color:var(--blue2)}
 
 /* MENU GRID */
 .menu-grid{
@@ -217,9 +219,7 @@ footer{
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <!-- Menu goes directly to Toast -->
       <a href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue" target="_blank" rel="noopener">Menu</a>
-      <!-- New pages (create these files next) -->
       <a href="catering.html">Catering</a>
       <a href="rewards.html">Rewards</a>
       <a href="locations.html">Locations</a>
@@ -289,14 +289,14 @@ footer{
   <div class="wrap">
     <h2 class="h2">What people are saying</h2>
 
-    <!-- Replaced subtitle + baked in behavior -->
+    <!-- ✅ Replaced subtext with link + auto-scroll-to-Yelp behavior -->
     <p class="sub">
-      <a class="yelp-link"
-         href="https://www.yelp.com/biz/philly-originals-beaver"
+      <a class="sub-link"
+         href="https://www.yelp.com/biz/philly-originals-beaver#reviews"
          target="_blank"
          rel="noopener"
-         onclick="scrollToReviews()">
-        Click here to see our Yelp reviews →
+         onclick="window.open(this.href,'_blank','noopener'); return false;">
+        Click here to see our Yelp reviews
       </a>
     </p>
 
@@ -324,14 +324,8 @@ footer{
   © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
 </footer>
 
-<!-- Smooth scroll helper -->
-<script>
-  function scrollToReviews() {
-    const reviews = document.getElementById('reviews');
-    if (reviews) reviews.scrollIntoView({ behavior: 'smooth' });
-  }
-</script>
-
 </body>
+</html>
+
 </html>
 
