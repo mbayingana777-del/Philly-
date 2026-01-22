@@ -146,7 +146,7 @@ section{padding:80px 0}
 .btn.primary:hover{background:var(--blue2)}
 .btn:hover{transform:translateY(-1px)}
 
-/* BUBBLE CATEGORY SELECTORS (keep) */
+/* CATEGORY BUBBLES (kept) */
 .pills-area{padding:16px 18px 18px;border-bottom:1px solid var(--line);}
 .pills-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0;}
 
@@ -171,10 +171,8 @@ section{padding:80px 0}
 }
 .chip.active .count{background:var(--blue2);color:#fff;}
 
-/* ✅ MENU ITEM TILE CARDS (same vibe as your old category tiles) */
-.item-tiles{
-  padding:18px;
-}
+/* MENU ITEM TILE CARDS */
+.item-tiles{padding:18px;}
 .tiles-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -292,7 +290,7 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
       <div class="menu-topbar">
         <div class="lefty">
           <div class="title">Order Online</div>
-          <div class="note">Category bubbles + menu items displayed as tile cards.</div>
+          <div class="note">Category bubbles + all menu items displayed as tile cards.</div>
         </div>
         <div class="actions">
           <a class="btn primary" target="_blank" rel="noopener"
@@ -303,14 +301,14 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
         </div>
       </div>
 
-      <!-- ✅ KEEP category bubbles -->
+      <!-- Category bubbles -->
       <div class="pills-area" aria-label="Menu selectors">
         <div class="pills-row" id="categoryChips" aria-label="Category bubbles">
           <!-- injected by JS -->
         </div>
       </div>
 
-      <!-- ✅ REPLACED: old category tiles are gone. Now we render MENU ITEMS as TILE CARDS -->
+      <!-- Menu item tiles -->
       <div class="item-tiles" aria-label="Menu item tiles">
         <div class="tiles-grid" id="itemTilesGrid">
           <!-- injected by JS -->
@@ -357,31 +355,49 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
 <script>
 /**
  * ✅ Category tiles removed.
- * ✅ Menu items are rendered as Tile Cards (same visual style as the old category tiles).
+ * ✅ ALL menu items (from your list) are shown as Tile Cards.
+ * ✅ Category bubbles filter which tiles are shown.
  *
- * NOTE: If an item does not have its own image, we fall back to the category image.
- * You can add `img:` on any item later.
+ * Images:
+ * - If item.img is not provided, we fall back to the category image.
+ * - Add your own photos later by adding `img:` to an item.
  */
 const MENU = [
   {
-    id: "cheesesteaks",
-    name: "Cheesesteaks",
+    id: "sandwich",
+    name: "Sandwich",
     img: "assets/cat-cheesesteaks.jpg",
     items: [
-      { name: "Philadelphia Cheesesteak", meta: "Classic steak + cheese", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak_ebd4b86c-b557-48ff-a035-d317279c0f9a" },
-      { name: "Chicken Cheesesteak", meta: "Grilled chicken + cheese", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheesesteak_b876a53c-49c0-458f-863d-024f50b68a91" },
-      { name: "Pizza Steak", meta: "Pizza-style steak hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pizza-steak-hoagie_1129b578-c657-4e66-9e6c-c6bd576b7821" },
-      { name: "Buffalo Chicken", meta: "Buffalo-style chicken hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken_725cabbe-190b-44a2-9e8b-959a732a78dd" }
+      { name: "Philadelphia Cheesesteak", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak_ebd4b86c-b557-48ff-a035-d317279c0f9a" },
+      { name: "Philadelphia Cheesesteak Jr.", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak-jr_07fd8b4d-08f7-4fc0-a81e-4cadae2d9f0f" },
+      { name: "Chicken Cheesesteak", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheesesteak_b876a53c-49c0-458f-863d-024f50b68a91" },
+      { name: "Chicken Cheesesteak Jr.", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheesesteak-jr_988ab45c-b2f7-49fa-b503-293c1b51855e" },
+      { name: "Buffalo Chicken", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken_725cabbe-190b-44a2-9e8b-959a732a78dd" }
     ]
   },
   {
-    id: "hoagies",
-    name: "Hoagies",
+    id: "hoagie",
+    name: "Hoagie",
     img: "assets/cat-hoagies.jpg",
     items: [
-      { name: "Italian Hoagie", meta: "Italian meats + provolone", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-italian-hoagie_79ae256d-2f17-42c7-8c89-1b88282994d8" },
-      { name: "Turkey Hoagie", meta: "Turkey + classic hoagie fixings", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-turkey-hoagie_967dcc94-296a-4c46-925c-aab2328e414d" },
-      { name: "Meatball Hoagie", meta: "Meatballs + marinara", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-meatball-hoagie_5c490dcd-6389-4476-9f9b-6e1f32a3e5d8" }
+      { name: "Chicken Cordon Bleu Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cordon-bleu-hoagie_32aee894-7de9-4229-a7cd-d26f8fc285f1" },
+      { name: "Italian Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-italian-hoagie_79ae256d-2f17-42c7-8c89-1b88282994d8" },
+      { name: "Turkey Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-turkey-hoagie_967dcc94-296a-4c46-925c-aab2328e414d" },
+      { name: "Meatball Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-meatball-hoagie_5c490dcd-6389-4476-9f9b-6e1f32a3e5d8" },
+      { name: "Steak & Egg Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-egg-hoagie_e3550b09-fc18-4e9d-9321-22431ab1c8d1" },
+      { name: "Chicken Parmesan Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-parmesan-hoagie_9a53fd44-a528-42ab-9ed7-195013717248" },
+      { name: "Pizza Steak Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pizza-steak-hoagie_1129b578-c657-4e66-9e6c-c6bd576b7821" },
+      { name: "Philly Club Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philly-club-hoagie_fb62343c-2916-4bd2-9245-8ad87a623f8f" },
+      { name: "Ham Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-ham-hoagie_52f8cbbb-3fc3-46e5-9554-10956b8c204b" },
+      { name: "Ham Hoagie Jr.", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-ham-hoagie-jr_8b83c4d5-5997-46ba-b9a9-c4e6a96e838f" },
+      { name: "Tuna Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-tuna-hoagie_62a9c33b-fd87-4b7c-ac4e-584318bf867a" },
+      { name: "Peppers & Egg Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-peppers-egg-hoagie_1fded3af-987b-40c8-8ae1-507f712616db" },
+      { name: "Vegetarian Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-vegetarian-hoagie_f482f90b-0177-4701-a53b-6d8cf829c1aa" },
+      { name: "Grilled Vegetarian Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-grilled-vegetarian-hoagie_4fc57f41-90a1-4fb9-be5d-de8d2bb1b467" },
+      { name: "Veggie Marinara", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-veggie-marinara_446f2f2a-2189-4bef-86fb-84139814df05" },
+      { name: "Cheese Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-hoagie_2c852187-6e73-4c8a-9ea6-7827ff19e246" },
+      { name: "Grilled Cheese", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-grilled-cheese_427e50be-4e97-4032-a696-856cac415944" },
+      { name: "Beer Battered Fish Sandwich", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-beer-battered-fish-sandwich_41380bbb-0748-4a78-8bb8-07e6340bd0fc" }
     ]
   },
   {
@@ -389,19 +405,44 @@ const MENU = [
     name: "Salads",
     img: "assets/cat-salads.jpg",
     items: [
-      { name: "Steak Salad", meta: "Steak on a fresh salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-salad_c7d01215-987a-42d9-ac1e-4b13bb933f8e" },
-      { name: "Chicken Salad", meta: "Chicken on a fresh salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-salad_8f7f8132-dec8-4ba4-9e4b-3e4458cff754" },
-      { name: "Buffalo Chicken Salad", meta: "Buffalo chicken over salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken-salad_088aeaef-5c12-4802-9409-188ccdb9a20d" }
+      { name: "Steak Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-salad_c7d01215-987a-42d9-ac1e-4b13bb933f8e" },
+      { name: "Chicken Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-salad_8f7f8132-dec8-4ba4-9e4b-3e4458cff754" },
+      { name: "Tuna Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-tuna-salad_c6d47f37-2c5a-4302-b369-808f64e9000b" },
+      { name: "Buffalo Chicken Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken-salad_088aeaef-5c12-4802-9409-188ccdb9a20d" },
+      { name: "Fried Fish Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fried-fish-salad_32830135-8c49-4804-8aac-4f3edbd03c68" }
     ]
   },
   {
-    id: "sides",
-    name: "Fries & Sides",
+    id: "specialty-fries",
+    name: "Specialty Fries",
     img: "assets/cat-sides.jpg",
     items: [
-      { name: "Fries", meta: "Classic fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries_cbbe6d00-3201-4827-a5e3-ac05ba0ef4f4" },
-      { name: "Cheese Fries", meta: "Fries topped with cheese", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-fries_29bc3073-4c45-4cf5-adec-cb80c55a98aa" },
-      { name: "Onion Rings", meta: "Crispy onion rings", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-onion-rings_e2694d71-6daa-4933-8b59-061237f68fa8" }
+      { name: "Cheese & Steak Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-steak-fries_92881612-e739-4afb-89b1-e23b5c2db397" },
+      { name: "Chicken Cheese Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheese-fries_f2bbf460-97a3-470f-9ad5-e6df54915fa5" },
+      { name: "Fish and Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fish-and-fries_c4ce57a8-7903-46ea-8290-31dc54d6ac77" }
+    ]
+  },
+  {
+    id: "sides-extras",
+    name: "Sides & Extras",
+    img: "assets/cat-sides.jpg",
+    items: [
+      { name: "Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries_cbbe6d00-3201-4827-a5e3-ac05ba0ef4f4" },
+      { name: "Fries w/ Cheese OTS", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries-w-cheese-ots_1794bc78-1a74-4b3b-9300-8a91cde28566" },
+      { name: "Cheese Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-fries_29bc3073-4c45-4cf5-adec-cb80c55a98aa" },
+      { name: "Cheese & Bacon Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-bacon-fries_6d4c5b46-9602-4a35-8f1d-169ffab4a984" },
+      { name: "Red Skin Potatoes", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-red-skin-potatoes_42186d09-5ffc-4c76-8d55-b7f2e11ad4a5" },
+      { name: "Jalapeno Poppers", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-jalapeno-poppers_69834b64-c4bf-4671-8822-fa2890d0872c" },
+      { name: "Dressing", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-dressing_90ebe078-37e2-4645-a86d-a09fa9188e3e" },
+      { name: "Mozzerlla Sticks", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mozzerlla-sticks_b9c5359f-8fb6-43e5-95c7-6ca7615b8d54" },
+      { name: "Onion Rings", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-onion-rings_e2694d71-6daa-4933-8b59-061237f68fa8" },
+      { name: "Chicken Fingers (3)", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-fingers-3_4128d734-91e1-44a5-9200-f00a4073e183" },
+      { name: "Chicken Fingers (5)", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-fingers-5_9f585d9c-bae6-4dee-b350-c7ecbb8ba440" },
+      { name: "Mac and Cheese Bites", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mac-and-cheese-bites_f6fedc62-8477-4ce4-b3c5-27f79eb75b3e" },
+      { name: "Pretzels With Cheese", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pretzels-with-cheese_21a93960-3834-4229-8d79-0d958ede55a1" },
+      { name: "Party Ring", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-party-ring_466aaeda-4b0c-4afe-b18f-24d38815896e" },
+      { name: "2 Homemade Chocolate Chip Cookies", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-2-homemade-chocolate-chip-cookies_d8fc028b-1e90-4079-be30-d4fc6186c691" },
+      { name: "2 Homemade Sugar Cookies", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-2-homemade-sugar-cookies_1fe3d5cc-d1ac-4cba-89fd-b973d1d7ddee" }
     ]
   },
   {
@@ -409,9 +450,27 @@ const MENU = [
     name: "Beverages",
     img: "assets/cat-beverages.jpg",
     items: [
-      { name: "Pepsi", meta: "Cold bottle", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37" },
-      { name: "Pure Leaf Sweet Tea", meta: "Bottled tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219" },
-      { name: "Bottled Water", meta: "Chilled water", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-bottled-water_09c54188-3e5d-4ad8-9853-bd93ed3b5ff3" }
+      { name: "Hanks Orange's and Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-oranges-and-cream_b0dbbc40-9978-4008-8a69-27f47ddf0b9e" },
+      { name: "Hanks Black Cherry", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-black-cherry_10ecaed3-97c1-47e5-b66c-f2cb1e949b68" },
+      { name: "Hanks Rootbeer", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-rootbeer_0cce0349-7666-42ff-8007-3a0c52535c22" },
+      { name: "Hanks Vanilla Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-vanilla-cream_4d46ffc8-2b73-47bb-a81b-c13e2329adf0" },
+      { name: "Pure Leaf Sweet Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219" },
+      { name: "Pure Leaf Unsweetened", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-unsweetened_b46de2f9-3131-4756-a3c6-2435971f8fe4" },
+      { name: "Pure Leaf Peach", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-peach_083b5265-099e-4e35-ac6b-4e1db489142e" },
+      { name: "Pure Leaf Raspberry", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-raspberry_54a04db6-2aba-459c-adbf-715f0ddf945c" },
+      { name: "Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37" },
+      { name: "Diet Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-pepsi_8d661fdf-7494-4fa8-92fc-bbf7e29790f9" },
+      { name: "Cherry Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cherry-pepsi_3228848e-811a-4f1b-be93-08a0806e8129" },
+      { name: "Pepsi Zero Sugar", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi-zero-sugar_0a256a0b-ccdf-4e6d-ae7a-885836ecb668" },
+      { name: "Dole Lemonade", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-dole-lemonade_e0b240b1-4a8e-4551-b22d-e6c1c98f5df5" },
+      { name: "Lipton Peach Iced Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-lipton-peach-iced-tea_b022cc52-c642-40d3-82cc-270d1e5f10b5" },
+      { name: "Mt Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mt-dew_1d0fc1dc-a060-4a37-af97-0aa82b1a04b1" },
+      { name: "Diet Mt Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-mt-dew_53e025cf-9747-4a87-9013-383ad1db32da" },
+      { name: "Brisk", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-brisk_888bd92a-39be-4040-9e49-60cb7943cb68" },
+      { name: "Gatorade Cool Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-cool-blue_56f7da4c-75d8-4860-afd8-11e3117a46d1" },
+      { name: "Gatorade Zero Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-zero-blue_5a70d94e-1d87-42a3-afbc-fb9ec3a5d466" },
+      { name: "Gatorade Fruit Punch", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-fruit-punch_1e63f138-a0aa-4256-9132-9502f0751fed" },
+      { name: "Bottled Water", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-bottled-water_09c54188-3e5d-4ad8-9853-bd93ed3b5ff3" }
     ]
   }
 ];
@@ -434,15 +493,11 @@ function setActiveCategory(id){
   if(!cat) return;
   activeCategoryId = id;
 
-  // highlight active category chip
   document.querySelectorAll(".chip.cat").forEach(ch => {
     ch.classList.toggle("active", ch.dataset.cat === id);
   });
 
-  // render MENU ITEMS as TILE CARDS
   renderItemTiles(cat);
-
-  // shareable state
   history.replaceState(null, "", `#menu-${id}`);
 }
 
@@ -465,10 +520,6 @@ function renderCategoryChips(){
   });
 }
 
-/**
- * ✅ Item tiles use the SAME visual style as your old category tiles.
- * If item.img is missing, we use cat.img as a fallback.
- */
 function renderItemTiles(cat){
   els.itemTilesGrid.innerHTML = cat.items.map(it => {
     const img = it.img || cat.img; // fallback so tiles always have a photo
@@ -499,4 +550,6 @@ setActiveCategory(activeCategoryId);
 </script>
 
 </body>
+</html>
+
 </html>
