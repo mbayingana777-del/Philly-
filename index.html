@@ -17,11 +17,9 @@
   --muted:#5b6472;
   --max:1200px;
 
-  /* Chipotle-ish header vibe */
   --chipotle-brown:#3a2416;
   --line:rgba(11,18,32,.10);
 
-  /* Menu */
   --card:#ffffff;
   --shadow:0 18px 50px rgba(2,6,23,.10);
 }
@@ -37,7 +35,7 @@ body{
 a{text-decoration:none;color:inherit}
 .wrap{width:min(var(--max),92%);margin:auto}
 
-/* HEADER (Chipotle-style layout) */
+/* HEADER */
 header{
   position:sticky;top:0;z-index:10;
   background:rgba(255,255,255,.92);
@@ -51,19 +49,10 @@ header{
   gap:18px;
   padding:14px 0;
 }
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  min-width:220px;
-}
+.brand{display:flex;align-items:center;gap:12px;min-width:220px;}
 .logo{height:44px;display:block}
 
-.nav{
-  display:flex;
-  align-items:center;
-  gap:28px;
-}
+.nav{display:flex;align-items:center;gap:28px;}
 .nav a{
   font-family:Oswald, system-ui, sans-serif;
   font-weight:700;
@@ -93,39 +82,21 @@ header{
   font-size:14px;
   transition:140ms ease;
 }
-.pill.primary{
-  background:var(--blue);
-  border-color:transparent;
-  color:#fff;
-}
+.pill.primary{background:var(--blue);border-color:transparent;color:#fff;}
 .pill.primary:hover{background:var(--blue2)}
 .pill:hover{transform:translateY(-1px)}
 
 /* HERO */
-.hero{
-  position:relative;
-  height:65vh;
-  min-height:420px;
-}
-.hero img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  display:block;
-}
+.hero{position:relative;height:65vh;min-height:420px;}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
 .hero::after{
   content:"";
-  position:absolute;
-  inset:0;
+  position:absolute;inset:0;
   background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.45));
 }
 .hero h1{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
   font-family:Oswald, system-ui, sans-serif;
   font-size:clamp(48px,6vw,96px);
   color:var(--blue);
@@ -156,11 +127,7 @@ section{padding:80px 0}
   padding:18px 18px;
   border-bottom:1px solid var(--line);
 }
-.menu-topbar .lefty{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
+.menu-topbar .lefty{display:flex;flex-direction:column;gap:4px;}
 .menu-topbar .title{
   font-family:Oswald, system-ui, sans-serif;
   letter-spacing:.6px;
@@ -168,41 +135,45 @@ section{padding:80px 0}
   font-size:20px;
   font-weight:700;
 }
-.menu-topbar .note{
-  color:var(--muted);
-  font-weight:600;
-  font-size:14px;
-}
-.menu-topbar .actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-}
+.menu-topbar .note{color:var(--muted);font-weight:600;font-size:14px;}
+.menu-topbar .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-weight:800;
-  font-size:14px;
-  transition:140ms ease;
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:10px 14px;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-weight:800;font-size:14px;transition:140ms ease;
 }
-.btn.primary{
-  background:var(--blue);
-  border-color:transparent;
-  color:#fff;
-}
+.btn.primary{background:var(--blue);border-color:transparent;color:#fff;}
 .btn.primary:hover{background:var(--blue2)}
 .btn:hover{transform:translateY(-1px)}
 
-/* CATEGORY TILES */
-.cat-tiles{
+/* BUBBLE CATEGORY SELECTORS (keep) */
+.pills-area{padding:16px 18px 18px;border-bottom:1px solid var(--line);}
+.pills-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0;}
+
+.chip{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-weight:900;transition:140ms ease;
+  cursor:pointer;user-select:none;
+}
+.chip:hover{transform:translateY(-1px)}
+.chip .count{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:999px;
+  background:rgba(36,85,255,.12);
+  color:var(--blue2);
+  font-weight:950;font-size:13px;
+}
+.chip.active{
+  border-color:rgba(36,85,255,.45);
+  background:rgba(36,85,255,.08);
+  color:var(--blue2);
+}
+.chip.active .count{background:var(--blue2);color:#fff;}
+
+/* ✅ MENU ITEM TILE CARDS (same vibe as your old category tiles) */
+.item-tiles{
   padding:18px;
-  border-bottom:1px solid var(--line);
 }
 .tiles-grid{
   display:grid;
@@ -238,102 +209,19 @@ section{padding:80px 0}
 }
 .tile:hover .img img{transform:scale(1.07)}
 .tile .label{
-  padding:14px 14px 16px;
-  font-size:28px;
+  padding:14px 14px 6px;
+  font-size:26px;
   font-weight:950;
   color:var(--ink);
 }
-.tile.active .label{color:var(--blue2)}
-
-/* BUBBLE BRACKETS AREA */
-.pills-area{
-  padding:16px 18px 18px;
-}
-.pills-row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:10px;
-}
-.pills-row:last-child{margin-bottom:0}
-
-/* Base chip (category + items) */
-.chip{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-weight:900;
-  transition:140ms ease;
-  cursor:pointer;
-  user-select:none;
-}
-.chip:hover{transform:translateY(-1px)}
-.chip .count{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:26px;height:26px;
-  border-radius:999px;
-  background:rgba(36,85,255,.12);
-  color:var(--blue2);
-  font-weight:950;
-  font-size:13px;
-}
-.chip.active{
-  border-color:rgba(36,85,255,.45);
-  background:rgba(36,85,255,.08);
-  color:var(--blue2);
-}
-.chip.active .count{
-  background:var(--blue2);
-  color:#fff;
-}
-
-/* ITEM CHIP = each menu item is its own bracket (with meta + order badge) */
-.chip.item{
-  cursor:pointer;
-  text-decoration:none;
-  align-items:stretch;
-  padding:10px 12px;
-}
-.chip.item .txt{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-  line-height:1.1;
-}
-.chip.item .topline{
-  font-weight:950;
-}
-.chip.item .mini{
-  font-size:12px;
-  font-weight:800;
+.tile .meta{
+  padding:0 14px 16px;
   color:var(--muted);
+  font-weight:700;
+  font-size:13px;
+  line-height:1.35;
 }
-.chip.item .badge{
-  margin-left:10px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(36,85,255,.12);
-  color:var(--blue2);
-  font-weight:950;
-  font-size:12px;
-  white-space:nowrap;
-}
-.chip.item:hover .badge{
-  background:var(--blue2);
-  color:#fff;
-}
-
-/* We are replacing the rectangular list with chips-only */
-.items-area{display:none}
+.tile.active .label{color:var(--blue2)}
 
 /* REVIEWS */
 .reviews{
@@ -353,19 +241,14 @@ section{padding:80px 0}
 .review span{color:var(--muted);font-size:14px}
 
 /* FOOTER */
-footer{
-  padding:40px 0;
-  color:var(--muted);
-  font-weight:600;
-  text-align:center;
-}
+footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
 
 /* MOBILE */
 @media(max-width:980px){
   .nav{display:none}
   .right{min-width:auto}
   .tiles-grid{grid-template-columns:1fr}
-  .tile .label{font-size:26px}
+  .tile .label{font-size:24px}
 }
 @media(max-width:900px){
   .reviews{grid-template-columns:1fr}
@@ -395,23 +278,21 @@ footer{
   </div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
   <img src="assets/hero.jpg" alt="Philly Originals food"/>
   <h1>Philly Originals</h1>
 </div>
 
-<!-- MENU -->
 <section id="menu">
   <div class="wrap">
     <h2 class="h2">Menu</h2>
-    <p class="sub">Tap a category, then tap an item to order online. (Opens Toast in a new tab.)</p>
+    <p class="sub">Pick a category, then tap a menu tile to order online. (Opens Toast in a new tab.)</p>
 
     <div class="menu-shell">
       <div class="menu-topbar">
         <div class="lefty">
           <div class="title">Order Online</div>
-          <div class="note">Category tiles + bubble selections (Jersey Mike’s style flow).</div>
+          <div class="note">Category bubbles + menu items displayed as tile cards.</div>
         </div>
         <div class="actions">
           <a class="btn primary" target="_blank" rel="noopener"
@@ -422,35 +303,24 @@ footer{
         </div>
       </div>
 
-      <!-- BIG CATEGORY TILES -->
-      <div class="cat-tiles">
-        <div class="tiles-grid" id="tilesGrid" aria-label="Menu category tiles">
-          <!-- injected by JS -->
-        </div>
-      </div>
-
-      <!-- BUBBLES -->
+      <!-- ✅ KEEP category bubbles -->
       <div class="pills-area" aria-label="Menu selectors">
         <div class="pills-row" id="categoryChips" aria-label="Category bubbles">
           <!-- injected by JS -->
         </div>
-
-        <!-- THIS ROW IS NOW THE FULL MENU ITEMS (each item = bracket) -->
-        <div class="pills-row" id="itemChips" aria-label="Item bubbles">
-          <!-- injected by JS -->
-        </div>
       </div>
 
-      <!-- Rectangular list removed via CSS (items-area hidden) -->
-      <div class="items-area" aria-label="Items list">
-        <div class="item-list" id="itemList"></div>
+      <!-- ✅ REPLACED: old category tiles are gone. Now we render MENU ITEMS as TILE CARDS -->
+      <div class="item-tiles" aria-label="Menu item tiles">
+        <div class="tiles-grid" id="itemTilesGrid">
+          <!-- injected by JS -->
+        </div>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- REVIEWS -->
 <section id="reviews">
   <div class="wrap">
     <h2 class="h2">What people are saying</h2>
@@ -486,8 +356,11 @@ footer{
 
 <script>
 /**
- * Data = chips + Toast deep links
- * UI = category tiles + bubble brackets for EVERY item
+ * ✅ Category tiles removed.
+ * ✅ Menu items are rendered as Tile Cards (same visual style as the old category tiles).
+ *
+ * NOTE: If an item does not have its own image, we fall back to the category image.
+ * You can add `img:` on any item later.
  */
 const MENU = [
   {
@@ -544,10 +417,8 @@ const MENU = [
 ];
 
 const els = {
-  tilesGrid: document.getElementById("tilesGrid"),
   categoryChips: document.getElementById("categoryChips"),
-  itemChips: document.getElementById("itemChips"),
-  itemList: document.getElementById("itemList"),
+  itemTilesGrid: document.getElementById("itemTilesGrid"),
 };
 
 let activeCategoryId = MENU[0].id;
@@ -558,45 +429,21 @@ function escapeHtml(str){
   }[s]));
 }
 
-function setActiveCategory(id, {scrollToItems=true} = {}){
+function setActiveCategory(id){
   const cat = MENU.find(c => c.id === id);
   if(!cat) return;
   activeCategoryId = id;
 
-  // highlight tiles + category chips
-  document.querySelectorAll(".tile").forEach(t => {
-    t.classList.toggle("active", t.dataset.cat === id);
-  });
+  // highlight active category chip
   document.querySelectorAll(".chip.cat").forEach(ch => {
     ch.classList.toggle("active", ch.dataset.cat === id);
   });
 
-  // render item chips (FULL MENU ITEMS AS BRACKETS)
-  renderItemChips(cat);
+  // render MENU ITEMS as TILE CARDS
+  renderItemTiles(cat);
 
-  // update hash for shareable state
+  // shareable state
   history.replaceState(null, "", `#menu-${id}`);
-
-  // optional scroll to chips area
-  if(scrollToItems){
-    const menuShellTop = document.querySelector(".pills-area");
-    if(menuShellTop) menuShellTop.scrollIntoView({behavior:"smooth", block:"start"});
-  }
-}
-
-function renderTiles(){
-  els.tilesGrid.innerHTML = MENU.map(cat => `
-    <a class="tile" href="javascript:void(0)" data-cat="${cat.id}" aria-label="${escapeHtml(cat.name)}">
-      <div class="img">
-        <img src="${escapeHtml(cat.img)}" alt="${escapeHtml(cat.name)}">
-      </div>
-      <div class="label">${escapeHtml(cat.name)}</div>
-    </a>
-  `).join("");
-
-  els.tilesGrid.querySelectorAll(".tile").forEach(tile => {
-    tile.addEventListener("click", () => setActiveCategory(tile.dataset.cat));
-  });
 }
 
 function renderCategoryChips(){
@@ -608,44 +455,47 @@ function renderCategoryChips(){
   `).join("");
 
   els.categoryChips.querySelectorAll(".chip.cat").forEach(chip => {
-    chip.addEventListener("click", () => setActiveCategory(chip.dataset.cat, {scrollToItems:false}));
+    chip.addEventListener("click", () => setActiveCategory(chip.dataset.cat));
     chip.addEventListener("keydown", (e) => {
       if(e.key === "Enter" || e.key === " "){
         e.preventDefault();
-        setActiveCategory(chip.dataset.cat, {scrollToItems:false});
+        setActiveCategory(chip.dataset.cat);
       }
     });
   });
 }
 
-/* Every menu item becomes its own chip “bracket” */
-function renderItemChips(cat){
-  els.itemChips.innerHTML = cat.items.map(it => `
-    <a class="chip item" target="_blank" rel="noopener"
-       href="${escapeHtml(it.url)}" aria-label="Order ${escapeHtml(it.name)}">
-      <span class="txt">
-        <span class="topline">${escapeHtml(it.name)}</span>
-        ${it.meta ? `<span class="mini">${escapeHtml(it.meta)}</span>` : ``}
-      </span>
-      <span class="badge">Order →</span>
-    </a>
-  `).join("");
+/**
+ * ✅ Item tiles use the SAME visual style as your old category tiles.
+ * If item.img is missing, we use cat.img as a fallback.
+ */
+function renderItemTiles(cat){
+  els.itemTilesGrid.innerHTML = cat.items.map(it => {
+    const img = it.img || cat.img; // fallback so tiles always have a photo
+    return `
+      <a class="tile" target="_blank" rel="noopener"
+         href="${escapeHtml(it.url)}" aria-label="Order ${escapeHtml(it.name)}">
+        <div class="img">
+          <img src="${escapeHtml(img)}" alt="${escapeHtml(it.name)}">
+        </div>
+        <div class="label">${escapeHtml(it.name)}</div>
+        <div class="meta">${escapeHtml(it.meta || "")}</div>
+      </a>
+    `;
+  }).join("");
 }
 
 function initFromHash(){
   const h = (location.hash || "").replace("#","").trim();
   if(h.startsWith("menu-")){
     const id = h.replace("menu-","");
-    if(MENU.some(c => c.id === id)){
-      activeCategoryId = id;
-    }
+    if(MENU.some(c => c.id === id)) activeCategoryId = id;
   }
 }
 
 initFromHash();
-renderTiles();
 renderCategoryChips();
-setActiveCategory(activeCategoryId, {scrollToItems:false});
+setActiveCategory(activeCategoryId);
 </script>
 
 </body>
