@@ -141,18 +141,16 @@ section{padding:80px 0}
 .sub a{color:var(--blue);font-weight:800}
 .sub a:hover{text-decoration:underline}
 
-/* ===== MENU: keep your current “bubble bracket” look, add Jersey Mike’s style category selector ===== */
-
+/* MENU SHELL */
 .menu-shell{
   background:var(--card);
   border-radius:18px;
   box-shadow:var(--shadow);
   overflow:hidden;
 }
-
 .menu-topbar{
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:space-between;
   gap:12px;
   padding:18px 18px;
@@ -179,6 +177,7 @@ section{padding:80px 0}
   display:flex;
   gap:10px;
   flex-wrap:wrap;
+  justify-content:flex-end;
 }
 .btn{
   display:inline-flex;
@@ -200,20 +199,65 @@ section{padding:80px 0}
 .btn.primary:hover{background:var(--blue2)}
 .btn:hover{transform:translateY(-1px)}
 
-/* Category selector (Jersey Mike’s style: tabs + “bubble brackets” underneath) */
-.cat-selector{
-  padding:16px 18px 8px;
+/* CATEGORY TILES (the “photo #1” look) */
+.cat-tiles{
+  padding:18px;
   border-bottom:1px solid var(--line);
-  background:linear-gradient(#ffffff, #fbfcff);
 }
+.tiles-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.tile{
+  display:block;
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:0 14px 34px rgba(2,6,23,.08);
+  transition:140ms ease;
+}
+.tile:hover{
+  transform:translateY(-2px);
+  border-color:rgba(36,85,255,.25);
+  box-shadow:0 18px 44px rgba(2,6,23,.12);
+}
+.tile .img{
+  height:210px;
+  background:#f3f5ff;
+  overflow:hidden;
+}
+.tile .img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1.01);
+  transition:transform .45s ease;
+}
+.tile:hover .img img{transform:scale(1.07)}
+.tile .label{
+  padding:14px 14px 16px;
+  font-size:28px;
+  font-weight:950;
+  color:var(--ink);
+}
+.tile.active .label{color:var(--blue2)}
 
-.cat-tabs{
+/* “Bubble brackets” rows (keep your current vibe, just more like Jersey Mike’s) */
+.pills-area{
+  padding:16px 18px 18px;
+}
+.pills-row{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  align-items:center;
+  margin-bottom:10px;
 }
-.cat-tab{
+.pills-row:last-child{margin-bottom:0}
+
+.chip{
   display:inline-flex;
   align-items:center;
   gap:10px;
@@ -221,63 +265,37 @@ section{padding:80px 0}
   border-radius:999px;
   border:1px solid var(--line);
   background:#fff;
-  font-weight:950;
+  font-weight:900;
   transition:140ms ease;
+  cursor:pointer;
+  user-select:none;
 }
-.cat-tab:hover{
-  transform:translateY(-1px);
-  border-color:rgba(36,85,255,.25);
-}
-.cat-tab.active{
-  border-color:rgba(36,85,255,.35);
-  box-shadow:0 10px 24px rgba(2,6,23,.08);
-}
-.cat-tab .count{
-  font-size:12px;
-  font-weight:950;
-  color:#fff;
-  background:var(--blue2);
-  padding:4px 8px;
-  border-radius:999px;
-}
-
-/* “bubble brackets” row (what you’re calling the bubbles underneath) */
-.cat-bubbles{
-  margin-top:12px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-.bubble{
+.chip:hover{transform:translateY(-1px)}
+.chip .count{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:8px 12px;
+  width:26px;height:26px;
   border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-weight:900;
+  background:rgba(36,85,255,.12);
+  color:var(--blue2);
+  font-weight:950;
   font-size:13px;
-  color:var(--ink);
-  transition:140ms ease;
 }
-.bubble:hover{
-  transform:translateY(-1px);
-  border-color:rgba(36,85,255,.25);
-}
-.bubble.active{
-  background:rgba(36,85,255,.10);
-  border-color:rgba(36,85,255,.28);
+.chip.active{
+  border-color:rgba(36,85,255,.45);
+  background:rgba(36,85,255,.08);
   color:var(--blue2);
 }
-
-/* Content area */
-.menu-content{
-  padding:18px;
+.chip.active .count{
+  background:var(--blue2);
+  color:#fff;
 }
 
-/* Item cards (keeps your current list look) */
+/* Items list */
+.items-area{
+  padding:0 18px 18px;
+}
 .item-list{
   display:grid;
   gap:10px;
@@ -317,7 +335,7 @@ section{padding:80px 0}
   white-space:nowrap;
 }
 
-/* Reviews */
+/* REVIEWS */
 .reviews{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -334,7 +352,7 @@ section{padding:80px 0}
 .review p{font-weight:600;line-height:1.6}
 .review span{color:var(--muted);font-size:14px}
 
-/* Footer */
+/* FOOTER */
 footer{
   padding:40px 0;
   color:var(--muted);
@@ -346,6 +364,8 @@ footer{
 @media(max-width:980px){
   .nav{display:none}
   .right{min-width:auto}
+  .tiles-grid{grid-template-columns:1fr}
+  .tile .label{font-size:26px}
 }
 @media(max-width:900px){
   .reviews{grid-template-columns:1fr}
@@ -385,14 +405,13 @@ footer{
 <section id="menu">
   <div class="wrap">
     <h2 class="h2">Menu</h2>
-    <p class="sub">Tap an item to order online. (Opens Toast in a new tab.)</p>
+    <p class="sub">Tap a category, then tap an item to order online. (Opens Toast in a new tab.)</p>
 
     <div class="menu-shell">
-
       <div class="menu-topbar">
         <div class="lefty">
           <div class="title">Order Online</div>
-          <div class="note">Pick a category below, then choose an item.</div>
+          <div class="note">Category tiles + bubble selections (Jersey Mike’s style flow).</div>
         </div>
         <div class="actions">
           <a class="btn primary" target="_blank" rel="noopener"
@@ -403,205 +422,31 @@ footer{
         </div>
       </div>
 
-      <!-- Jersey Mike’s-style category selector + bubble brackets (keeps your current look, just more of it) -->
-      <div class="cat-selector">
-        <div class="cat-tabs" role="tablist" aria-label="Menu categories">
-          <button class="cat-tab active" type="button" data-cat="cheesesteaks" role="tab" aria-selected="true">
-            Cheesesteaks <span class="count">4</span>
-          </button>
-          <button class="cat-tab" type="button" data-cat="hoagies" role="tab" aria-selected="false">
-            Hoagies <span class="count">3</span>
-          </button>
-          <button class="cat-tab" type="button" data-cat="salads" role="tab" aria-selected="false">
-            Salads <span class="count">3</span>
-          </button>
-          <button class="cat-tab" type="button" data-cat="sides" role="tab" aria-selected="false">
-            Fries & Sides <span class="count">3</span>
-          </button>
-          <button class="cat-tab" type="button" data-cat="beverages" role="tab" aria-selected="false">
-            Beverages <span class="count">3</span>
-          </button>
-        </div>
-
-        <!-- “bubble brackets” under the selected category -->
-        <div class="cat-bubbles" aria-label="Category quick picks">
-          <!-- populated by JS -->
+      <!-- BIG CATEGORY TILES (photo #1 look) -->
+      <div class="cat-tiles">
+        <div class="tiles-grid" id="tilesGrid" aria-label="Menu category tiles">
+          <!-- injected by JS -->
         </div>
       </div>
 
-      <!-- Content -->
-      <div class="menu-content">
-        <!-- CHEESESTEAKS -->
-        <div class="cat-panel" data-panel="cheesesteaks">
-          <div class="item-list">
-            <a class="item bubble-item" data-bubble="Philadelphia Cheesesteak" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak_ebd4b86c-b557-48ff-a035-d317279c0f9a">
-              <div>
-                <div class="name">Philadelphia Cheesesteak</div>
-                <div class="meta">Classic steak + cheese</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Chicken Cheesesteak" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheesesteak_b876a53c-49c0-458f-863d-024f50b68a91">
-              <div>
-                <div class="name">Chicken Cheesesteak</div>
-                <div class="meta">Grilled chicken + cheese</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Pizza Steak" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pizza-steak-hoagie_1129b578-c657-4e66-9e6c-c6bd576b7821">
-              <div>
-                <div class="name">Pizza Steak</div>
-                <div class="meta">Pizza-style steak hoagie</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Buffalo Chicken" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken_725cabbe-190b-44a2-9e8b-959a732a78dd">
-              <div>
-                <div class="name">Buffalo Chicken</div>
-                <div class="meta">Buffalo-style chicken hoagie</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-          </div>
+      <!-- BUBBLES (keep your current vibe, just “more” like JM) -->
+      <div class="pills-area" aria-label="Menu selectors">
+        <div class="pills-row" id="categoryChips" aria-label="Category bubbles">
+          <!-- injected by JS -->
         </div>
 
-        <!-- HOAGIES -->
-        <div class="cat-panel" data-panel="hoagies" hidden>
-          <div class="item-list">
-            <a class="item bubble-item" data-bubble="Italian Hoagie" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-italian-hoagie_79ae256d-2f17-42c7-8c89-1b88282994d8">
-              <div>
-                <div class="name">Italian Hoagie</div>
-                <div class="meta">Italian meats + provolone</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Turkey Hoagie" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-turkey-hoagie_967dcc94-296a-4c46-925c-aab2328e414d">
-              <div>
-                <div class="name">Turkey Hoagie</div>
-                <div class="meta">Turkey + classic hoagie fixings</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Meatball Hoagie" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-meatball-hoagie_5c490dcd-6389-4476-9f9b-6e1f32a3e5d8">
-              <div>
-                <div class="name">Meatball Hoagie</div>
-                <div class="meta">Meatballs + marinara</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-          </div>
+        <div class="pills-row" id="itemChips" aria-label="Item bubbles">
+          <!-- injected by JS -->
         </div>
+      </div>
 
-        <!-- SALADS -->
-        <div class="cat-panel" data-panel="salads" hidden>
-          <div class="item-list">
-            <a class="item bubble-item" data-bubble="Steak Salad" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-salad_c7d01215-987a-42d9-ac1e-4b13bb933f8e">
-              <div>
-                <div class="name">Steak Salad</div>
-                <div class="meta">Steak on a fresh salad</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Chicken Salad" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-salad_8f7f8132-dec8-4ba4-9e4b-3e4458cff754">
-              <div>
-                <div class="name">Chicken Salad</div>
-                <div class="meta">Chicken on a fresh salad</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Buffalo Chicken Salad" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken-salad_088aeaef-5c12-4802-9409-188ccdb9a20d">
-              <div>
-                <div class="name">Buffalo Chicken Salad</div>
-                <div class="meta">Buffalo chicken over salad</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-          </div>
+      <!-- ITEM LIST -->
+      <div class="items-area" aria-label="Items list">
+        <div class="item-list" id="itemList">
+          <!-- injected by JS -->
         </div>
-
-        <!-- SIDES -->
-        <div class="cat-panel" data-panel="sides" hidden>
-          <div class="item-list">
-            <a class="item bubble-item" data-bubble="Fries" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries_cbbe6d00-3201-4827-a5e3-ac05ba0ef4f4">
-              <div>
-                <div class="name">Fries</div>
-                <div class="meta">Classic fries</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Cheese Fries" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-fries_29bc3073-4c45-4cf5-adec-cb80c55a98aa">
-              <div>
-                <div class="name">Cheese Fries</div>
-                <div class="meta">Fries topped with cheese</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Onion Rings" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-onion-rings_e2694d71-6daa-4933-8b59-061237f68fa8">
-              <div>
-                <div class="name">Onion Rings</div>
-                <div class="meta">Crispy onion rings</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-          </div>
-        </div>
-
-        <!-- BEVERAGES -->
-        <div class="cat-panel" data-panel="beverages" hidden>
-          <div class="item-list">
-            <a class="item bubble-item" data-bubble="Pepsi" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37">
-              <div>
-                <div class="name">Pepsi</div>
-                <div class="meta">Cold bottle</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Pure Leaf Sweet Tea" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219">
-              <div>
-                <div class="name">Pure Leaf Sweet Tea</div>
-                <div class="meta">Bottled tea</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-
-            <a class="item bubble-item" data-bubble="Bottled Water" target="_blank" rel="noopener"
-               href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-bottled-water_09c54188-3e5d-4ad8-9853-bd93ed3b5ff3">
-              <div>
-                <div class="name">Bottled Water</div>
-                <div class="meta">Chilled water</div>
-              </div>
-              <div class="go">Order →</div>
-            </a>
-          </div>
-        </div>
-
-      </div><!-- /menu-content -->
-    </div><!-- /menu-shell -->
+      </div>
+    </div>
 
   </div>
 </section>
@@ -642,73 +487,248 @@ footer{
 
 <script>
 /**
- * Jersey Mike’s behavior:
- * - Click category pill → swaps visible items
- * - “Bubble brackets” underneath update to that category’s items
- * - Click bubble → scroll/highlight that item in the list (keeps your design)
+ * Data = “mechanisms of photo #2” (chips, item list, Toast deep links)
+ * UI = “look of photo #1” (big category tiles)
  */
+const MENU = [
+  {
+    id: "cheesesteaks",
+    name: "Cheesesteaks",
+    count: 4,
+    img: "assets/cat-cheesesteaks.jpg", // add this image (or swap to an existing one)
+    items: [
+      {
+        name: "Philadelphia Cheesesteak",
+        meta: "Classic steak + cheese",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak_ebd4b86c-b557-48ff-a035-d317279c0f9a"
+      },
+      {
+        name: "Chicken Cheesesteak",
+        meta: "Grilled chicken + cheese",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheesesteak_b876a53c-49c0-458f-863d-024f50b68a91"
+      },
+      {
+        name: "Pizza Steak",
+        meta: "Pizza-style steak hoagie",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pizza-steak-hoagie_1129b578-c657-4e66-9e6c-c6bd576b7821"
+      },
+      {
+        name: "Buffalo Chicken",
+        meta: "Buffalo-style chicken hoagie",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken_725cabbe-190b-44a2-9e8b-959a732a78dd"
+      }
+    ]
+  },
+  {
+    id: "hoagies",
+    name: "Hoagies",
+    count: 3,
+    img: "assets/cat-hoagies.jpg",
+    items: [
+      {
+        name: "Italian Hoagie",
+        meta: "Italian meats + provolone",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-italian-hoagie_79ae256d-2f17-42c7-8c89-1b88282994d8"
+      },
+      {
+        name: "Turkey Hoagie",
+        meta: "Turkey + classic hoagie fixings",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-turkey-hoagie_967dcc94-296a-4c46-925c-aab2328e414d"
+      },
+      {
+        name: "Meatball Hoagie",
+        meta: "Meatballs + marinara",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-meatball-hoagie_5c490dcd-6389-4476-9f9b-6e1f32a3e5d8"
+      }
+    ]
+  },
+  {
+    id: "salads",
+    name: "Salads",
+    count: 3,
+    img: "assets/cat-salads.jpg",
+    items: [
+      {
+        name: "Steak Salad",
+        meta: "Steak on a fresh salad",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-salad_c7d01215-987a-42d9-ac1e-4b13bb933f8e"
+      },
+      {
+        name: "Chicken Salad",
+        meta: "Chicken on a fresh salad",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-salad_8f7f8132-dec8-4ba4-9e4b-3e4458cff754"
+      },
+      {
+        name: "Buffalo Chicken Salad",
+        meta: "Buffalo chicken over salad",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken-salad_088aeaef-5c12-4802-9409-188ccdb9a20d"
+      }
+    ]
+  },
+  {
+    id: "sides",
+    name: "Fries & Sides",
+    count: 3,
+    img: "assets/cat-sides.jpg",
+    items: [
+      {
+        name: "Fries",
+        meta: "Classic fries",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries_cbbe6d00-3201-4827-a5e3-ac05ba0ef4f4"
+      },
+      {
+        name: "Cheese Fries",
+        meta: "Fries topped with cheese",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-fries_29bc3073-4c45-4cf5-adec-cb80c55a98aa"
+      },
+      {
+        name: "Onion Rings",
+        meta: "Crispy onion rings",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-onion-rings_e2694d71-6daa-4933-8b59-061237f68fa8"
+      }
+    ]
+  },
+  {
+    id: "beverages",
+    name: "Beverages",
+    count: 3,
+    img: "assets/cat-beverages.jpg",
+    items: [
+      {
+        name: "Pepsi",
+        meta: "Cold bottle",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37"
+      },
+      {
+        name: "Pure Leaf Sweet Tea",
+        meta: "Bottled tea",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219"
+      },
+      {
+        name: "Bottled Water",
+        meta: "Chilled water",
+        url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-bottled-water_09c54188-3e5d-4ad8-9853-bd93ed3b5ff3"
+      }
+    ]
+  }
+];
 
-const tabs = Array.from(document.querySelectorAll('.cat-tab'));
-const panels = Array.from(document.querySelectorAll('.cat-panel'));
-const bubbleRow = document.querySelector('.cat-bubbles');
+const els = {
+  tilesGrid: document.getElementById("tilesGrid"),
+  categoryChips: document.getElementById("categoryChips"),
+  itemChips: document.getElementById("itemChips"),
+  itemList: document.getElementById("itemList"),
+};
 
-function getItemsForCat(cat){
-  const panel = document.querySelector(`.cat-panel[data-panel="${cat}"]`);
-  if(!panel) return [];
-  return Array.from(panel.querySelectorAll('.bubble-item')).map(a => ({
-    label: a.getAttribute('data-bubble') || a.querySelector('.name')?.textContent?.trim() || 'Item',
-    el: a
-  }));
+let activeCategoryId = MENU[0].id;
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, s => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+  }[s]));
 }
 
-function setActiveCat(cat){
-  // tabs
-  tabs.forEach(t => {
-    const isActive = t.dataset.cat === cat;
-    t.classList.toggle('active', isActive);
-    t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+function setActiveCategory(id, {scrollToItems=true} = {}){
+  const cat = MENU.find(c => c.id === id);
+  if(!cat) return;
+  activeCategoryId = id;
+
+  // highlight tiles + category chips
+  document.querySelectorAll(".tile").forEach(t => {
+    t.classList.toggle("active", t.dataset.cat === id);
+  });
+  document.querySelectorAll(".chip.cat").forEach(ch => {
+    ch.classList.toggle("active", ch.dataset.cat === id);
   });
 
-  // panels
-  panels.forEach(p => {
-    const isActive = p.dataset.panel === cat;
-    p.hidden = !isActive;
+  // render item chips + item list
+  renderItemChips(cat);
+  renderItemList(cat);
+
+  // update hash for shareable state
+  history.replaceState(null, "", `#menu-${id}`);
+
+  // optional scroll to items area (keeps the “tile first, then choose” flow)
+  if(scrollToItems){
+    const menuShellTop = document.querySelector(".pills-area");
+    if(menuShellTop) menuShellTop.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+}
+
+function renderTiles(){
+  els.tilesGrid.innerHTML = MENU.map(cat => `
+    <a class="tile" href="javascript:void(0)" data-cat="${cat.id}" aria-label="${escapeHtml(cat.name)}">
+      <div class="img">
+        <img src="${escapeHtml(cat.img)}" alt="${escapeHtml(cat.name)}">
+      </div>
+      <div class="label">${escapeHtml(cat.name)}</div>
+    </a>
+  `).join("");
+
+  els.tilesGrid.querySelectorAll(".tile").forEach(tile => {
+    tile.addEventListener("click", () => setActiveCategory(tile.dataset.cat));
   });
+}
 
-  // bubbles
-  const items = getItemsForCat(cat);
-  bubbleRow.innerHTML = '';
-  items.forEach((it, idx) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'bubble' + (idx === 0 ? ' active' : '');
-    b.textContent = it.label;
-    b.addEventListener('click', () => {
-      // toggle active bubble
-      Array.from(bubbleRow.querySelectorAll('.bubble')).forEach(x => x.classList.remove('active'));
-      b.classList.add('active');
+function renderCategoryChips(){
+  els.categoryChips.innerHTML = MENU.map(cat => `
+    <div class="chip cat" role="button" tabindex="0" data-cat="${cat.id}" aria-label="${escapeHtml(cat.name)}">
+      <span>${escapeHtml(cat.name)}</span>
+      <span class="count">${cat.items.length}</span>
+    </div>
+  `).join("");
 
-      // scroll to item inside the visible panel and do a quick highlight
-      it.el.scrollIntoView({behavior:'smooth', block:'center'});
-      it.el.animate(
-        [{transform:'scale(1)'},{transform:'scale(1.01)'},{transform:'scale(1)'}],
-        {duration:260, easing:'ease-out'}
-      );
-      it.el.style.borderColor = 'rgba(36,85,255,.35)';
-      setTimeout(() => { it.el.style.borderColor = ''; }, 700);
+  els.categoryChips.querySelectorAll(".chip.cat").forEach(chip => {
+    chip.addEventListener("click", () => setActiveCategory(chip.dataset.cat, {scrollToItems:false}));
+    chip.addEventListener("keydown", (e) => {
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        setActiveCategory(chip.dataset.cat, {scrollToItems:false});
+      }
     });
-    bubbleRow.appendChild(b);
   });
 }
 
-tabs.forEach(t => {
-  t.addEventListener('click', () => setActiveCat(t.dataset.cat));
-});
+function renderItemChips(cat){
+  els.itemChips.innerHTML = cat.items.map((it, idx) => `
+    <a class="chip item ${idx===0 ? "active" : ""}" target="_blank" rel="noopener"
+       href="${escapeHtml(it.url)}" aria-label="Order ${escapeHtml(it.name)}">
+      <span>${escapeHtml(it.name)}</span>
+    </a>
+  `).join("");
+}
 
-// init
-setActiveCat('cheesesteaks');
+function renderItemList(cat){
+  els.itemList.innerHTML = cat.items.map(it => `
+    <a class="item" target="_blank" rel="noopener" href="${escapeHtml(it.url)}">
+      <div>
+        <div class="name">${escapeHtml(it.name)}</div>
+        <div class="meta">${escapeHtml(it.meta || "")}</div>
+      </div>
+      <div class="go">Order →</div>
+    </a>
+  `).join("");
+}
+
+function initFromHash(){
+  // supports links like #menu-cheesesteaks
+  const h = (location.hash || "").replace("#","").trim();
+  if(h.startsWith("menu-")){
+    const id = h.replace("menu-","");
+    if(MENU.some(c => c.id === id)){
+      activeCategoryId = id;
+    }
+  }
+}
+
+initFromHash();
+renderTiles();
+renderCategoryChips();
+setActiveCategory(activeCategoryId, {scrollToItems:false});
 </script>
 
 </body>
+</html>
+
 </html>
 
