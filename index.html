@@ -21,14 +21,13 @@
   --chipotle-brown:#3a2416;
   --line:rgba(11,18,32,.10);
 
-  /* Jersey Mike's-ish menu vibe */
-  --paper:#ffffff;
-  --shadow:0 14px 34px rgba(2,6,23,.08);
-  --shadow2:0 16px 40px rgba(2,6,23,.10);
+  /* Menu */
+  --card:#ffffff;
+  --shadow:0 18px 50px rgba(2,6,23,.10);
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -112,7 +111,7 @@ header{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center; /* centered */
+  object-position:center;
   display:block;
 }
 .hero::after{
@@ -129,181 +128,177 @@ header{
   justify-content:center;
   font-family:Oswald, system-ui, sans-serif;
   font-size:clamp(48px,6vw,96px);
-  color:var(--blue);             /* blue title */
+  color:var(--blue);
   z-index:2;
   text-shadow:0 10px 40px rgba(0,0,0,.45);
-  transform:translateY(-10%);    /* lifted up */
+  transform:translateY(-10%);
 }
 
 /* SECTION */
 section{padding:80px 0}
 .h2{font-size:36px;font-weight:900;margin:0 0 10px}
 .sub{color:var(--muted);font-weight:600}
+.sub a{color:var(--blue);font-weight:800}
+.sub a:hover{text-decoration:underline}
 
-/* =========================
-   JERSEY MIKE'S STYLE MENU
-   ========================= */
-
-/* Top line: Menu + "Ready to order?" */
-.menu-header{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:18px;
-  margin-bottom:18px;
-}
-.menu-title{
-  display:flex;
-  align-items:baseline;
-  gap:16px;
-}
-.menu-title .h2{
-  margin:0;
-  font-size:44px;
-  letter-spacing:.3px;
-}
-.menu-title .divider{
-  width:2px;height:44px;background:var(--line);
-}
-.ready{
-  color:var(--muted);
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.8px;
-  font-size:12px;
-}
-.ready a{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-weight:900;
-  color:var(--ink);
-  text-transform:none;
-  letter-spacing:0;
-  font-size:16px;
-  margin-top:6px;
-}
-.ready a:hover{color:var(--blue)}
-
-/* Subnav categories */
-.menu-subnav{
-  display:flex;
-  gap:22px;
-  align-items:center;
-  flex-wrap:wrap;
-  border-bottom:1px solid var(--line);
-  padding-bottom:12px;
-  margin:14px 0 24px;
-}
-.tab{
-  font-family:Oswald, system-ui, sans-serif;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  font-size:16px;
-  color:rgba(11,18,32,.75);
-  padding:8px 2px;
-  border-bottom:3px solid transparent;
-}
-.tab:hover{color:var(--ink)}
-.tab.active{
-  color:var(--ink);
-  border-bottom-color:var(--blue);
-}
-
-/* Banner */
-.banner{
-  position:relative;
-  background:linear-gradient(90deg, rgba(36,85,255,.10), rgba(36,85,255,.03));
-  border:1px solid var(--line);
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:var(--shadow2);
-  padding:28px;
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap:18px;
-  align-items:center;
-  margin-bottom:28px;
-}
-.banner h3{
-  margin:0;
-  font-family:Oswald, system-ui, sans-serif;
-  font-size:44px;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-}
-.banner h3 span{
-  color:var(--blue);
-  border-bottom:4px solid rgba(36,85,255,.35);
-}
-.banner p{
-  margin:10px 0 0;
-  color:var(--muted);
-  font-weight:700;
-}
-.banner img{
-  width:100%;
-  max-height:180px;
-  object-fit:contain;
-  justify-self:end;
-  filter:drop-shadow(0 18px 30px rgba(2,6,23,.18));
-}
-
-/* Cards grid */
-.item-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:22px;
-}
-.item{
-  background:var(--paper);
+/* JERSEY MIKE'S STYLE MENU */
+.menu-shell{
+  background:var(--card);
   border-radius:18px;
   box-shadow:var(--shadow);
   overflow:hidden;
-  border:1px solid var(--line);
-  transition:160ms ease;
 }
-.item:hover{transform:translateY(-3px)}
-.item-img{
-  aspect-ratio: 4 / 3;
-  background:#f3f6ff;
-  overflow:hidden;
+.menu-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:18px 18px;
+  border-bottom:1px solid var(--line);
 }
-.item-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .45s ease;
+.menu-topbar .lefty{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
 }
-.item:hover .item-img img{transform:scale(1.06)}
-.item-body{
-  padding:16px 16px 18px;
+.menu-topbar .title{
+  font-family:Oswald, system-ui, sans-serif;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  font-size:20px;
+  font-weight:700;
 }
-.item-name{
-  font-weight:950;
-  font-size:18px;
-  margin:0 0 8px;
-}
-.item-meta{
+.menu-topbar .note{
   color:var(--muted);
-  font-weight:650;
+  font-weight:600;
   font-size:14px;
-  margin:0;
 }
-.badge-num{
-  position:absolute;
-  transform:translate(10px, -10px);
-  background:var(--blue);
-  color:#fff;
-  font-weight:900;
+.menu-topbar .actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-weight:800;
   font-size:14px;
-  padding:8px 10px;
-  border-radius:12px;
-  box-shadow:0 12px 24px rgba(36,85,255,.25);
+  transition:140ms ease;
+}
+.btn.primary{
+  background:var(--blue);
+  border-color:transparent;
+  color:#fff;
+}
+.btn.primary:hover{background:var(--blue2)}
+.btn:hover{transform:translateY(-1px)}
+
+.menu-layout{
+  display:grid;
+  grid-template-columns: 270px 1fr;
+  gap:0;
 }
 
-/* Reviews (unchanged) */
+/* Left category rail */
+.cat-rail{
+  padding:16px;
+  border-right:1px solid var(--line);
+  background:linear-gradient(#ffffff, #fbfcff);
+}
+.cat-rail a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 12px;
+  border-radius:12px;
+  font-weight:900;
+  color:var(--ink);
+  transition:120ms ease;
+  margin-bottom:8px;
+  border:1px solid transparent;
+}
+.cat-rail a:hover{
+  background:rgba(36,85,255,.08);
+  border-color:rgba(36,85,255,.18);
+  color:var(--blue2);
+}
+.cat-rail .small{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+}
+
+/* Right content */
+.menu-content{
+  padding:18px;
+}
+.cat-block{
+  padding:10px 0 18px;
+}
+.cat-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 8px;
+}
+.cat-head h3{
+  margin:0;
+  font-size:22px;
+  font-weight:950;
+}
+.cat-head .hint{
+  color:var(--muted);
+  font-weight:700;
+  font-size:13px;
+}
+
+/* Items list */
+.item-list{
+  display:grid;
+  gap:10px;
+}
+.item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 14px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:#fff;
+  transition:140ms ease;
+}
+.item:hover{
+  transform:translateY(-1px);
+  border-color:rgba(36,85,255,.25);
+  box-shadow:0 12px 26px rgba(2,6,23,.07);
+}
+.item .name{
+  font-weight:950;
+  font-size:15.5px;
+}
+.item .meta{
+  margin-top:3px;
+  color:var(--muted);
+  font-weight:700;
+  font-size:13px;
+}
+.item .go{
+  font-family:Oswald, system-ui, sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  font-weight:700;
+  color:var(--blue2);
+  white-space:nowrap;
+}
+
+/* REVIEWS */
 .reviews{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -314,21 +309,11 @@ section{padding:80px 0}
   background:#fff;
   padding:28px;
   border-radius:16px;
-  box-shadow:var(--shadow);
+  box-shadow:0 14px 34px rgba(2,6,23,.08);
 }
 .review .stars{color:#f5a623;font-weight:900}
 .review p{font-weight:600;line-height:1.6}
 .review span{color:var(--muted);font-size:14px}
-
-/* Yelp link style */
-.yelp-link{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  color:var(--blue2);
-  font-weight:900;
-}
-.yelp-link:hover{color:var(--blue)}
 
 /* FOOTER */
 footer{
@@ -339,21 +324,15 @@ footer{
 }
 
 /* MOBILE */
-@media(max-width:1080px){
-  .item-grid{grid-template-columns:repeat(2,1fr)}
-  .banner{grid-template-columns:1fr; text-align:left}
-  .banner img{justify-self:start}
-}
 @media(max-width:980px){
   .nav{display:none}
   .right{min-width:auto}
+  .menu-layout{grid-template-columns:1fr}
+  .cat-rail{border-right:none;border-bottom:1px solid var(--line);display:flex;gap:10px;overflow:auto}
+  .cat-rail a{margin-bottom:0;min-width:220px}
 }
-@media(max-width:700px){
-  .item-grid{grid-template-columns:1fr}
-  .menu-title .divider{display:none}
-  .menu-title{flex-direction:column; align-items:flex-start; gap:6px}
-  .menu-title .h2{font-size:40px}
-  .banner h3{font-size:36px}
+@media(max-width:900px){
+  .reviews{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -369,7 +348,6 @@ footer{
     <nav class="nav" aria-label="Primary">
       <!-- Menu goes directly to Toast -->
       <a href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue" target="_blank" rel="noopener">Menu</a>
-      <!-- New pages (create these files next) -->
       <a href="catering.html">Catering</a>
       <a href="rewards.html">Rewards</a>
       <a href="locations.html">Locations</a>
@@ -388,279 +366,232 @@ footer{
   <h1>Philly Originals</h1>
 </div>
 
-<!-- MENU (REPLACED WITH JERSEY MIKE'S-STYLE TEMPLATE) -->
+<!-- MENU (Jersey Mike's style) -->
 <section id="menu">
   <div class="wrap">
+    <h2 class="h2">Menu</h2>
+    <p class="sub">Tap an item to order online. (Opens Toast in a new tab.)</p>
 
-    <div class="menu-header">
-      <div class="menu-title">
-        <h2 class="h2">Menu</h2>
-        <div class="divider" aria-hidden="true"></div>
-      </div>
-
-      <div class="ready">
-        Ready to order?
-        <div>
-          <a href="locations.html">Find a location near you →</a>
+    <div class="menu-shell">
+      <div class="menu-topbar">
+        <div class="lefty">
+          <div class="title">Order Online</div>
+          <div class="note">Pick a category, then choose an item.</div>
+        </div>
+        <div class="actions">
+          <a class="btn primary" target="_blank" rel="noopener"
+             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+            Open Full Toast Menu →
+          </a>
+          <a class="btn" href="tel:+17247283011">Order by Phone</a>
         </div>
       </div>
-    </div>
 
-    <!-- Category subnav (internal tabs) -->
-    <div class="menu-subnav" role="tablist" aria-label="Menu categories">
-      <a class="tab active" href="#favorites" role="tab" aria-selected="true">Favorites</a>
-      <a class="tab" href="#cold" role="tab" aria-selected="false">Cold Subs</a>
-      <a class="tab" href="#hot" role="tab" aria-selected="false">Hot Subs</a>
-      <a class="tab" href="#sidesdrinks" role="tab" aria-selected="false">Sides, Drinks, &amp; Desserts</a>
-      <a class="tab" href="#kids" role="tab" aria-selected="false">Kid’s Meal</a>
-      <a class="tab" href="catering.html">Catering</a>
-    </div>
+      <div class="menu-layout">
+        <!-- Category rail -->
+        <div class="cat-rail" aria-label="Menu categories">
+          <a href="#cat-cheesesteaks"><span>Cheesesteaks</span><span class="small">4 items</span></a>
+          <a href="#cat-hoagies"><span>Hoagies</span><span class="small">3 items</span></a>
+          <a href="#cat-salads"><span>Salads</span><span class="small">3 items</span></a>
+          <a href="#cat-sides"><span>Fries & Sides</span><span class="small">3 items</span></a>
+          <a href="#cat-beverages"><span>Beverages</span><span class="small">3 items</span></a>
+        </div>
 
-    <!-- Banner -->
-    <div class="banner" aria-label="Menu banner">
-      <div>
-        <h3>All Subs <span>Made Your Way</span></h3>
-        <p>Also available as wraps and bowls. Order online in seconds.</p>
-        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="pill primary" target="_blank" rel="noopener"
-             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">Order Now</a>
-          <a class="pill" href="locations.html">Locations</a>
+        <!-- Items -->
+        <div class="menu-content">
+          <!-- CHEESESTEAKS -->
+          <div id="cat-cheesesteaks" class="cat-block">
+            <div class="cat-head">
+              <h3>Cheesesteaks</h3>
+              <div class="hint">Click to order</div>
+            </div>
+            <div class="item-list">
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak_ebd4b86c-b557-48ff-a035-d317279c0f9a">
+                <div>
+                  <div class="name">Philadelphia Cheesesteak</div>
+                  <div class="meta">Classic steak + cheese</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheesesteak_b876a53c-49c0-458f-863d-024f50b68a91">
+                <div>
+                  <div class="name">Chicken Cheesesteak</div>
+                  <div class="meta">Grilled chicken + cheese</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pizza-steak-hoagie_1129b578-c657-4e66-9e6c-c6bd576b7821">
+                <div>
+                  <div class="name">Pizza Steak</div>
+                  <div class="meta">Pizza-style steak hoagie</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken_725cabbe-190b-44a2-9e8b-959a732a78dd">
+                <div>
+                  <div class="name">Buffalo Chicken</div>
+                  <div class="meta">Buffalo-style chicken hoagie</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- HOAGIES -->
+          <div id="cat-hoagies" class="cat-block">
+            <div class="cat-head">
+              <h3>Hoagies</h3>
+              <div class="hint">Click to order</div>
+            </div>
+            <div class="item-list">
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-italian-hoagie_79ae256d-2f17-42c7-8c89-1b88282994d8">
+                <div>
+                  <div class="name">Italian Hoagie</div>
+                  <div class="meta">Italian meats + provolone</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-turkey-hoagie_967dcc94-296a-4c46-925c-aab2328e414d">
+                <div>
+                  <div class="name">Turkey Hoagie</div>
+                  <div class="meta">Turkey + classic hoagie fixings</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-meatball-hoagie_5c490dcd-6389-4476-9f9b-6e1f32a3e5d8">
+                <div>
+                  <div class="name">Meatball Hoagie</div>
+                  <div class="meta">Meatballs + marinara</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- SALADS -->
+          <div id="cat-salads" class="cat-block">
+            <div class="cat-head">
+              <h3>Salads</h3>
+              <div class="hint">Click to order</div>
+            </div>
+            <div class="item-list">
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-salad_c7d01215-987a-42d9-ac1e-4b13bb933f8e">
+                <div>
+                  <div class="name">Steak Salad</div>
+                  <div class="meta">Steak on a fresh salad</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-salad_8f7f8132-dec8-4ba4-9e4b-3e4458cff754">
+                <div>
+                  <div class="name">Chicken Salad</div>
+                  <div class="meta">Chicken on a fresh salad</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken-salad_088aeaef-5c12-4802-9409-188ccdb9a20d">
+                <div>
+                  <div class="name">Buffalo Chicken Salad</div>
+                  <div class="meta">Buffalo chicken over salad</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- FRIES / SIDES -->
+          <div id="cat-sides" class="cat-block">
+            <div class="cat-head">
+              <h3>Fries & Sides</h3>
+              <div class="hint">Click to order</div>
+            </div>
+            <div class="item-list">
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries_cbbe6d00-3201-4827-a5e3-ac05ba0ef4f4">
+                <div>
+                  <div class="name">Fries</div>
+                  <div class="meta">Classic fries</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-fries_29bc3073-4c45-4cf5-adec-cb80c55a98aa">
+                <div>
+                  <div class="name">Cheese Fries</div>
+                  <div class="meta">Fries topped with cheese</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-onion-rings_e2694d71-6daa-4933-8b59-061237f68fa8">
+                <div>
+                  <div class="name">Onion Rings</div>
+                  <div class="meta">Crispy onion rings</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- BEVERAGES -->
+          <div id="cat-beverages" class="cat-block">
+            <div class="cat-head">
+              <h3>Beverages</h3>
+              <div class="hint">Click to order</div>
+            </div>
+            <div class="item-list">
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37">
+                <div>
+                  <div class="name">Pepsi</div>
+                  <div class="meta">Cold bottle</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219">
+                <div>
+                  <div class="name">Pure Leaf Sweet Tea</div>
+                  <div class="meta">Bottled tea</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+
+              <a class="item" target="_blank" rel="noopener"
+                 href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-bottled-water_09c54188-3e5d-4ad8-9853-bd93ed3b5ff3">
+                <div>
+                  <div class="name">Bottled Water</div>
+                  <div class="meta">Chilled water</div>
+                </div>
+                <div class="go">Order →</div>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
-      <!-- Use any banner image you want here (or remove it) -->
-      <img src="assets/cat-hoagies.jpg" alt="Philly Originals subs" />
+
     </div>
-
-    <!-- FAVORITES -->
-    <div id="favorites" style="scroll-margin-top:110px;">
-      <p class="sub">Top picks (click to order online)</p>
-
-      <div class="item-grid">
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img">
-            <div class="badge-num">1</div>
-            <img src="assets/cat-hoagies.jpg" alt="Classic Cheesesteak">
-          </div>
-          <div class="item-body">
-            <p class="item-name">Classic Cheesesteak</p>
-            <p class="item-meta">Steak • melted cheese • onions</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img">
-            <div class="badge-num">2</div>
-            <img src="assets/cat-sandwiches.jpg" alt="Chicken Cheesesteak">
-          </div>
-          <div class="item-body">
-            <p class="item-name">Chicken Cheesesteak</p>
-            <p class="item-meta">Grilled chicken • cheese • peppers</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img">
-            <div class="badge-num">3</div>
-            <img src="assets/cat-salads.jpg" alt="Steak Salad">
-          </div>
-          <div class="item-body">
-            <p class="item-name">Steak Salad</p>
-            <p class="item-meta">Fresh greens • steak • toppings</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img">
-            <div class="badge-num">4</div>
-            <img src="assets/cat-fries.jpg" alt="Cheese Fries">
-          </div>
-          <div class="item-body">
-            <p class="item-name">Cheese Fries</p>
-            <p class="item-meta">Crispy fries • cheese • add-ons</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- COLD SUBS -->
-    <div id="cold" style="margin-top:54px; scroll-margin-top:110px;">
-      <h3 style="margin:0; font-size:26px; font-weight:950;">Cold Subs</h3>
-      <p class="sub">Fresh, stacked, and made fast.</p>
-
-      <div class="item-grid">
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-sandwiches.jpg" alt="Italian Cold Sub"></div>
-          <div class="item-body">
-            <p class="item-name">Italian</p>
-            <p class="item-meta">Classic deli stack • lettuce • tomato</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-sandwiches.jpg" alt="Turkey Sub"></div>
-          <div class="item-body">
-            <p class="item-name">Turkey</p>
-            <p class="item-meta">Lean turkey • fresh toppings</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-sandwiches.jpg" alt="Ham & Cheese Sub"></div>
-          <div class="item-body">
-            <p class="item-name">Ham &amp; Cheese</p>
-            <p class="item-meta">Simple classic • always hits</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-sandwiches.jpg" alt="Veggie Sub"></div>
-          <div class="item-body">
-            <p class="item-name">Veggie</p>
-            <p class="item-meta">Loaded toppings • cheese option</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- HOT SUBS -->
-    <div id="hot" style="margin-top:54px; scroll-margin-top:110px;">
-      <h3 style="margin:0; font-size:26px; font-weight:950;">Hot Subs</h3>
-      <p class="sub">Hot off the grill.</p>
-
-      <div class="item-grid">
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-hoagies.jpg" alt="Cheesesteak"></div>
-          <div class="item-body">
-            <p class="item-name">Philly Cheesesteak</p>
-            <p class="item-meta">Steak • cheese • onions</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-hoagies.jpg" alt="Pepper Steak"></div>
-          <div class="item-body">
-            <p class="item-name">Pepper Steak</p>
-            <p class="item-meta">Steak • peppers • melted cheese</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-hoagies.jpg" alt="Chicken Philly"></div>
-          <div class="item-body">
-            <p class="item-name">Chicken Philly</p>
-            <p class="item-meta">Grilled chicken • cheese • peppers</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-hoagies.jpg" alt="Buffalo Chicken"></div>
-          <div class="item-body">
-            <p class="item-name">Buffalo Chicken</p>
-            <p class="item-meta">Buffalo heat • ranch option</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- SIDES / DRINKS / DESSERTS -->
-    <div id="sidesdrinks" style="margin-top:54px; scroll-margin-top:110px;">
-      <h3 style="margin:0; font-size:26px; font-weight:950;">Sides, Drinks, &amp; Desserts</h3>
-      <p class="sub">Add the extras.</p>
-
-      <div class="item-grid">
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-fries.jpg" alt="Fries"></div>
-          <div class="item-body">
-            <p class="item-name">Fries</p>
-            <p class="item-meta">Classic • add cheese</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-sides.jpg" alt="Sides"></div>
-          <div class="item-body">
-            <p class="item-name">Sides</p>
-            <p class="item-meta">Pick your favorites</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-beverages.jpg" alt="Beverages"></div>
-          <div class="item-body">
-            <p class="item-name">Beverages</p>
-            <p class="item-meta">Cold drinks • bottled</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-beverages.jpg" alt="Desserts"></div>
-          <div class="item-body">
-            <p class="item-name">Desserts</p>
-            <p class="item-meta">Sweet add-on</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- KIDS -->
-    <div id="kids" style="margin-top:54px; scroll-margin-top:110px;">
-      <h3 style="margin:0; font-size:26px; font-weight:950;">Kid’s Meal</h3>
-      <p class="sub">Easy, simple, and fast.</p>
-
-      <div class="item-grid">
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-sandwiches.jpg" alt="Kids Sub"></div>
-          <div class="item-body">
-            <p class="item-name">Kid’s Sub</p>
-            <p class="item-meta">Smaller size • simple toppings</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-fries.jpg" alt="Kids Fries"></div>
-          <div class="item-body">
-            <p class="item-name">Kid’s Fries</p>
-            <p class="item-meta">Mini portion • crispy</p>
-          </div>
-        </a>
-
-        <a class="item" target="_blank" rel="noopener"
-           href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
-          <div class="item-img"><img src="assets/cat-beverages.jpg" alt="Kids Drink"></div>
-          <div class="item-body">
-            <p class="item-name">Kid’s Drink</p>
-            <p class="item-meta">Juice / soda options</p>
-          </div>
-        </a>
-
-        <a class="item" href="catering.html">
-          <div class="item-img"><img src="assets/cat-sides.jpg" alt="Catering"></div>
-          <div class="item-body">
-            <p class="item-name">Catering</p>
-            <p class="item-meta">Schedule a quick call</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -668,10 +599,8 @@ footer{
 <section id="reviews">
   <div class="wrap">
     <h2 class="h2">What people are saying</h2>
-
-    <!-- Requested change: replace the subtitle with a Yelp link -->
     <p class="sub">
-      <a class="yelp-link" href="https://www.yelp.com/biz/philly-originals-beaver" target="_blank" rel="noopener">
+      <a href="https://www.yelp.com/biz/philly-originals-beaver" target="_blank" rel="noopener">
         Click here to see our Yelp reviews →
       </a>
     </p>
@@ -699,43 +628,6 @@ footer{
 <footer>
   © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
 </footer>
-
-<script>
-/* Highlight active tab while scrolling / clicking */
-(function(){
-  const tabs = Array.from(document.querySelectorAll('.menu-subnav .tab[href^="#"]'));
-  const sections = tabs
-    .map(t => document.querySelector(t.getAttribute('href')))
-    .filter(Boolean);
-
-  function setActive(id){
-    tabs.forEach(t => {
-      const on = t.getAttribute('href') === '#'+id;
-      t.classList.toggle('active', on);
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-    });
-  }
-
-  // Click behavior: keep it snappy, update active immediately
-  tabs.forEach(t => {
-    t.addEventListener('click', () => {
-      const id = t.getAttribute('href').slice(1);
-      setActive(id);
-    });
-  });
-
-  // Scroll spy
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        setActive(e.target.id);
-      }
-    });
-  }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 });
-
-  sections.forEach(s => obs.observe(s));
-})();
-</script>
 
 </body>
 </html>
