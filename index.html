@@ -146,7 +146,7 @@ section{padding:80px 0}
 .btn.primary:hover{background:var(--blue2)}
 .btn:hover{transform:translateY(-1px)}
 
-/* CATEGORY BUBBLES */
+/* CATEGORY BUBBLES (kept) */
 .pills-area{padding:16px 18px 18px;border-bottom:1px solid var(--line);}
 .pills-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0;}
 
@@ -277,7 +277,7 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
 </header>
 
 <div class="hero">
-  <img src="assets/hero.jpg" alt="Philly Originals food" loading="eager" decoding="async"/>
+  <img src="assets/hero.jpg" alt="Philly Originals food"/>
   <h1>Philly Originals</h1>
 </div>
 
@@ -354,20 +354,19 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
 
 <script>
 /**
- * FIXES + IMPROVEMENTS
- * 1) Category fallback images now use assets/hero.jpg (you already have it).
- * 2) Beverage items now point to your real beverage PNGs in /assets.
- * 3) Safe image fallback: if any image path is wrong, it auto-falls back to hero.jpg (no broken icon).
- * 4) Performance: images lazy-load (except hero) + decoding async.
+ * ✅ Category tiles removed.
+ * ✅ ALL menu items (from your list) are shown as Tile Cards.
+ * ✅ Category bubbles filter which tiles are shown.
+ *
+ * Images:
+ * - If item.img is not provided, we fall back to the category image.
+ * - Add your own photos later by adding `img:` to an item.
  */
-
-const FALLBACK_IMG = "assets/hero.jpg";
-
 const MENU = [
   {
     id: "sandwich",
     name: "Sandwich",
-    img: FALLBACK_IMG,
+    img: "assets/cat-cheesesteaks.jpg",
     items: [
       { name: "Philadelphia Cheesesteak", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak_ebd4b86c-b557-48ff-a035-d317279c0f9a" },
       { name: "Philadelphia Cheesesteak Jr.", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak-jr_07fd8b4d-08f7-4fc0-a81e-4cadae2d9f0f" },
@@ -379,7 +378,7 @@ const MENU = [
   {
     id: "hoagie",
     name: "Hoagie",
-    img: FALLBACK_IMG,
+    img: "assets/cat-hoagies.jpg",
     items: [
       { name: "Chicken Cordon Bleu Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cordon-bleu-hoagie_32aee894-7de9-4229-a7cd-d26f8fc285f1" },
       { name: "Italian Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-italian-hoagie_79ae256d-2f17-42c7-8c89-1b88282994d8" },
@@ -404,7 +403,7 @@ const MENU = [
   {
     id: "salads",
     name: "Salads",
-    img: FALLBACK_IMG,
+    img: "assets/cat-salads.jpg",
     items: [
       { name: "Steak Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-salad_c7d01215-987a-42d9-ac1e-4b13bb933f8e" },
       { name: "Chicken Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-salad_8f7f8132-dec8-4ba4-9e4b-3e4458cff754" },
@@ -416,7 +415,7 @@ const MENU = [
   {
     id: "specialty-fries",
     name: "Specialty Fries",
-    img: FALLBACK_IMG,
+    img: "assets/cat-sides.jpg",
     items: [
       { name: "Cheese & Steak Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-steak-fries_92881612-e739-4afb-89b1-e23b5c2db397" },
       { name: "Chicken Cheese Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheese-fries_f2bbf460-97a3-470f-9ad5-e6df54915fa5" },
@@ -426,11 +425,11 @@ const MENU = [
   {
     id: "sides-extras",
     name: "Sides & Extras",
-    img: FALLBACK_IMG,
+    img: "assets/cat-sides.jpg",
     items: [
       { name: "Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries_cbbe6d00-3201-4827-a5e3-ac05ba0ef4f4" },
       { name: "Fries w/ Cheese OTS", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries-w-cheese-ots_1794bc78-1a74-4b3b-9300-8a91cde28566" },
-      { name: "ssqs: "Cheese Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-fries_29bc3073-4c45-4cf5-adec-cb80c55a98aa" },
+      { name: "Cheese Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-fries_29bc3073-4c45-4cf5-adec-cb80c55a98aa" },
       { name: "Cheese & Bacon Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-bacon-fries_6d4c5b46-9602-4a35-8f1d-169ffab4a984" },
       { name: "Red Skin Potatoes", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-red-skin-potatoes_42186d09-5ffc-4c76-8d55-b7f2e11ad4a5" },
       { name: "Jalapeno Poppers", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-jalapeno-poppers_69834b64-c4bf-4671-8822-fa2890d0872c" },
@@ -449,36 +448,29 @@ const MENU = [
   {
     id: "beverages",
     name: "Beverages",
-    img: "assets/beverage-68-bottled-water.png", // ✅ exists (from your assets list)
+    img: "assets/cat-beverages.jpg",
     items: [
-      // Hanks (you didn't show filenames for these in your screenshot, so they'll fallback)
-      { name: "Hanks Orange's and Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-oranges-and-cream_b0dbbc40-9978-4008-8a69-27f47ddf0b9e", img: FALLBACK_IMG },
-      { name: "Hanks Black Cherry", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-black-cherry_10ecaed3-97c1-47e5-b66c-f2cb1e949b68", img: FALLBACK_IMG },
-      { name: "Hanks Rootbeer", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-rootbeer_0cce0349-7666-42ff-8007-3a0c52535c22", img: FALLBACK_IMG },
-      { name: "Hanks Vanilla Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-vanilla-cream_4d46ffc8-2b73-47bb-a81b-c13e2329adf0", img: FALLBACK_IMG },
-
-      // Pure Leaf (✅ these match your visible asset filenames)
-      { name: "Pure Leaf Sweet Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219", img: "assets/beverage-52-pure-leaf-sweet-tea.png" },
-      { name: "Pure Leaf Unsweetened", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-unsweetened_b46de2f9-3131-4756-a3c6-2435971f8fe4", img: "assets/beverage-53-pure-leaf-unsweetened.png" },
-      { name: "Pure Leaf Peach", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-peach_083b5265-099e-4e35-ac6b-4e1db489142e", img: "assets/beverage-54-pure-leaf-peach-tea.png" },
-      { name: "Pure Leaf Raspberry", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-raspberry_54a04db6-2aba-459c-adbf-715f0ddf945c", img: "assets/beverage-55-pure-leaf-raspberry.png" },
-
-      // Pepsi
-      { name: "Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37", img: "assets/beverage-56-pepsi.png" },
-      { name: "Diet Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-pepsi_8d661fdf-7494-4fa8-92fc-bbf7e29790f9", img: "assets/beverage-57-diet-pepsi.png" },
-
-      // The rest (you didn’t show their exact filenames in the screenshot, so fallback)
-      { name: "Cherry Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cherry-pepsi_3228848e-811a-4f1b-be93-08a0806e8129", img: FALLBACK_IMG },
-      { name: "Pepsi Zero Sugar", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi-zero-sugar_0a256a0b-ccdf-4e6d-ae7a-885836ecb668", img: FALLBACK_IMG },
-      { name: "Dole Lemonade", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-dole-lemonade_e0b240b1-4a8e-4551-b22d-e6c1c98f5df5", img: FALLBACK_IMG },
-      { name: "Lipton Peach Iced Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-lipton-peach-iced-tea_b022cc52-c642-40d3-82cc-270d1e5f10b5", img: FALLBACK_IMG },
-      { name: "Mt Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mt-dew_1d0fc1dc-a060-4a37-af97-0aa82b1a04b1", img: FALLBACK_IMG },
-      { name: "Diet Mt Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-mt-dew_53e025cf-9747-4a87-9013-383ad1db32da", img: "assets/beverage-63-diet-mountain-dew.png" },
-      { name: "Brisk", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-brisk_888bd92a-39be-4040-9e49-60cb7943cb68", img: "assets/beverage-64-brisk.png" },
-      { name: "Gatorade Cool Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-cool-blue_56f7da4c-75d8-4860-afd8-11e3117a46d1", img: "assets/beverage-65-gatorade-cool-blue.png" },
-      { name: "Gatorade Zero Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-zero-blue_5a70d94e-1d87-42a3-afbc-fb9ec3a5d466", img: "assets/beverage-66-gatorade-zero-blue.png" },
-      { name: "Gatorade Fruit Punch", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-fruit-punch_1e63f138-a0aa-4256-9132-9502f0751fed", img: "assets/beverage-67-gatorade-fruit-punch.png" },
-      { name: "Bottled Water", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-bottled-water_09c54188-3e5d-4ad8-9853-bd93ed3b5ff3", img: "assets/beverage-68-bottled-water.png" }
+      { name: "Hanks Orange's and Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-oranges-and-cream_b0dbbc40-9978-4008-8a69-27f47ddf0b9e" },
+      { name: "Hanks Black Cherry", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-black-cherry_10ecaed3-97c1-47e5-b66c-f2cb1e949b68" },
+      { name: "Hanks Rootbeer", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-rootbeer_0cce0349-7666-42ff-8007-3a0c52535c22" },
+      { name: "Hanks Vanilla Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-vanilla-cream_4d46ffc8-2b73-47bb-a81b-c13e2329adf0" },
+      { name: "Pure Leaf Sweet Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219" },
+      { name: "Pure Leaf Unsweetened", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-unsweetened_b46de2f9-3131-4756-a3c6-2435971f8fe4" },
+      { name: "Pure Leaf Peach", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-peach_083b5265-099e-4e35-ac6b-4e1db489142e" },
+      { name: "Pure Leaf Raspberry", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-raspberry_54a04db6-2aba-459c-adbf-715f0ddf945c" },
+      { name: "Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37" },
+      { name: "Diet Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-pepsi_8d661fdf-7494-4fa8-92fc-bbf7e29790f9" },
+      { name: "Cherry Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cherry-pepsi_3228848e-811a-4f1b-be93-08a0806e8129" },
+      { name: "Pepsi Zero Sugar", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi-zero-sugar_0a256a0b-ccdf-4e6d-ae7a-885836ecb668" },
+      { name: "Dole Lemonade", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-dole-lemonade_e0b240b1-4a8e-4551-b22d-e6c1c98f5df5" },
+      { name: "Lipton Peach Iced Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-lipton-peach-iced-tea_b022cc52-c642-40d3-82cc-270d1e5f10b5" },
+      { name: "Mt Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mt-dew_1d0fc1dc-a060-4a37-af97-0aa82b1a04b1" },
+      { name: "Diet Mt Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-mt-dew_53e025cf-9747-4a87-9013-383ad1db32da" },
+      { name: "Brisk", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-brisk_888bd92a-39be-4040-9e49-60cb7943cb68" },
+      { name: "Gatorade Cool Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-cool-blue_56f7da4c-75d8-4860-afd8-11e3117a46d1" },
+      { name: "Gatorade Zero Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-zero-blue_5a70d94e-1d87-42a3-afbc-fb9ec3a5d466" },
+      { name: "Gatorade Fruit Punch", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-fruit-punch_1e63f138-a0aa-4256-9132-9502f0751fed" },
+      { name: "Bottled Water", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-bottled-water_09c54188-3e5d-4ad8-9853-bd93ed3b5ff3" }
     ]
   }
 ];
@@ -530,18 +522,12 @@ function renderCategoryChips(){
 
 function renderItemTiles(cat){
   els.itemTilesGrid.innerHTML = cat.items.map(it => {
-    const img = it.img || cat.img || FALLBACK_IMG;
+    const img = it.img || cat.img; // fallback so tiles always have a photo
     return `
       <a class="tile" target="_blank" rel="noopener"
          href="${escapeHtml(it.url)}" aria-label="Order ${escapeHtml(it.name)}">
         <div class="img">
-          <img
-            src="${escapeHtml(img)}"
-            alt="${escapeHtml(it.name)}"
-            loading="lazy"
-            decoding="async"
-            onerror="this.onerror=null;this.src='${FALLBACK_IMG}';"
-          >
+          <img src="${escapeHtml(img)}" alt="${escapeHtml(it.name)}">
         </div>
         <div class="label">${escapeHtml(it.name)}</div>
         <div class="meta">${escapeHtml(it.meta || "")}</div>
@@ -564,4 +550,5 @@ setActiveCategory(activeCategoryId);
 </script>
 
 </body>
+</html>
 </html>
