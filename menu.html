@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Philly Originals | Menu</title>
+<meta name="description" content="Philly Originals — Full menu. Tap items to order online."/>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --blue-bg:#eef3ff;
+  --blue:#2455ff;
+  --blue2:#1437c9;
+  --ink:#0b1220;
+  --muted:#5b6472;
+  --max:1200px;
+
+  --chipotle-brown:#3a2416;
+  --line:rgba(11,18,32,.10);
+
+  --card:#ffffff;
+  --shadow:0 18px 50px rgba(2,6,23,.10);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--blue-bg);
+}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(var(--max),92%);margin:auto}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:14px 0;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:220px;}
+.logo{height:44px;display:block}
+
+.nav{display:flex;align-items:center;gap:28px;}
+.nav a{
+  font-family:Oswald, system-ui, sans-serif;
+  font-weight:700;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  color:var(--chipotle-brown);
+  font-size:18px;
+}
+.nav a:hover{opacity:.75}
+
+.right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px;
+  justify-content:flex-end;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-weight:800;
+  font-size:14px;
+  transition:140ms ease;
+}
+.pill.primary{background:var(--blue);border-color:transparent;color:#fff;}
+.pill.primary:hover{background:var(--blue2)}
+.pill:hover{transform:translateY(-1px)}
+
+/* SECTION */
+section{padding:48px 0}
+.h2{font-size:36px;font-weight:900;margin:0 0 10px}
+.sub{color:var(--muted);font-weight:600}
+
+/* MENU SHELL */
+.menu-shell{
+  background:var(--card);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.menu-topbar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding:18px 18px;
+  border-bottom:1px solid var(--line);
+}
+.menu-topbar .lefty{display:flex;flex-direction:column;gap:6px;}
+.menu-topbar .title{
+  font-family:Oswald, system-ui, sans-serif;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  font-size:20px;
+  font-weight:700;
+}
+.menu-topbar .note{color:var(--muted);font-weight:600;font-size:14px;}
+.menu-topbar .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:10px 14px;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-weight:800;font-size:14px;transition:140ms ease;
+}
+.btn.primary{background:var(--blue);border-color:transparent;color:#fff;}
+.btn.primary:hover{background:var(--blue2)}
+.btn:hover{transform:translateY(-1px)}
+
+.search-wrap{
+  display:flex; gap:10px; flex-wrap:wrap;
+  margin-top:4px;
+}
+.search{
+  flex:1;
+  min-width:220px;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  font-weight:700;
+  outline:none;
+}
+.search:focus{
+  border-color:rgba(36,85,255,.45);
+  box-shadow:0 0 0 4px rgba(36,85,255,.10);
+}
+
+/* CATEGORY BUBBLES */
+.pills-area{padding:16px 18px 18px;border-bottom:1px solid var(--line);}
+.pills-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0;}
+
+.chip{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-weight:900;transition:140ms ease;
+  cursor:pointer;user-select:none;
+}
+.chip:hover{transform:translateY(-1px)}
+.chip .count{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:999px;
+  background:rgba(36,85,255,.12);
+  color:var(--blue2);
+  font-weight:950;font-size:13px;
+}
+.chip.active{
+  border-color:rgba(36,85,255,.45);
+  background:rgba(36,85,255,.08);
+  color:var(--blue2);
+}
+.chip.active .count{background:var(--blue2);color:#fff;}
+
+/* TILE CARDS */
+.item-tiles{padding:18px;}
+.tiles-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.tile{
+  display:block;
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:0 14px 34px rgba(2,6,23,.08);
+  transition:140ms ease;
+}
+.tile:hover{
+  transform:translateY(-2px);
+  border-color:rgba(36,85,255,.25);
+  box-shadow:0 18px 44px rgba(2,6,23,.12);
+}
+.tile .img{
+  height:210px;
+  background:#f3f5ff;
+  overflow:hidden;
+}
+.tile .img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1.01);
+  transition:transform .45s ease;
+}
+.tile:hover .img img{transform:scale(1.07)}
+.tile .label{
+  padding:14px 14px 6px;
+  font-size:26px;
+  font-weight:950;
+  color:var(--ink);
+}
+.tile .meta{
+  padding:0 14px 16px;
+  color:var(--muted);
+  font-weight:700;
+  font-size:13px;
+  line-height:1.35;
+}
+
+/* FOOTER */
+footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
+
+/* MOBILE */
+@media(max-width:980px){
+  .nav{display:none}
+  .right{min-width:auto}
+  .tiles-grid{grid-template-columns:1fr}
+  .tile .label{font-size:24px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap top">
+    <a class="brand" href="index.html" aria-label="Philly Originals Home">
+      <img src="assets/logo.png" class="logo" alt="Philly Originals"
+           onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffffff%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%230b1220%22>Philly Originals</text></svg>';"/>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="menu.html">Menu</a>
+      <a href="catering.html">Catering</a>
+      <a href="rewards.html">Rewards</a>
+      <a href="locations.html">Locations</a>
+    </nav>
+
+    <div class="right">
+      <a class="pill" href="locations.html">Directions</a>
+      <a class="pill primary" href="tel:+17247283011">Call</a>
+    </div>
+  </div>
+</header>
+
+<section id="menu">
+  <div class="wrap">
+    <h2 class="h2">Menu</h2>
+    <p class="sub">Pick a category, then tap a menu tile to order online. (Opens Toast in a new tab.)</p>
+
+    <div class="menu-shell">
+      <div class="menu-topbar">
+        <div class="lefty">
+          <div class="title">Order Online</div>
+          <div class="note">Search + category bubbles filter the menu.</div>
+
+          <div class="search-wrap">
+            <input id="searchInput" class="search" type="search" placeholder="Search (e.g., hoagie, fries, pepsi)"/>
+            <button class="btn" id="clearSearchBtn" type="button">Clear</button>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn primary" target="_blank" rel="noopener"
+             href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue">
+            Open Full Toast Menu →
+          </a>
+          <a class="btn" href="tel:+17247283011">Order by Phone</a>
+        </div>
+      </div>
+
+      <div class="pills-area" aria-label="Menu selectors">
+        <div class="pills-row" id="categoryChips" aria-label="Category bubbles"></div>
+      </div>
+
+      <div class="item-tiles" aria-label="Menu item tiles">
+        <div class="tiles-grid" id="itemTilesGrid"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
+</footer>
+
+<script>
+/**
+ * Menu page:
+ * - Supports ?cat=sandwich (from category cards on index.html)
+ * - Also supports old #menu-hoagie hash as fallback
+ * - "Show All" chip
+ * - Search filter
+ * - Lazy-load images
+ */
+
+const PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#eef3ff"/>
+      <stop offset="1" stop-color="#dfe8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#g)"/>
+  <text x="50%" y="54%" text-anchor="middle"
+        font-family="Arial" font-size="42" fill="#0b1220" opacity="0.70">
+    Image coming soon
+  </text>
+</svg>
+`);
+
+const MENU = [
+  {
+    id: "sandwich",
+    name: "Sandwiches",
+    img: "assets/hero.jpg",
+    items: [
+      { name: "Philadelphia Cheesesteak", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak_ebd4b86c-b557-48ff-a035-d317279c0f9a", img: "assets/01-sandwich-philadelphia-cheesesteak.png" },
+      { name: "Philadelphia Cheesesteak Jr.", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philadelphia-cheesesteak-jr_07fd8b4d-08f7-4fc0-a81e-4cadae2d9f0f", img: "assets/02-sandwich-philadelphia-cheesesteak-jr.png" },
+      { name: "Chicken Cheesesteak", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheesesteak_b876a53c-49c0-458f-863d-024f50b68a91", img: "assets/03-sandwich-chicken-cheesesteak.png" },
+      { name: "Chicken Cheesesteak Jr.", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheesesteak-jr_988ab45c-b2f7-49fa-b503-293c1b51855e", img: "assets/04-sandwich-chicken-cheesesteak-jr.png" },
+      { name: "Buffalo Chicken", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken_725cabbe-190b-44a2-9e8b-959a732a78dd", img: "assets/05-sandwich-buffalo-chicken.png" },
+    ]
+  },
+  {
+    id: "hoagie",
+    name: "Hoagies",
+    img: "assets/cat-hoagies.jpg",
+    items: [
+      { name: "Chicken Cordon Bleu Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cordon-bleu-hoagie_32aee894-7de9-4229-a7cd-d26f8fc285f1", img: "assets/06-hoagie-chicken-cordon-bleu.png" },
+      { name: "Italian Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-italian-hoagie_79ae256d-2f17-42c7-8c89-1b88282994d8", img: "assets/07-hoagie-italian.png" },
+      { name: "Turkey Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-turkey-hoagie_967dcc94-296a-4c46-925c-aab2328e414d", img: "assets/08-hoagie-turkey.png" },
+      { name: "Meatball Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-meatball-hoagie_5c490dcd-6389-4476-9f9b-6e1f32a3e5d8", img: "assets/09-hoagie-meatball.png" },
+      { name: "Steak & Egg Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-egg-hoagie_e3550b09-fc18-4e9d-9321-22431ab1c8d1", img: "assets/10-hoagie-steak-egg.png" },
+      { name: "Chicken Parmesan Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-parmesan-hoagie_9a53fd44-a528-42ab-9ed7-195013717248", img: "assets/11-hoagie-chicken-parmesan.png" },
+      { name: "Pizza Steak Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pizza-steak-hoagie_1129b578-c657-4e66-9e6c-c6bd576b7821", img: "assets/12-hoagie-pizza-steak.png" },
+      { name: "Philly Club Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-philly-club-hoagie_fb62343c-2916-4bd2-9245-8ad87a623f8f", img: "assets/13-hoagie-philly-club.png" },
+      { name: "Ham Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-ham-hoagie_52f8cbbb-3fc3-46e5-9554-10956b8c204b", img: "assets/14-hoagie-ham.png" },
+      { name: "Ham Hoagie Jr.", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-ham-hoagie-jr_8b83c4d5-5997-46ba-b9a9-c4e6a96e838f", img: "assets/15-hoagie-ham-jr.png" },
+      { name: "Tuna Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-tuna-hoagie_62a9c33b-fd87-4b7c-ac4e-584318bf867a", img: "assets/16-hoagie-tuna.png" },
+      { name: "Peppers & Egg Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-peppers-egg-hoagie_1fded3af-987b-40c8-8ae1-507f712616db", img: "assets/17-hoagie-peppers-egg.png" },
+      { name: "Vegetarian Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-vegetarian-hoagie_f482f90b-0177-4701-a53b-6d8cf829c1aa", img: "assets/18-hoagie-vegetarian.png" },
+      { name: "Grilled Vegetarian Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-grilled-vegetarian-hoagie_4fc57f41-90a1-4fb9-be5d-de8d2bb1b467", img: "assets/19-hoagie-grilled-vegetarian.png" },
+      { name: "Veggie Marinara", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-veggie-marinara_446f2f2a-2189-4bef-86fb-84139814df05", img: "assets/20-hoagie-veggie-marinara.png" },
+      { name: "Cheese Hoagie", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-hoagie_2c852187-6e73-4c8a-9ea6-7827ff19e246", img: "assets/21-hoagie-cheese.png" },
+      { name: "Grilled Cheese", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-grilled-cheese_427e50be-4e97-4032-a696-856cac415944", img: "assets/22-hoagie-grilled-cheese.png" },
+      { name: "Beer Battered Fish Sandwich", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-beer-battered-fish-sandwich_41380bbb-0748-4a78-8bb8-07e6340bd0fc", img: "assets/23-hoagie-beer-battered-fish-sandwich.png" },
+    ]
+  },
+  {
+    id: "salads",
+    name: "Salads",
+    img: "assets/cat-salads.jpg",
+    items: [
+      { name: "Steak Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-steak-salad_5d7b2c14-9d6e-4c32-8eb1-3af6aa8d5b9b", img: "assets/24-salad-steak.png" },
+      { name: "Chicken Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-salad_6b5b6b1a-2b60-4cd9-9c36-1c0a7a6c7b1a", img: "assets/25-salad-chicken.png" },
+      { name: "Tuna Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-tuna-salad_23a3d2b2-3c6f-4c49-bb37-1d2b0d5c6a9a", img: "assets/26-salad-tuna.png" },
+      { name: "Buffalo Chicken Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-buffalo-chicken-salad_1e2b3c4d-5f6a-7b8c-9d0e-1f2a3b4c5d6e", img: "assets/27-salad-buffalo-chicken.png" },
+      { name: "Fried Fish Salad", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fried-fish-salad_9a8b7c6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d", img: "assets/28-salad-fried-fish.png" },
+    ]
+  },
+  {
+    id: "specialty-fries",
+    name: "Specialty Fries",
+    img: "assets/cat-specialty-fries.jpg",
+    items: [
+      { name: "Cheese & Steak Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-steak-fries_ae86e7a5-27c1-4dd5-8f64-71b2c9d8f12a", img: "assets/29-specialty-fries-cheese-steak.png" },
+      { name: "Chicken Cheese Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-cheese-fries_8aa3d540-60d3-4a75-9a2a-8b1c0b0f0f1f", img: "assets/30-specialty-fries-chicken-cheese.png" },
+      { name: "Fish and Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fish-and-fries_2a1b0c9d-8e7f-6a5b-4c3d-2e1f0a9b8c7d", img: "assets/31-specialty-fries-fish-and-fries.png" },
+    ]
+  },
+  {
+    id: "sides-extras",
+    name: "Sides & Extras",
+    img: "assets/cat-sides.jpg",
+    items: [
+      { name: "Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries_cbbe6d00-3201-4827-a5e3-ac05ba0ef4f4", img: "assets/32-side-fries.png" },
+      { name: "Fries w/ Cheese OTS", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-fries-w-cheese-ots_1794bc78-1a74-4b3b-9300-8a91cde28566", img: "assets/33-side-fries-cheese-ots.png" },
+      { name: "Cheese Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-fries_29bc3073-4c45-4cf5-adec-cb80c55a98aa", img: "assets/34-side-cheese-fries.png" },
+      { name: "Cheese & Bacon Fries", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cheese-bacon-fries_6d4c5b46-9602-4a35-8f1d-169ffab4a984", img: "assets/35-side-cheese-bacon-fries.png" },
+      { name: "Red Skin Potatoes", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-red-skin-potatoes_42186d09-5ffc-4c76-8d55-b7f2e11ad4a5", img: "assets/36-side-red-skin-potatoes.png" },
+      { name: "Jalapeño Poppers", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-jalapeno-poppers_69834b64-c4bf-4671-8822-fa2890d0872c", img: "assets/37-side-jalapeno-poppers.png" },
+      { name: "Dressing", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-dressing_90ebe078-37e2-4645-a86d-a09fa9188e3e", img: "assets/38-side-dressing.png" },
+      { name: "Mozzarella Sticks", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mozzerlla-sticks_b9c5359f-8fb6-43e5-95c7-6ca7615b8d54", img: "assets/39-side-mozzarella-sticks.png" },
+      { name: "Onion Rings", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-onion-rings_e2694d71-6daa-4933-8b59-061237f68fa8", img: "assets/40-side-onion-rings.png" },
+      { name: "Chicken Fingers (3)", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-fingers-3_4128d734-91e1-44a5-9200-f00a4073e183", img: "assets/41-side-chicken-fingers-3.png" },
+      { name: "Chicken Fingers (5)", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-chicken-fingers-5_9f585d9c-bae6-4dee-b350-c7ecbb8ba440", img: "assets/42-side-chicken-fingers-5.png" },
+      { name: "Mac and Cheese Bites", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mac-and-cheese-bites_f6fedc62-8477-4ce4-b3c5-27f79eb75b3e", img: "assets/43-side-mac-cheese-bites.png" },
+      { name: "Pretzels With Cheese", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pretzels-with-cheese_21a93960-3834-4229-8d79-0d958ede55a1", img: "assets/44-side-pretzels-cheese.png" },
+      { name: "Party Ring", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-party-ring_466aaeda-4b0c-4afe-b18f-24d38815896e", img: "assets/45-side-party-ring.png" },
+      { name: "2 Homemade Chocolate Chip Cookies", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-2-homemade-chocolate-chip-cookies_d8fc028b-1e90-4079-be30-d4fc6186c691", img: "assets/46-side-chocolate-chip-cookies.png" },
+      { name: "2 Homemade Sugar Cookies", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-2-homemade-sugar-cookies_1fe3d5cc-d1ac-4cba-89fd-b973d1d7ddee", img: "assets/47-side-sugar-cookies.png" },
+    ]
+  },
+  {
+    id: "beverages",
+    name: "Beverages",
+    img: "assets/cat-drinks.jpg",
+    items: [
+      { name: "Hank’s Orange & Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-oranges-and-cream_b0dbbc40-9978-4008-8a69-27f47ddf0b9e", img: "assets/48-drink-hanks-orange-cream.png" },
+      { name: "Hank’s Black Cherry", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-black-cherry_10ecaed3-97c1-47e5-b66c-f2cb1e949b68", img: "assets/49-drink-hanks-black-cherry.png" },
+      { name: "Hank’s Root Beer", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-rootbeer_0cce0349-7666-42ff-8007-3a0c52535c22", img: "assets/50-drink-hanks-root-beer.png" },
+      { name: "Hank’s Vanilla Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-vanilla-cream_4d46ffc8-2b73-47bb-a81b-c13e2329adf0", img: "assets/51-drink-hanks-vanilla-cream.png" },
+
+      { name: "Pure Leaf Sweet Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219", img: "assets/52-drink-pure-leaf-sweet-tea.png" },
+      { name: "Pure Leaf Unsweetened Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-unsweetened_b46de2f9-3131-4756-a3c6-2435971f8fe4", img: "assets/53-drink-pure-leaf-unsweetened-tea.png" },
+      { name: "Pure Leaf Peach Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-peach_083b5265-099e-4e35-ac6b-4e1db489142e", img: "assets/54-drink-pure-leaf-peach-tea.png" },
+      { name: "Pure Leaf Raspberry Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-raspberry_54a04db6-2aba-459c-adbf-715f0ddf945c", img: "assets/55-drink-pure-leaf-raspberry-tea.png" },
+
+      { name: "Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37", img: "assets/56-drink-pepsi.png" },
+      { name: "Diet Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-pepsi_8d661fdf-7494-4fa8-92fc-bbf7e29790f9", img: "assets/57-drink-diet-pepsi.png" },
+      { name: "Cherry Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cherry-pepsi_3228848e-811a-4f1b-be93-08a0806e8129", img: "assets/58-drink-cherry-pepsi.png" },
+      { name: "Pepsi Zero Sugar", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi-zero-sugar_0a256a0b-ccdf-4e6d-ae7a-885836ecb668", img: "assets/59-drink-pepsi-zero-sugar.png" },
+
+      { name: "Dole Lemonade", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-dole-lemonade_e0b240b1-4a8e-4551-b22d-e6c1c98f5df5", img: "assets/60-drink-dole-lemonade.png" },
+      { name: "Lipton Peach Iced Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-lipton-peach-iced-tea_b022cc52-c642-40d3-82cc-270d1e5f10b5", img: "assets/61-drink-lipton-peach-iced-tea.png" },
+
+      { name: "Mountain Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mt-dew_1d0fc1dc-a060-4a37-af97-0aa82b1a04b1", img: "assets/62-drink-mountain-dew.png" },
+      { name: "Diet Mountain Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-mt-dew_53e025cf-9747-4a87-9013-383ad1db32da", img: "assets/63-drink-diet-mountain-dew.png" },
+
+      { name: "Brisk", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-brisk_888bd92a-39be-4040-9e49-60cb7943cb68", img: "assets/64-drink-brisk.png" },
+
+      { name: "Gatorade Cool Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-cool-blue_56f7da4c-75d8-4860-afd8-11e3117a46d1", img: "assets/65-drink-gatorade-cool-blue.png" },
+      { name: "Gatorade Zero Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-zero-blue_5a70d94e-1d87-42a3-afbc-fb9ec3a5d466", img: "assets/66-drink-gatorade-zero-blue.png" },
+      { name: "Gatorade Fruit Punch", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-fruit-punch_1e63f138-a0aa-4256-9132-9502f0751fed", img: "assets/67-drink-gatorade-fruit-punch.png" },
+      { name: "Bottled Water", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-bottled-water_09c54188-3e5d-4ad8-9853-bd93ed3b5ff3", img: "assets/68-drink-bottled-water.png" },
+    ]
+  }
+];
+
+const els = {
+  categoryChips: document.getElementById("categoryChips"),
+  itemTilesGrid: document.getElementById("itemTilesGrid"),
+  searchInput: document.getElementById("searchInput"),
+  clearSearchBtn: document.getElementById("clearSearchBtn"),
+};
+
+let activeCategoryId = "all";
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, s => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+  }[s]));
+}
+
+function getActiveItems(){
+  if(activeCategoryId === "all"){
+    return MENU.flatMap(cat => cat.items.map(it => ({...it, __cat: cat})));
+  }
+  const cat = MENU.find(c => c.id === activeCategoryId);
+  if(!cat) return [];
+  return cat.items.map(it => ({...it, __cat: cat}));
+}
+
+function setActiveCategory(id){
+  activeCategoryId = id;
+
+  document.querySelectorAll(".chip.cat").forEach(ch => {
+    ch.classList.toggle("active", ch.dataset.cat === id);
+  });
+
+  renderItemTiles();
+
+  // Keep URL updated (so refresh keeps category)
+  const url = new URL(location.href);
+  url.searchParams.set("cat", id);
+  history.replaceState(null, "", url.toString());
+}
+
+function renderCategoryChips(){
+  const allCount = MENU.reduce((sum, c) => sum + c.items.length, 0);
+
+  const chips = [
+    { id:"all", name:"All", count: allCount },
+    ...MENU.map(c => ({ id:c.id, name:c.name, count:c.items.length }))
+  ];
+
+  els.categoryChips.innerHTML = chips.map(cat => `
+    <div class="chip cat" role="button" tabindex="0" data-cat="${cat.id}" aria-label="${escapeHtml(cat.name)}">
+      <span>${escapeHtml(cat.name)}</span>
+      <span class="count">${cat.count}</span>
+    </div>
+  `).join("");
+
+  els.categoryChips.querySelectorAll(".chip.cat").forEach(chip => {
+    chip.addEventListener("click", () => setActiveCategory(chip.dataset.cat));
+    chip.addEventListener("keydown", (e) => {
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        setActiveCategory(chip.dataset.cat);
+      }
+    });
+  });
+
+  setActiveCategory(activeCategoryId);
+}
+
+function renderItemTiles(){
+  const q = (els.searchInput.value || "").trim().toLowerCase();
+  const items = getActiveItems().filter(it => !q || it.name.toLowerCase().includes(q));
+
+  els.itemTilesGrid.innerHTML = items.map(it => {
+    const cat = it.__cat;
+    const img = it.img || cat?.img || PLACEHOLDER;
+
+    return `
+      <a class="tile" target="_blank" rel="noopener"
+         href="${escapeHtml(it.url)}" aria-label="Order ${escapeHtml(it.name)}">
+        <div class="img">
+          <img
+            src="${escapeHtml(img)}"
+            alt="${escapeHtml(it.name)}"
+            loading="lazy"
+            decoding="async"
+            onerror="this.onerror=null;this.src='${PLACEHOLDER}';"
+          >
+        </div>
+        <div class="label">${escapeHtml(it.name)}</div>
+        <div class="meta">${escapeHtml(cat?.name || "")}</div>
+      </a>
+    `;
+  }).join("");
+}
+
+function initFromHash(){
+  const h = (location.hash || "").replace("#","").trim();
+  if(h.startsWith("menu-")){
+    const id = h.replace("menu-","");
+    if(id === "all" || MENU.some(c => c.id === id)) activeCategoryId = id;
+  }
+}
+
+function initFromUrl(){
+  const params = new URLSearchParams(location.search);
+  const cat = (params.get("cat") || "").trim();
+  if(cat && (cat === "all" || MENU.some(c => c.id === cat))){
+    activeCategoryId = cat;
+    return;
+  }
+  initFromHash(); // fallback
+}
+
+els.searchInput.addEventListener("input", () => renderItemTiles());
+els.clearSearchBtn.addEventListener("click", () => {
+  els.searchInput.value="";
+  renderItemTiles();
+  els.searchInput.focus();
+});
+
+initFromUrl();
+renderCategoryChips();
+renderItemTiles();
+</script>
+
+</body>
+</html>
