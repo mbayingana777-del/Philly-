@@ -81,10 +81,12 @@ header{
   font-weight:800;
   font-size:14px;
   transition:140ms ease;
+  cursor:pointer;
 }
 .pill.primary{background:var(--blue);border-color:transparent;color:#fff;}
 .pill.primary:hover{background:var(--blue2)}
 .pill:hover{transform:translateY(-1px)}
+button.pill{appearance:none;-webkit-appearance:none}
 
 /* HERO (old hero styles kept, but not used by slideshow now) */
 .hero{position:relative;height:65vh;min-height:420px;}
@@ -163,7 +165,7 @@ header{
   padding:12px 18px;
 }
 
-/* optional: little dots (no JS needed besides below) */
+/* optional: little dots */
 .hero-dots{
   position:absolute;
   left:50%;
@@ -314,6 +316,91 @@ section{padding:80px 0}
 /* FOOTER */
 footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
 
+/* ✅ MEMBERSHIP MODAL */
+.member-backdrop{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center; justify-content:center;
+  padding:18px;
+  z-index:999;
+}
+.member-backdrop.open{display:flex;}
+
+.member-modal{
+  width:min(560px, 96vw);
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 30px 90px rgba(0,0,0,.35);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.15);
+}
+.member-head{
+  padding:16px 18px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  border-bottom:1px solid var(--line);
+}
+.member-title{
+  font-family:Oswald, system-ui, sans-serif;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  font-weight:800;
+  font-size:20px;
+}
+.member-close{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  font-weight:900;
+  padding:8px 12px;
+  cursor:pointer;
+}
+.member-body{padding:18px;}
+.member-desc{color:var(--muted); font-weight:650; margin:0 0 14px; line-height:1.35;}
+
+.member-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.member-form .full{grid-column:1 / -1;}
+
+.field label{
+  display:block;
+  font-weight:900;
+  font-size:12px;
+  color:var(--muted);
+  margin:0 0 6px;
+  letter-spacing:.2px;
+}
+.field input{
+  width:100%;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  outline:none;
+  font-weight:800;
+}
+.field input:focus{
+  border-color:rgba(36,85,255,.45);
+  box-shadow:0 0 0 4px rgba(36,85,255,.10);
+}
+.member-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-end;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+.member-msg{
+  margin-top:12px;
+  font-weight:850;
+  color:var(--muted);
+}
+.member-msg.success{color:#0b6b2a;}
+.member-msg.error{color:#b42318;}
+
 /* MOBILE */
 @media(max-width:980px){
   .nav{display:none}
@@ -322,203 +409,9 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
   .tile .label{font-size:24px}
   .hero-content p{font-size:16px}
 }
-  <script>
-/**
- * ✅ Membership signup
- * Works instantly on GitHub Pages:
- * - stores member in localStorage (so they’re "signed in" next visit)
- * Optional:
- * - POSTs to an endpoint (Formspree / Google Apps Script / your API)
- */
-
-(function(){
-  const STORAGE_KEY = "philly_member_v1";
-
-  // OPTIONAL: add your endpoint here later
-  // Example (Formspree): "https://formspree.io/f/xxxxxx"
-  // Example (Apps Script Web App): "https://script.google.com/macros/s/XXXX/exec"
-  const MEMBER_ENDPOINT_URL = ""; // <- paste your endpoint URL to enable real signups
-
-  const els = {
-    openBtn: document.getElementById("openMemberBtn"),
-    backdrop: document.getElementById("memberBackdrop"),
-    closeBtn: document.getElementById("closeMemberBtn"),
-    form: document.getElementById("memberForm"),
-    msg: document.getElementById("memberMsg"),
-    submitBtn: document.getElementById("memberSubmitBtn"),
-    logoutBtn: document.getElementById("memberLogoutBtn"),
-    first: document.getElementById("mFirst"),
-    last: document.getElementById("mLast"),
-    email: document.getElementById("mEmail"),
-    phone: document.getElementById("mPhone"),
-    zip: document.getElementById("mZip"),
-  };
-
-  if(!els.openBtn || !els.backdrop || !els.form) return;
-
-  function safeJsonParse(s){
-    try { return JSON.parse(s); } catch { return null; }
-  }
-
-  function getMember(){
-    return safeJsonParse(localStorage.getItem(STORAGE_KEY));
-  }
-
-  function setMember(member){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(member));
-  }
-
-  function clearMember(){
-    localStorage.removeItem(STORAGE_KEY);
-  }
-
-  function setMsg(text, type){
-    els.msg.textContent = text || "";
-    els.msg.classList.remove("success","error");
-    if(type) els.msg.classList.add(type);
-  }
-
-  function openModal(){
-    els.backdrop.classList.add("open");
-    els.backdrop.setAttribute("aria-hidden","false");
-    setMsg("");
-
-    const m = getMember();
-    if(m){
-      // show "logged in" state
-      els.first.value = m.first || "";
-      els.last.value  = m.last  || "";
-      els.email.value = m.email || "";
-      els.phone.value = m.phone || "";
-      els.zip.value   = m.zip   || "";
-      els.submitBtn.textContent = "Update";
-      els.logoutBtn.style.display = "inline-flex";
-      setMsg(`Welcome back, ${m.first || "member"} ✅`, "success");
-      setTimeout(() => els.first.focus(), 50);
-    }else{
-      els.form.reset();
-      els.submitBtn.textContent = "Join";
-      els.logoutBtn.style.display = "none";
-      setTimeout(() => els.first.focus(), 50);
-    }
-  }
-
-  function closeModal(){
-    els.backdrop.classList.remove("open");
-    els.backdrop.setAttribute("aria-hidden","true");
-  }
-
-  function normalizePhone(phone){
-    const digits = String(phone || "").replace(/\D/g,"");
-    if(!digits) return "";
-    // keep US-ish formats clean (still store whatever they typed if weird)
-    if(digits.length === 10) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
-    if(digits.length === 11 && digits.startsWith("1")) return `(${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
-    return phone.trim();
-  }
-
-  async function postToEndpoint(payload){
-    if(!MEMBER_ENDPOINT_URL) return { ok:true, skipped:true };
-
-    // Works for Formspree (JSON) and many simple webhooks.
-    // If your endpoint needs different format, adjust here.
-    const res = await fetch(MEMBER_ENDPOINT_URL, {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    const text = await res.text().catch(() => "");
-    return { ok: res.ok, status: res.status, text };
-  }
-
-  // Events
-  els.openBtn.addEventListener("click", openModal);
-  els.closeBtn.addEventListener("click", closeModal);
-
-  els.backdrop.addEventListener("click", (e) => {
-    if(e.target === els.backdrop) closeModal();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape" && els.backdrop.classList.contains("open")) closeModal();
-  });
-
-  els.logoutBtn.addEventListener("click", () => {
-    clearMember();
-    els.form.reset();
-    els.submitBtn.textContent = "Join";
-    els.logoutBtn.style.display = "none";
-    setMsg("Logged out.", "success");
-    els.first.focus();
-  });
-
-  els.form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    setMsg("");
-
-    const first = (els.first.value || "").trim();
-    const last  = (els.last.value  || "").trim();
-    const email = (els.email.value || "").trim().toLowerCase();
-    const phone = normalizePhone(els.phone.value || "");
-    const zip   = (els.zip.value   || "").trim();
-
-    if(!first || !email){
-      setMsg("Please enter your first name and email.", "error");
-      return;
-    }
-
-    const payload = {
-      first, last, email, phone, zip,
-      source: "philly-originals-site",
-      page: location.href,
-      ts: new Date().toISOString()
-    };
-
-    // optimistic UI
-    els.submitBtn.disabled = true;
-    els.submitBtn.textContent = "Saving...";
-
-    try{
-      // Save locally (functional membership on static site)
-      setMember(payload);
-
-      // Optional send to real list
-      const out = await postToEndpoint(payload);
-
-      if(out.ok){
-        setMsg(MEMBER_ENDPOINT_URL
-          ? "You’re in ✅ Check your email for offers."
-          : "You’re in ✅ (Local membership saved — add an endpoint to collect signups.)"
-        , "success");
-
-        els.submitBtn.textContent = "Update";
-        els.logoutBtn.style.display = "inline-flex";
-
-        // also swap header button text
-        els.openBtn.textContent = `Member: ${first}`;
-      }else{
-        // membership still saved locally; endpoint failed
-        setMsg("Saved locally ✅ (Couldn’t reach signup server. Try again later.)", "success");
-      }
-    }catch(err){
-      console.error(err);
-      setMsg("Something went wrong. Please try again.", "error");
-      // If localStorage failed, there’s nothing else to do
-    }finally{
-      els.submitBtn.disabled = false;
-      if(els.submitBtn.textContent === "Saving...") els.submitBtn.textContent = "Update";
-    }
-  });
-
-  // On load: if member exists, update header button label
-  const existing = getMember();
-  if(existing?.first){
-    els.openBtn.textContent = `Member: ${existing.first}`;
-  }
-})();
-</script>
-
+@media(max-width:680px){
+  .member-form{grid-template-columns:1fr;}
+}
 </style>
 </head>
 
@@ -528,7 +421,7 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
   <div class="wrap top">
     <a class="brand" href="index.html" aria-label="Philly Originals Home">
       <img src="assets/logo.png" class="logo" alt="Philly Originals"
-           onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffffff%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%230b1220%22>Philly Originals</text></svg>';">
+           onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffffff%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%230b1220%22>Philly Originals</text></svg>';"/>
     </a>
 
     <nav class="nav" aria-label="Primary">
@@ -539,6 +432,9 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
     </nav>
 
     <div class="right">
+      <!-- ✅ NEW: Membership button -->
+      <button class="pill" id="openMemberBtn" type="button">Join Rewards</button>
+
       <a class="pill" href="locations.html">Directions</a>
       <a class="pill primary" href="tel:+17247283011">Call</a>
     </div>
@@ -627,6 +523,54 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
 <footer>
   © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
 </footer>
+
+<!-- ✅ MEMBERSHIP SIGNUP MODAL -->
+<div class="member-backdrop" id="memberBackdrop" aria-hidden="true">
+  <div class="member-modal" role="dialog" aria-modal="true" aria-labelledby="memberTitle">
+    <div class="member-head">
+      <div class="member-title" id="memberTitle">Rewards Membership</div>
+      <button class="member-close" id="closeMemberBtn" type="button" aria-label="Close">✕</button>
+    </div>
+
+    <div class="member-body">
+      <p class="member-desc">Join for offers + rewards. Takes 10 seconds.</p>
+
+      <form id="memberForm" class="member-form">
+        <div class="field">
+          <label for="mFirst">First name</label>
+          <input id="mFirst" name="first" autocomplete="given-name" required />
+        </div>
+
+        <div class="field">
+          <label for="mLast">Last name</label>
+          <input id="mLast" name="last" autocomplete="family-name" />
+        </div>
+
+        <div class="field full">
+          <label for="mEmail">Email</label>
+          <input id="mEmail" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <div class="field full">
+          <label for="mPhone">Phone (optional)</label>
+          <input id="mPhone" name="phone" inputmode="tel" autocomplete="tel" placeholder="(724) 555-1234" />
+        </div>
+
+        <div class="field full">
+          <label for="mZip">ZIP (optional)</label>
+          <input id="mZip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="15009" />
+        </div>
+
+        <div class="member-actions full">
+          <button class="btn" id="memberLogoutBtn" type="button" style="display:none;">Log out</button>
+          <button class="btn primary" id="memberSubmitBtn" type="submit">Join</button>
+        </div>
+
+        <div class="member-msg full" id="memberMsg" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script>
 /**
@@ -901,6 +845,180 @@ renderItemTiles();
   setInterval(() => {
     setSlide((current + 1) % slides.length);
   }, INTERVAL_MS);
+})();
+</script>
+
+<!-- ✅ MEMBERSHIP JS -->
+<script>
+(function(){
+  const STORAGE_KEY = "philly_member_v1";
+  const MEMBER_ENDPOINT_URL = ""; // paste endpoint later to collect signups
+
+  const els = {
+    openBtn: document.getElementById("openMemberBtn"),
+    backdrop: document.getElementById("memberBackdrop"),
+    closeBtn: document.getElementById("closeMemberBtn"),
+    form: document.getElementById("memberForm"),
+    msg: document.getElementById("memberMsg"),
+    submitBtn: document.getElementById("memberSubmitBtn"),
+    logoutBtn: document.getElementById("memberLogoutBtn"),
+    first: document.getElementById("mFirst"),
+    last: document.getElementById("mLast"),
+    email: document.getElementById("mEmail"),
+    phone: document.getElementById("mPhone"),
+    zip: document.getElementById("mZip"),
+  };
+
+  if(!els.openBtn || !els.backdrop || !els.form) return;
+
+  function safeJsonParse(s){
+    try { return JSON.parse(s); } catch { return null; }
+  }
+
+  function getMember(){
+    return safeJsonParse(localStorage.getItem(STORAGE_KEY));
+  }
+
+  function setMember(member){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(member));
+  }
+
+  function clearMember(){
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  function setMsg(text, type){
+    els.msg.textContent = text || "";
+    els.msg.classList.remove("success","error");
+    if(type) els.msg.classList.add(type);
+  }
+
+  function openModal(){
+    els.backdrop.classList.add("open");
+    els.backdrop.setAttribute("aria-hidden","false");
+    setMsg("");
+
+    const m = getMember();
+    if(m){
+      els.first.value = m.first || "";
+      els.last.value  = m.last  || "";
+      els.email.value = m.email || "";
+      els.phone.value = m.phone || "";
+      els.zip.value   = m.zip   || "";
+      els.submitBtn.textContent = "Update";
+      els.logoutBtn.style.display = "inline-flex";
+      setMsg(`Welcome back, ${m.first || "member"} ✅`, "success");
+      setTimeout(() => els.first.focus(), 50);
+    }else{
+      els.form.reset();
+      els.submitBtn.textContent = "Join";
+      els.logoutBtn.style.display = "none";
+      setTimeout(() => els.first.focus(), 50);
+    }
+  }
+
+  function closeModal(){
+    els.backdrop.classList.remove("open");
+    els.backdrop.setAttribute("aria-hidden","true");
+  }
+
+  function normalizePhone(phone){
+    const digits = String(phone || "").replace(/\D/g,"");
+    if(!digits) return "";
+    if(digits.length === 10) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+    if(digits.length === 11 && digits.startsWith("1")) return `(${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
+    return String(phone || "").trim();
+  }
+
+  async function postToEndpoint(payload){
+    if(!MEMBER_ENDPOINT_URL) return { ok:true, skipped:true };
+    const res = await fetch(MEMBER_ENDPOINT_URL, {
+      method: "POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify(payload)
+    });
+    const text = await res.text().catch(() => "");
+    return { ok: res.ok, status: res.status, text };
+  }
+
+  els.openBtn.addEventListener("click", openModal);
+  els.closeBtn.addEventListener("click", closeModal);
+
+  els.backdrop.addEventListener("click", (e) => {
+    if(e.target === els.backdrop) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape" && els.backdrop.classList.contains("open")) closeModal();
+  });
+
+  els.logoutBtn.addEventListener("click", () => {
+    clearMember();
+    els.form.reset();
+    els.submitBtn.textContent = "Join";
+    els.logoutBtn.style.display = "none";
+    setMsg("Logged out.", "success");
+    els.first.focus();
+    els.openBtn.textContent = "Join Rewards";
+  });
+
+  els.form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setMsg("");
+
+    const first = (els.first.value || "").trim();
+    const last  = (els.last.value  || "").trim();
+    const email = (els.email.value || "").trim().toLowerCase();
+    const phone = normalizePhone(els.phone.value || "");
+    const zip   = (els.zip.value   || "").trim();
+
+    if(!first || !email){
+      setMsg("Please enter your first name and email.", "error");
+      return;
+    }
+
+    const payload = {
+      first, last, email, phone, zip,
+      source: "philly-originals-site",
+      page: location.href,
+      ts: new Date().toISOString()
+    };
+
+    els.submitBtn.disabled = true;
+    els.submitBtn.textContent = "Saving...";
+
+    try{
+      setMember(payload);
+      const out = await postToEndpoint(payload);
+
+      if(out.ok){
+        setMsg(MEMBER_ENDPOINT_URL
+          ? "You’re in ✅ Check your email for offers."
+          : "You’re in ✅ (Saved locally — add endpoint to collect signups.)"
+        , "success");
+
+        els.submitBtn.textContent = "Update";
+        els.logoutBtn.style.display = "inline-flex";
+        els.openBtn.textContent = `Member: ${first}`;
+      }else{
+        setMsg("Saved locally ✅ (Couldn’t reach signup server. Try again later.)", "success");
+        els.openBtn.textContent = `Member: ${first}`;
+        els.submitBtn.textContent = "Update";
+        els.logoutBtn.style.display = "inline-flex";
+      }
+    }catch(err){
+      console.error(err);
+      setMsg("Something went wrong. Please try again.", "error");
+    }finally{
+      els.submitBtn.disabled = false;
+      if(els.submitBtn.textContent === "Saving...") els.submitBtn.textContent = "Update";
+    }
+  });
+
+  const existing = getMember();
+  if(existing?.first){
+    els.openBtn.textContent = `Member: ${existing.first}`;
+  }
 })();
 </script>
 
