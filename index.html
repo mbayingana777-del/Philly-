@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Philly Originals | Beaver, PA</title>
-<meta name="description" content="Philly Originals — Hoagies, cheesesteaks, salads, fries & more. Beaver, PA."/>
+<title>Menu | Philly Originals</title>
+<meta name="description" content="Philly Originals — Browse the menu by category and order online."/>
 
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
@@ -50,7 +50,7 @@ header{
   padding:14px 0;
 }
 .brand{display:flex;align-items:center;gap:12px;min-width:220px;}
-.logo{height:44px;display:block}
+.logo{height:44px;width:auto;display:block;object-fit:contain}
 
 .nav{display:flex;align-items:center;gap:28px;}
 .nav a{
@@ -86,102 +86,8 @@ header{
 .pill.primary:hover{background:var(--blue2)}
 .pill:hover{transform:translateY(-1px)}
 
-/* HERO (old hero styles kept, but not used by slideshow now) */
-.hero{position:relative;height:65vh;min-height:420px;}
-.hero img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
-.hero::after{
-  content:"";
-  position:absolute;inset:0;
-  background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.45));
-}
-.hero h1{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  font-family:Oswald, system-ui, sans-serif;
-  font-size:clamp(48px,6vw,96px);
-  color:var(--blue);
-  z-index:2;
-  text-shadow:0 10px 40px rgba(0,0,0,.45);
-  transform:translateY(-10%);
-}
-
-/* ✅ HERO SLIDESHOW (NEW) */
-.hero-slider{
-  position:relative;
-  height:70vh;
-  min-height:420px;
-  overflow:hidden;
-  background:#0b1220;
-}
-.slide{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  opacity:0;
-  transition:opacity .8s ease;
-  transform:translateZ(0);
-}
-.slide::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.55));
-}
-.slide.active{opacity:1;z-index:1;}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:#fff;
-  padding:24px;
-}
-.hero-content h1{
-  font-family:Oswald, system-ui, sans-serif;
-  font-size:clamp(42px, 6vw, 90px);
-  margin:0 0 12px;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  text-shadow:0 12px 40px rgba(0,0,0,.55);
-}
-.hero-content p{
-  font-size:18px;
-  font-weight:800;
-  max-width:560px;
-  margin:0 0 22px;
-  color:rgba(255,255,255,.92);
-  text-shadow:0 10px 30px rgba(0,0,0,.45);
-}
-.hero-content .pill.primary{
-  font-size:15px;
-  padding:12px 18px;
-}
-
-/* optional: little dots (no JS needed besides below) */
-.hero-dots{
-  position:absolute;
-  left:50%;
-  bottom:14px;
-  transform:translateX(-50%);
-  display:flex;
-  gap:8px;
-  z-index:5;
-}
-.hero-dot{
-  width:10px;height:10px;border-radius:999px;
-  background:rgba(255,255,255,.45);
-  border:1px solid rgba(255,255,255,.35);
-}
-.hero-dot.active{background:#fff;}
-
 /* SECTION */
-section{padding:80px 0}
+section{padding:70px 0}
 .h2{font-size:36px;font-weight:900;margin:0 0 10px}
 .sub{color:var(--muted);font-weight:600}
 
@@ -240,7 +146,6 @@ section{padding:80px 0}
 /* CATEGORY BUBBLES */
 .pills-area{padding:16px 18px 18px;border-bottom:1px solid var(--line);}
 .pills-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0;}
-
 .chip{
   display:inline-flex;align-items:center;gap:10px;
   padding:10px 14px;border-radius:999px;border:1px solid var(--line);
@@ -320,7 +225,6 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
   .right{min-width:auto}
   .tiles-grid{grid-template-columns:1fr}
   .tile .label{font-size:24px}
-  .hero-content p{font-size:16px}
 }
 </style>
 </head>
@@ -331,64 +235,22 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
   <div class="wrap top">
     <a class="brand" href="index.html" aria-label="Philly Originals Home">
       <img src="assets/logo.png" class="logo" alt="Philly Originals"
-           onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffffff%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%230b1220%22>Philly Originals</text></svg>';">
+           onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffffff%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%230b1220%22>Philly Originals</text></svg>';"/>
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue" target="_blank" rel="noopener">Menu</a>
+      <a href="menu.html?cat=all">Menu</a>
       <a href="catering.html">Catering</a>
       <a href="rewards.html">Rewards</a>
       <a href="locations.html">Locations</a>
     </nav>
 
     <div class="right">
-      <a class="pill" href="locations.html">Directions</a>
+      <a class="pill" href="index.html">Home</a>
       <a class="pill primary" href="tel:+17247283011">Call</a>
     </div>
   </div>
 </header>
-
-<!-- ✅ HERO SLIDESHOW (NEW) -->
-<div class="hero-slider" aria-label="Featured items">
-  <div class="slide active" style="background-image:url('assets/01-sandwich-philadelphia-cheesesteak.png')">
-    <div class="hero-content">
-      <h1>LEGENDARY CHEESESTEAKS</h1>
-      <p>Fresh-cut steak. Melted cheese. No shortcuts.</p>
-      <a href="#menu" class="pill primary">Order Now</a>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image:url('assets/07-hoagie-italian.png')">
-    <div class="hero-content">
-      <h1>STACKED HOAGIES</h1>
-      <p>Classic, loaded, and made to order.</p>
-      <a href="#menu" class="pill primary">View Menu</a>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image:url('assets/34-side-cheese-fries.png')">
-    <div class="hero-content">
-      <h1>SIDES THAT HIT</h1>
-      <p>Don’t skip the fries.</p>
-      <a href="#menu" class="pill primary">Add a Side</a>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image:url('assets/58-drink-cherry-pepsi.png')">
-    <div class="hero-content">
-      <h1>ICE-COLD DRINKS</h1>
-      <p>Cherry Pepsi — a classic.</p>
-      <a href="#menu" class="pill primary">Grab One</a>
-    </div>
-  </div>
-
-  <div class="hero-dots" aria-hidden="true">
-    <span class="hero-dot active"></span>
-    <span class="hero-dot"></span>
-    <span class="hero-dot"></span>
-    <span class="hero-dot"></span>
-  </div>
-</div>
 
 <section id="menu">
   <div class="wrap">
@@ -432,14 +294,6 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
 </footer>
 
 <script>
-/**
- * Improvements:
- * - ✅ "Show All" chip
- * - ✅ Search filter across current category OR all categories
- * - ✅ Lazy-load images
- * - ✅ No broken image icons: onerror fallback to placeholder svg
- */
-
 const PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent(`
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700">
   <defs>
@@ -548,25 +402,19 @@ const MENU = [
       { name: "Hank’s Black Cherry", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-black-cherry_10ecaed3-97c1-47e5-b66c-f2cb1e949b68", img: "assets/49-drink-hanks-black-cherry.png" },
       { name: "Hank’s Root Beer", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-rootbeer_0cce0349-7666-42ff-8007-3a0c52535c22", img: "assets/50-drink-hanks-root-beer.png" },
       { name: "Hank’s Vanilla Cream", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-hanks-vanilla-cream_4d46ffc8-2b73-47bb-a81b-c13e2329adf0", img: "assets/51-drink-hanks-vanilla-cream.png" },
-
       { name: "Pure Leaf Sweet Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-sweet-tea_5e735fb4-2644-4455-9015-32a46f9c3219", img: "assets/52-drink-pure-leaf-sweet-tea.png" },
       { name: "Pure Leaf Unsweetened Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-unsweetened_b46de2f9-3131-4756-a3c6-2435971f8fe4", img: "assets/53-drink-pure-leaf-unsweetened-tea.png" },
       { name: "Pure Leaf Peach Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-peach_083b5265-099e-4e35-ac6b-4e1db489142e", img: "assets/54-drink-pure-leaf-peach-tea.png" },
       { name: "Pure Leaf Raspberry Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pure-leaf-raspberry_54a04db6-2aba-459c-adbf-715f0ddf945c", img: "assets/55-drink-pure-leaf-raspberry-tea.png" },
-
       { name: "Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi_9b34964b-1e31-4e0c-a47a-f240d327ba37", img: "assets/56-drink-pepsi.png" },
       { name: "Diet Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-pepsi_8d661fdf-7494-4fa8-92fc-bbf7e29790f9", img: "assets/57-drink-diet-pepsi.png" },
       { name: "Cherry Pepsi", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-cherry-pepsi_3228848e-811a-4f1b-be93-08a0806e8129", img: "assets/58-drink-cherry-pepsi.png" },
       { name: "Pepsi Zero Sugar", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-pepsi-zero-sugar_0a256a0b-ccdf-4e6d-ae7a-885836ecb668", img: "assets/59-drink-pepsi-zero-sugar.png" },
-
       { name: "Dole Lemonade", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-dole-lemonade_e0b240b1-4a8e-4551-b22d-e6c1c98f5df5", img: "assets/60-drink-dole-lemonade.png" },
       { name: "Lipton Peach Iced Tea", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-lipton-peach-iced-tea_b022cc52-c642-40d3-82cc-270d1e5f10b5", img: "assets/61-drink-lipton-peach-iced-tea.png" },
-
       { name: "Mountain Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-mt-dew_1d0fc1dc-a060-4a37-af97-0aa82b1a04b1", img: "assets/62-drink-mountain-dew.png" },
       { name: "Diet Mountain Dew", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-diet-mt-dew_53e025cf-9747-4a87-9013-383ad1db32da", img: "assets/63-drink-diet-mountain-dew.png" },
-
       { name: "Brisk", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-brisk_888bd92a-39be-4040-9e49-60cb7943cb68", img: "assets/64-drink-brisk.png" },
-
       { name: "Gatorade Cool Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-cool-blue_56f7da4c-75d8-4860-afd8-11e3117a46d1", img: "assets/65-drink-gatorade-cool-blue.png" },
       { name: "Gatorade Zero Blue", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-zero-blue_5a70d94e-1d87-42a3-afbc-fb9ec3a5d466", img: "assets/66-drink-gatorade-zero-blue.png" },
       { name: "Gatorade Fruit Punch", url: "https://order.toasttab.com/online/philly-originals-ambridge-1507-duss-avenue/item-gatorade-fruit-punch_1e63f138-a0aa-4256-9132-9502f0751fed", img: "assets/67-drink-gatorade-fruit-punch.png" },
@@ -607,7 +455,7 @@ function setActiveCategory(id){
   });
 
   renderItemTiles();
-  history.replaceState(null, "", `#menu-${id}`);
+  history.replaceState(null, "", `?cat=${encodeURIComponent(id)}#menu`);
 }
 
 function renderCategoryChips(){
@@ -665,46 +513,24 @@ function renderItemTiles(){
   }).join("");
 }
 
-function initFromHash(){
-  const h = (location.hash || "").replace("#","").trim();
-  if(h.startsWith("menu-")){
-    const id = h.replace("menu-","");
-    if(id === "all" || MENU.some(c => c.id === id)) activeCategoryId = id;
+function initFromUrl(){
+  const params = new URLSearchParams(location.search);
+  const cat = (params.get("cat") || "").trim();
+  if(cat && (cat === "all" || MENU.some(c => c.id === cat))){
+    activeCategoryId = cat;
   }
 }
 
 els.searchInput.addEventListener("input", () => renderItemTiles());
-els.clearSearchBtn.addEventListener("click", () => { els.searchInput.value=""; renderItemTiles(); els.searchInput.focus(); });
+els.clearSearchBtn.addEventListener("click", () => {
+  els.searchInput.value="";
+  renderItemTiles();
+  els.searchInput.focus();
+});
 
-initFromHash();
+initFromUrl();
 renderCategoryChips();
 renderItemTiles();
-</script>
-
-<!-- ✅ HERO SLIDESHOW JS (NEW) -->
-<script>
-(function(){
-  const slides = document.querySelectorAll(".hero-slider .slide");
-  const dots = document.querySelectorAll(".hero-slider .hero-dot");
-  if(!slides.length) return;
-
-  let current = 0;
-  const INTERVAL_MS = 5000;
-
-  function setSlide(i){
-    slides[current].classList.remove("active");
-    if(dots[current]) dots[current].classList.remove("active");
-
-    current = i;
-
-    slides[current].classList.add("active");
-    if(dots[current]) dots[current].classList.add("active");
-  }
-
-  setInterval(() => {
-    setSlide((current + 1) % slides.length);
-  }, INTERVAL_MS);
-})();
 </script>
 
 </body>
