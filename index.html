@@ -322,6 +322,203 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
   .tile .label{font-size:24px}
   .hero-content p{font-size:16px}
 }
+  <script>
+/**
+ * ✅ Membership signup
+ * Works instantly on GitHub Pages:
+ * - stores member in localStorage (so they’re "signed in" next visit)
+ * Optional:
+ * - POSTs to an endpoint (Formspree / Google Apps Script / your API)
+ */
+
+(function(){
+  const STORAGE_KEY = "philly_member_v1";
+
+  // OPTIONAL: add your endpoint here later
+  // Example (Formspree): "https://formspree.io/f/xxxxxx"
+  // Example (Apps Script Web App): "https://script.google.com/macros/s/XXXX/exec"
+  const MEMBER_ENDPOINT_URL = ""; // <- paste your endpoint URL to enable real signups
+
+  const els = {
+    openBtn: document.getElementById("openMemberBtn"),
+    backdrop: document.getElementById("memberBackdrop"),
+    closeBtn: document.getElementById("closeMemberBtn"),
+    form: document.getElementById("memberForm"),
+    msg: document.getElementById("memberMsg"),
+    submitBtn: document.getElementById("memberSubmitBtn"),
+    logoutBtn: document.getElementById("memberLogoutBtn"),
+    first: document.getElementById("mFirst"),
+    last: document.getElementById("mLast"),
+    email: document.getElementById("mEmail"),
+    phone: document.getElementById("mPhone"),
+    zip: document.getElementById("mZip"),
+  };
+
+  if(!els.openBtn || !els.backdrop || !els.form) return;
+
+  function safeJsonParse(s){
+    try { return JSON.parse(s); } catch { return null; }
+  }
+
+  function getMember(){
+    return safeJsonParse(localStorage.getItem(STORAGE_KEY));
+  }
+
+  function setMember(member){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(member));
+  }
+
+  function clearMember(){
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  function setMsg(text, type){
+    els.msg.textContent = text || "";
+    els.msg.classList.remove("success","error");
+    if(type) els.msg.classList.add(type);
+  }
+
+  function openModal(){
+    els.backdrop.classList.add("open");
+    els.backdrop.setAttribute("aria-hidden","false");
+    setMsg("");
+
+    const m = getMember();
+    if(m){
+      // show "logged in" state
+      els.first.value = m.first || "";
+      els.last.value  = m.last  || "";
+      els.email.value = m.email || "";
+      els.phone.value = m.phone || "";
+      els.zip.value   = m.zip   || "";
+      els.submitBtn.textContent = "Update";
+      els.logoutBtn.style.display = "inline-flex";
+      setMsg(`Welcome back, ${m.first || "member"} ✅`, "success");
+      setTimeout(() => els.first.focus(), 50);
+    }else{
+      els.form.reset();
+      els.submitBtn.textContent = "Join";
+      els.logoutBtn.style.display = "none";
+      setTimeout(() => els.first.focus(), 50);
+    }
+  }
+
+  function closeModal(){
+    els.backdrop.classList.remove("open");
+    els.backdrop.setAttribute("aria-hidden","true");
+  }
+
+  function normalizePhone(phone){
+    const digits = String(phone || "").replace(/\D/g,"");
+    if(!digits) return "";
+    // keep US-ish formats clean (still store whatever they typed if weird)
+    if(digits.length === 10) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+    if(digits.length === 11 && digits.startsWith("1")) return `(${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
+    return phone.trim();
+  }
+
+  async function postToEndpoint(payload){
+    if(!MEMBER_ENDPOINT_URL) return { ok:true, skipped:true };
+
+    // Works for Formspree (JSON) and many simple webhooks.
+    // If your endpoint needs different format, adjust here.
+    const res = await fetch(MEMBER_ENDPOINT_URL, {
+      method: "POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const text = await res.text().catch(() => "");
+    return { ok: res.ok, status: res.status, text };
+  }
+
+  // Events
+  els.openBtn.addEventListener("click", openModal);
+  els.closeBtn.addEventListener("click", closeModal);
+
+  els.backdrop.addEventListener("click", (e) => {
+    if(e.target === els.backdrop) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape" && els.backdrop.classList.contains("open")) closeModal();
+  });
+
+  els.logoutBtn.addEventListener("click", () => {
+    clearMember();
+    els.form.reset();
+    els.submitBtn.textContent = "Join";
+    els.logoutBtn.style.display = "none";
+    setMsg("Logged out.", "success");
+    els.first.focus();
+  });
+
+  els.form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setMsg("");
+
+    const first = (els.first.value || "").trim();
+    const last  = (els.last.value  || "").trim();
+    const email = (els.email.value || "").trim().toLowerCase();
+    const phone = normalizePhone(els.phone.value || "");
+    const zip   = (els.zip.value   || "").trim();
+
+    if(!first || !email){
+      setMsg("Please enter your first name and email.", "error");
+      return;
+    }
+
+    const payload = {
+      first, last, email, phone, zip,
+      source: "philly-originals-site",
+      page: location.href,
+      ts: new Date().toISOString()
+    };
+
+    // optimistic UI
+    els.submitBtn.disabled = true;
+    els.submitBtn.textContent = "Saving...";
+
+    try{
+      // Save locally (functional membership on static site)
+      setMember(payload);
+
+      // Optional send to real list
+      const out = await postToEndpoint(payload);
+
+      if(out.ok){
+        setMsg(MEMBER_ENDPOINT_URL
+          ? "You’re in ✅ Check your email for offers."
+          : "You’re in ✅ (Local membership saved — add an endpoint to collect signups.)"
+        , "success");
+
+        els.submitBtn.textContent = "Update";
+        els.logoutBtn.style.display = "inline-flex";
+
+        // also swap header button text
+        els.openBtn.textContent = `Member: ${first}`;
+      }else{
+        // membership still saved locally; endpoint failed
+        setMsg("Saved locally ✅ (Couldn’t reach signup server. Try again later.)", "success");
+      }
+    }catch(err){
+      console.error(err);
+      setMsg("Something went wrong. Please try again.", "error");
+      // If localStorage failed, there’s nothing else to do
+    }finally{
+      els.submitBtn.disabled = false;
+      if(els.submitBtn.textContent === "Saving...") els.submitBtn.textContent = "Update";
+    }
+  });
+
+  // On load: if member exists, update header button label
+  const existing = getMember();
+  if(existing?.first){
+    els.openBtn.textContent = `Member: ${existing.first}`;
+  }
+})();
+</script>
+
 </style>
 </head>
 
