@@ -235,6 +235,101 @@ section{padding:80px 0}
   line-height:1.35;
 }
 
+/* ✅ ORDERING SYSTEM BLUEPRINT (NEW) */
+.blueprint-shell{
+  background:var(--card);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.blueprint-head{
+  padding:20px 18px;
+  border-bottom:1px solid var(--line);
+}
+.blueprint-head .title{
+  font-family:Oswald, system-ui, sans-serif;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  font-size:20px;
+  font-weight:700;
+  margin:0 0 6px;
+}
+.blueprint-head .note{
+  color:var(--muted);
+  font-weight:600;
+  font-size:14px;
+  margin:0;
+}
+.blueprint-grid{
+  padding:18px;
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:18px;
+}
+.bp-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 14px 34px rgba(2,6,23,.08);
+  padding:16px;
+}
+.bp-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:Oswald, system-ui, sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  font-size:16px;
+  font-weight:700;
+  color:var(--chipotle-brown);
+  margin:0 0 10px;
+}
+.bp-card h3{
+  margin:0 0 10px;
+  font-size:20px;
+  font-weight:950;
+}
+.bp-list{
+  margin:0;
+  padding-left:18px;
+  color:var(--muted);
+  font-weight:700;
+  font-size:14px;
+  line-height:1.5;
+}
+.bp-footer{
+  padding:0 18px 18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+}
+.bp-cta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.bp-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-weight:900;
+  font-size:13px;
+  color:var(--ink);
+}
+.bp-badge strong{color:var(--chipotle-brown)}
+.bp-mini{
+  color:var(--muted);
+  font-weight:700;
+  font-size:13px;
+}
+
 /* ✅ EMAIL SIGNUP */
 .signup-wrap{
   padding:0 0 80px; /* matches section rhythm */
@@ -322,6 +417,8 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
   .category-grid{grid-template-columns:1fr}
   .cat-card .label{font-size:24px}
   .hero-content p{font-size:16px}
+
+  .blueprint-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -338,6 +435,7 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
     <nav class="nav" aria-label="Primary">
       <a href="#categories">Menu</a>
       <a href="catering.html">Catering</a>
+      <a href="#blueprint">Ordering System</a>
       <a href="rewards.html">Rewards</a>
       <a href="locations.html">Locations</a>
     </nav>
@@ -468,6 +566,72 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
   </div>
 </section>
 
+<!-- ✅ ORDERING SYSTEM BLUEPRINT (NEW) -->
+<section id="blueprint">
+  <div class="wrap">
+    <h2 class="h2">Ordering System Blueprint</h2>
+    <p class="sub">If you control the code, here’s what a real ordering system needs (end-to-end).</p>
+
+    <div class="blueprint-shell">
+      <div class="blueprint-head">
+        <div class="title">If you control the code: what you need</div>
+        <p class="note">An ordering system is basically 4 parts — frontend, backend, payments, and ops.</p>
+      </div>
+
+      <div class="blueprint-grid" aria-label="Ordering system components">
+        <div class="bp-card">
+          <div class="bp-kicker">1) Menu + Cart (frontend)</div>
+          <h3>Customer selects + customizes</h3>
+          <ul class="bp-list">
+            <li>Items, modifiers, quantities, notes, tips</li>
+            <li>Pickup/delivery selector + time slots</li>
+          </ul>
+        </div>
+
+        <div class="bp-card">
+          <div class="bp-kicker">2) Order API (backend)</div>
+          <h3>Server validates + records</h3>
+          <ul class="bp-list">
+            <li>Validate prices + availability (never trust client)</li>
+            <li>Create an “Order” record in DB</li>
+            <li>Compute taxes/fees/tips correctly</li>
+          </ul>
+        </div>
+
+        <div class="bp-card">
+          <div class="bp-kicker">3) Payment Processor</div>
+          <h3>Collect money safely</h3>
+          <ul class="bp-list">
+            <li>Use something like Stripe (most common) or Square Payments</li>
+            <li>Create a Payment Intent for the cart total</li>
+            <li>Confirm payment (client)</li>
+            <li>Use webhooks (server) to mark orders “paid” / handle failures/refunds</li>
+          </ul>
+        </div>
+
+        <div class="bp-card">
+          <div class="bp-kicker">4) Admin / Kitchen view</div>
+          <h3>Fulfillment + operations</h3>
+          <ul class="bp-list">
+            <li>Order list, status updates (new → preparing → ready)</li>
+            <li>Printer/KDS integration if needed</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bp-footer">
+        <div class="bp-mini">
+          <span class="bp-badge"><strong>Tip:</strong> Toast/Square/Owner can handle payments + orders, but custom code gives full control.</span>
+        </div>
+        <div class="bp-cta">
+          <a class="pill primary" href="#categories">Start Order Flow</a>
+          <a class="pill" href="menu.html">Open Full Menu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ✅ EMAIL SIGNUP (NEW) -->
 <div class="signup-wrap" id="signup">
   <div class="wrap">
@@ -574,3 +738,4 @@ footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
 
 </body>
 </html>
+
