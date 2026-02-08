@@ -3,25 +3,27 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Philly Originals | Beaver, PA</title>
-<meta name="description" content="Philly Originals — Hoagies, cheesesteaks, salads, fries & more. Beaver, PA."/>
+
+<title>Ambridge Italian Villa | Ambridge, PA</title>
+<meta name="description" content="Ambridge Italian Villa — Italian, Greek, and American favorites including pizza, gyros, wings, salads, and more."/>
 
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --blue-bg:#eef3ff;
-  --blue:#2455ff;
-  --blue2:#1437c9;
+  --bg:#ffffff;
   --ink:#0b1220;
-  --muted:#5b6472;
-  --max:1200px;
+  --muted:rgba(255,255,255,.85);
 
-  --chipotle-brown:#3a2416;
-  --line:rgba(11,18,32,.10);
+  /* Italian-flag palette (brand accents) */
+  --red:#c1121f;
+  --green:#1f7a3a;
+  --white:#ffffff;
 
-  --card:#ffffff;
-  --shadow:0 18px 50px rgba(2,6,23,.10);
+  --max:1180px;
+  --line:rgba(255,255,255,.18);
+  --radius:16px;
+  --shadow:0 18px 60px rgba(0,0,0,.35);
 }
 
 *{box-sizing:border-box}
@@ -30,162 +32,235 @@ body{
   margin:0;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--ink);
-  background:var(--blue-bg);
+  background:var(--bg);
 }
 a{text-decoration:none;color:inherit}
 .wrap{width:min(var(--max),92%);margin:auto}
 
-/* HEADER */
+/* ===== Header ===== */
 header{
-  position:sticky;top:0;z-index:10;
-  background:rgba(255,255,255,.92);
+  position:sticky; top:0; z-index:20;
+  background:rgba(10,12,16,.55);
   backdrop-filter:saturate(140%) blur(10px);
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid rgba(255,255,255,.10);
 }
 .top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:18px;
+  gap:14px;
   padding:14px 0;
 }
-.brand{display:flex;align-items:center;gap:12px;min-width:220px;}
-.logo{height:44px;display:block}
-
-.nav{display:flex;align-items:center;gap:28px;}
-.nav a{
-  font-family:Oswald, system-ui, sans-serif;
-  font-weight:700;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  color:var(--chipotle-brown);
-  font-size:18px;
-}
-.nav a:hover{opacity:.75}
-
-.right{
+.brand{
   display:flex;
   align-items:center;
   gap:12px;
   min-width:220px;
-  justify-content:flex-end;
+  color:#fff;
 }
+.logo{
+  height:44px;
+  width:auto;
+  display:block;
+  filter:drop-shadow(0 12px 30px rgba(0,0,0,.35));
+}
+.brand-name{
+  font-family:Oswald, system-ui, sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  font-size:18px;
+  font-weight:800;
+  line-height:1.1;
+}
+.brand-sub{
+  font-size:12px;
+  font-weight:800;
+  color:rgba(255,255,255,.75);
+}
+
+.nav{display:flex;gap:22px;align-items:center}
+.nav a{
+  font-family:Oswald, system-ui, sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  font-weight:800;
+  color:rgba(255,255,255,.9);
+}
+.nav a:hover{opacity:.8}
+
+.right{display:flex;gap:10px;align-items:center;justify-content:flex-end}
+
+/* Pills / buttons */
 .pill{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   padding:10px 14px;
   border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-weight:800;
-  font-size:14px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  font-weight:900;
   transition:140ms ease;
 }
-.pill.primary{background:var(--blue);border-color:transparent;color:#fff;}
-.pill.primary:hover{background:var(--blue2)}
-.pill:hover{transform:translateY(-1px)}
+.pill:hover{transform:translateY(-1px); background:rgba(255,255,255,.10)}
+.pill.red{background:var(--red); border-color:transparent}
+.pill.red:hover{filter:brightness(1.05)}
+.pill.green{background:var(--green); border-color:transparent}
+.pill.green:hover{filter:brightness(1.05)}
 
-/* ✅ HERO SLIDESHOW */
-.hero-slider{
+/* ===== Hero ===== */
+.hero{
   position:relative;
-  height:70vh;
-  min-height:420px;
-  overflow:hidden;
-  background:#0b1220;
-}
-.slide{
-  position:absolute;
-  inset:0;
+  min-height:92vh;
+  display:flex;
+  align-items:center;
+
+  /* ✅ Background photo */
+  background-image:url("assets/assetsgreek-platter-bg.png");
   background-size:cover;
   background-position:center;
-  opacity:0;
-  transition:opacity .8s ease;
-  transform:translateZ(0);
+  background-repeat:no-repeat;
 }
-.slide::after{
+
+/* ✅ Dark tint overlay */
+.hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.55));
-}
-.slide.active{opacity:1;z-index:1;}
 
-.hero-content{
+  /* Professional tint + depth */
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.78), rgba(0,0,0,.45)),
+    radial-gradient(circle at 70% 30%, rgba(0,0,0,.10), rgba(0,0,0,.65));
+}
+
+/* subtle film grain */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='.18'/></svg>");
+  opacity:.22;
+  mix-blend-mode:overlay;
+  pointer-events:none;
+}
+
+.hero-inner{
   position:relative;
   z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+  padding:86px 0 56px;
   color:#fff;
-  padding:24px;
 }
-.hero-content h1{
-  font-family:Oswald, system-ui, sans-serif;
-  font-size:clamp(42px, 6vw, 90px);
-  margin:0 0 12px;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  text-shadow:0 12px 40px rgba(0,0,0,.55);
-}
-.hero-content p{
-  font-size:18px;
-  font-weight:800;
-  max-width:560px;
-  margin:0 0 22px;
-  color:rgba(255,255,255,.92);
-  text-shadow:0 10px 30px rgba(0,0,0,.45);
-}
-.hero-content .pill.primary{
-  font-size:15px;
-  padding:12px 18px;
-}
-
-/* dots */
-.hero-dots{
-  position:absolute;
-  left:50%;
-  bottom:14px;
-  transform:translateX(-50%);
-  display:flex;
-  gap:8px;
-  z-index:5;
-}
-.hero-dot{
-  width:10px;height:10px;border-radius:999px;
-  background:rgba(255,255,255,.45);
-  border:1px solid rgba(255,255,255,.35);
-}
-.hero-dot.active{background:#fff;}
-
-/* SECTION */
-section{padding:80px 0}
-.h2{font-size:36px;font-weight:900;margin:0 0 10px}
-.sub{color:var(--muted);font-weight:600}
-
-/* CATEGORY GRID (Chipotle-style big cards) */
-.category-shell{
-  background:var(--card);
-  border-radius:18px;
-  box-shadow:var(--shadow);
+.flag-bar{
+  display:inline-flex;
+  border-radius:999px;
   overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 14px 40px rgba(0,0,0,.25);
+}
+.flag-bar span{display:block; width:18px; height:10px;}
+.flag-bar .g{background:var(--green)}
+.flag-bar .w{background:#fff}
+.flag-bar .r{background:var(--red)}
+
+.hero h1{
+  font-family:Oswald, system-ui, sans-serif;
+  font-size:clamp(42px, 6vw, 86px);
+  margin:14px 0 10px;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  text-shadow:0 18px 60px rgba(0,0,0,.55);
+}
+.hero p{
+  margin:0 0 20px;
+  max-width:680px;
+  font-weight:900;
+  color:rgba(255,255,255,.88);
+  line-height:1.45;
+  text-shadow:0 12px 40px rgba(0,0,0,.45);
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  margin-top:16px;
+}
+.hero-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+.badge{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.07);
+  font-weight:900;
+  color:rgba(255,255,255,.90);
+}
+
+/* ===== Sections ===== */
+section{padding:72px 0}
+.section-title{
+  font-size:38px;
+  font-weight:950;
+  margin:0 0 10px;
+}
+.section-sub{
+  margin:0 0 18px;
+  color:rgba(11,18,32,.70);
+  font-weight:800;
+}
+
+.grid{
+  display:grid;
+  gap:16px;
+}
+.grid-3{grid-template-columns:repeat(3, 1fr)}
+.card{
+  border:1px solid rgba(11,18,32,.10);
+  border-radius:var(--radius);
+  padding:18px;
+  background:#fff;
+  box-shadow:0 18px 60px rgba(2,6,23,.08);
+  transition:140ms ease;
+}
+.card:hover{transform:translateY(-2px); box-shadow:0 22px 70px rgba(2,6,23,.12)}
+.card b{font-size:18px}
+.card p{margin:8px 0 0; color:rgba(11,18,32,.65); font-weight:800; line-height:1.35}
+
+/* ===== CATEGORY GRID (big image cards) ===== */
+.category-shell{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 18px 60px rgba(2,6,23,.10);
+  overflow:hidden;
+  border:1px solid rgba(11,18,32,.10);
 }
 .category-head{
   padding:20px 18px;
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid rgba(11,18,32,.10);
 }
 .category-head .title{
   font-family:Oswald, system-ui, sans-serif;
   letter-spacing:.6px;
   text-transform:uppercase;
   font-size:20px;
-  font-weight:700;
+  font-weight:900;
   margin:0 0 6px;
 }
-.category-head .note{color:var(--muted);font-weight:600;font-size:14px;margin:0}
+.category-head .note{
+  color:rgba(11,18,32,.65);
+  font-weight:800;
+  font-size:14px;
+  margin:0;
+}
 
 .category-grid{
   padding:18px;
@@ -198,18 +273,18 @@ section{padding:80px 0}
   border-radius:16px;
   overflow:hidden;
   background:#fff;
-  border:1px solid var(--line);
+  border:1px solid rgba(11,18,32,.10);
   box-shadow:0 14px 34px rgba(2,6,23,.08);
   transition:140ms ease;
 }
 .cat-card:hover{
   transform:translateY(-2px);
-  border-color:rgba(36,85,255,.25);
+  border-color:rgba(193,18,31,.25);
   box-shadow:0 18px 44px rgba(2,6,23,.12);
 }
 .cat-card .img{
   height:240px;
-  background:#f3f5ff;
+  background:#f3f4f6;
   overflow:hidden;
 }
 .cat-card .img img{
@@ -229,513 +304,270 @@ section{padding:80px 0}
 }
 .cat-card .meta{
   padding:0 14px 16px;
-  color:var(--muted);
-  font-weight:700;
+  color:rgba(11,18,32,.65);
+  font-weight:800;
   font-size:13px;
   line-height:1.35;
 }
 
-/* ✅ ORDERING SYSTEM BLUEPRINT (NEW) */
-.blueprint-shell{
-  background:var(--card);
-  border-radius:18px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-.blueprint-head{
-  padding:20px 18px;
-  border-bottom:1px solid var(--line);
-}
-.blueprint-head .title{
-  font-family:Oswald, system-ui, sans-serif;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  font-size:20px;
-  font-weight:700;
-  margin:0 0 6px;
-}
-.blueprint-head .note{
-  color:var(--muted);
-  font-weight:600;
-  font-size:14px;
-  margin:0;
-}
-.blueprint-grid{
-  padding:18px;
+.split{
   display:grid;
-  grid-template-columns:repeat(2, 1fr);
+  grid-template-columns: 1.2fr .8fr;
   gap:18px;
+  align-items:start;
 }
-.bp-card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  box-shadow:0 14px 34px rgba(2,6,23,.08);
-  padding:16px;
-}
-.bp-kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  font-size:16px;
-  font-weight:700;
-  color:var(--chipotle-brown);
-  margin:0 0 10px;
-}
-.bp-card h3{
-  margin:0 0 10px;
-  font-size:20px;
-  font-weight:950;
-}
-.bp-list{
-  margin:0;
-  padding-left:18px;
-  color:var(--muted);
-  font-weight:700;
-  font-size:14px;
-  line-height:1.5;
-}
-.bp-footer{
-  padding:0 18px 18px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  align-items:center;
-  justify-content:space-between;
-}
-.bp-cta{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.bp-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 12px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-weight:900;
-  font-size:13px;
-  color:var(--ink);
-}
-.bp-badge strong{color:var(--chipotle-brown)}
-.bp-mini{
-  color:var(--muted);
-  font-weight:700;
-  font-size:13px;
-}
-
-/* ✅ EMAIL SIGNUP */
-.signup-wrap{
-  padding:0 0 80px; /* matches section rhythm */
-}
-.signup-shell{
-  background:var(--card);
+.panel{
+  border:1px solid rgba(11,18,32,.10);
   border-radius:18px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-.signup-inner{
-  padding:20px 18px;
-  border-bottom:1px solid var(--line);
-}
-.signup-title{
-  font-family:Oswald, system-ui, sans-serif;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  font-size:20px;
-  font-weight:700;
-  margin:0 0 6px;
-}
-.signup-note{
-  margin:0;
-  color:var(--muted);
-  font-weight:600;
-  font-size:14px;
-}
-.signup-form{
   padding:18px;
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  align-items:center;
+  background:#fff;
+  box-shadow:0 18px 60px rgba(2,6,23,.08);
 }
-.signup-input{
-  flex:1;
-  min-width:240px;
-  padding:12px 14px;
-  border-radius:12px;
-  border:1px solid var(--line);
-  font-weight:800;
-  outline:none;
-}
-.signup-input:focus{
-  border-color:rgba(36,85,255,.45);
-  box-shadow:0 0 0 4px rgba(36,85,255,.10);
-}
-.signup-btn{
+.panel p{margin:8px 0;color:rgba(11,18,32,.70);font-weight:800;line-height:1.45}
+.kicker{
   display:inline-flex;
   align-items:center;
-  justify-content:center;
-  padding:12px 16px;
-  border-radius:999px;
-  border:1px solid transparent;
-  background:var(--blue);
-  color:#fff;
+  gap:10px;
+  font-family:Oswald, system-ui, sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.7px;
   font-weight:900;
-  cursor:pointer;
-  transition:140ms ease;
+  color:rgba(11,18,32,.85);
 }
-.signup-btn:hover{background:var(--blue2); transform:translateY(-1px)}
-.signup-fineprint{
-  padding:0 18px 18px;
-  color:var(--muted);
-  font-weight:600;
-  font-size:12px;
-  line-height:1.4;
-}
-.signup-msg{
-  padding:0 18px 18px;
+
+/* ===== Footer ===== */
+footer{
+  border-top:1px solid rgba(11,18,32,.10);
+  padding:40px 0;
+  text-align:center;
+  color:rgba(11,18,32,.60);
   font-weight:800;
-  font-size:13px;
 }
-.signup-msg.ok{color:#0a7a35}
-.signup-msg.err{color:#b42318}
 
-/* FOOTER */
-footer{padding:40px 0;color:var(--muted);font-weight:600;text-align:center}
-
-/* MOBILE */
+/* ===== Mobile ===== */
 @media(max-width:980px){
   .nav{display:none}
-  .right{min-width:auto}
+  .split{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
   .category-grid{grid-template-columns:1fr}
   .cat-card .label{font-size:24px}
-  .hero-content p{font-size:16px}
-
-  .blueprint-grid{grid-template-columns:1fr}
+  .brand{min-width:auto}
+  .right{min-width:auto}
 }
 </style>
 </head>
 
 <body>
 
+<!-- ✅ Change these once -->
+<script>
+  window.TOAST_ORDER_URL = "https://www.toasttab.com/local/order/ambridge-italian-villa-1710-duss-ave";
+  window.GMAPS_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=1710%20Duss%20Avenue%2C%20Ambridge%2C%20PA%2015003";
+</script>
+
 <header>
   <div class="wrap top">
-    <a class="brand" href="index.html" aria-label="Philly Originals Home">
-      <img src="assets/logo.png" class="logo" alt="Philly Originals"
-           onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffffff%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%230b1220%22>Philly Originals</text></svg>';"/>
+    <a class="brand" href="#top" aria-label="Home">
+      <img class="logo" src="assets/logo.png" alt="Ambridge Italian Villa"
+           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22transparent%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22white%22>Ambridge Italian Villa</text></svg>';">
+      <div>
+        <div class="brand-name">Ambridge Italian Villa</div>
+        <div class="brand-sub">Italian • Greek • American</div>
+      </div>
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="#categories">Menu</a>
-      <a href="catering.html">Catering</a>
-      <a href="#blueprint">Ordering System</a>
-      <a href="rewards.html">Rewards</a>
-      <a href="locations.html">Locations</a>
+      <a href="#menu">Menu</a>
+      <a href="#favorites">Favorites</a>
+      <a href="#hours">Hours</a>
     </nav>
 
     <div class="right">
-      <a class="pill" href="locations.html">Directions</a>
-      <a class="pill primary" href="tel:+17247283011">Call</a>
+      <a class="pill" href="#" id="directionsTop">Directions</a>
+      <a class="pill red" href="#" id="orderTop" target="_blank" rel="noopener">Order Online</a>
     </div>
   </div>
 </header>
 
-<!-- ✅ HERO SLIDESHOW -->
-<div class="hero-slider" aria-label="Featured items">
-  <div class="slide active" style="background-image:url('assets/01-sandwich-philadelphia-cheesesteak.png')">
-    <div class="hero-content">
-      <h1>LEGENDARY CHEESESTEAKS</h1>
-      <p>Fresh-cut steak. Melted cheese. No shortcuts.</p>
-      <a href="#categories" class="pill primary">Order Now</a>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image:url('assets/07-hoagie-italian.png')">
-    <div class="hero-content">
-      <h1>STACKED HOAGIES</h1>
-      <p>Classic, loaded, and made to order.</p>
-      <a href="#categories" class="pill primary">View Menu</a>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image:url('assets/34-side-cheese-fries.png')">
-    <div class="hero-content">
-      <h1>SIDES THAT HIT</h1>
-      <p>Don’t skip the fries.</p>
-      <a href="#categories" class="pill primary">Add a Side</a>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image:url('assets/58-drink-cherry-pepsi.png')">
-    <div class="hero-content">
-      <h1>ICE-COLD DRINKS</h1>
-      <p>Cherry Pepsi — a classic.</p>
-      <a href="#categories" class="pill primary">Grab One</a>
-    </div>
-  </div>
-
-  <div class="hero-dots" aria-hidden="true">
-    <span class="hero-dot active"></span>
-    <span class="hero-dot"></span>
-    <span class="hero-dot"></span>
-    <span class="hero-dot"></span>
-  </div>
-</div>
-
-<!-- ✅ CATEGORY SELECT SECTION -->
-<section id="categories">
-  <div class="wrap">
-    <h2 class="h2">Menu</h2>
-    <p class="sub">Pick a category to see the full menu and order online.</p>
-
-    <div class="category-shell">
-      <div class="category-head">
-        <div class="title">Choose a Category</div>
-        <p class="note">Tap a card to open that category on the menu page.</p>
+<main id="top">
+  <div class="hero" role="img" aria-label="Greek platter background">
+    <div class="wrap hero-inner">
+      <div class="flag-bar" aria-hidden="true">
+        <span class="g"></span><span class="w"></span><span class="r"></span>
       </div>
 
-      <div class="category-grid" aria-label="Menu categories">
-        <a class="cat-card" href="menu.html?cat=sandwich" aria-label="Open Sandwiches">
-          <div class="img">
-            <img src="assets/cat-sandwiches.png" alt="Sandwiches"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='assets/01-sandwich-philadelphia-cheesesteak.png';">
-          </div>
-          <div class="label">Sandwiches</div>
-          <div class="meta">Cheesesteaks, chicken, buffalo & more.</div>
-        </a>
+      <h1>Gyros. Pizza. Family.</h1>
+      <p>
+        A little taste of the Mediterranean — with Italian classics and American favorites.
+        Fresh, fast pickup, and big portions that hit.
+      </p>
 
-        <a class="cat-card" href="menu.html?cat=hoagie" aria-label="Open Hoagies">
-          <div class="img">
-            <img src="assets/cat-hoagies.png" alt="Hoagies"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='assets/07-hoagie-italian.png';">
-          </div>
-          <div class="label">Hoagies</div>
-          <div class="meta">Italian, turkey, meatball, and classics.</div>
-        </a>
+      <div class="hero-actions">
+        <a class="pill red" href="#" id="orderHero" target="_blank" rel="noopener">Order Online</a>
+        <a class="pill green" href="#menu">View Menu</a>
+        <a class="pill" href="#" id="directionsHero">Get Directions</a>
+      </div>
 
-        <a class="cat-card" href="menu.html?cat=salads" aria-label="Open Salads">
-          <div class="img">
-            <img src="assets/cat-salads.png" alt="Salads"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='assets/24-salad-steak.png';">
-          </div>
-          <div class="label">Salads</div>
-          <div class="meta">Steak, chicken, tuna & more.</div>
-        </a>
-
-        <a class="cat-card" href="menu.html?cat=specialty-fries" aria-label="Open Specialty Fries">
-          <div class="img">
-            <img src="assets/cat-specialty-fries.png" alt="Specialty Fries"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='assets/34-side-cheese-fries.png';">
-          </div>
-          <div class="label">Specialty Fries</div>
-          <div class="meta">Loaded fries, cheese & steak, fish & fries.</div>
-        </a>
-
-        <a class="cat-card" href="menu.html?cat=sides-extras" aria-label="Open Sides and Extras">
-          <div class="img">
-            <img src="assets/cat-sides-extras.png" alt="Sides & Extras"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='assets/32-side-fries.png';">
-          </div>
-          <div class="label">Sides & Extras</div>
-          <div class="meta">Fries, rings, sticks, fingers, snacks.</div>
-        </a>
-
-        <a class="cat-card" href="menu.html?cat=beverages" aria-label="Open Beverages">
-          <div class="img">
-            <img src="assets/cat-beverages.png" alt="Beverages"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='assets/58-drink-cherry-pepsi.png';">
-          </div>
-          <div class="label">Beverages</div>
-          <div class="meta">Pepsi, teas, Hank’s, Gatorade & more.</div>
-        </a>
+      <div class="hero-badges">
+        <span class="badge">✔ Fresh made-to-order</span>
+        <span class="badge">✔ Fast pickup</span>
+        <span class="badge">✔ Greek + Italian favorites</span>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ✅ ORDERING SYSTEM BLUEPRINT (NEW) -->
-<section id="blueprint">
-  <div class="wrap">
-    <h2 class="h2">Ordering System Blueprint</h2>
-    <p class="sub">If you control the code, here’s what a real ordering system needs (end-to-end).</p>
+  <!-- ✅ CATEGORY SELECT MENU (matches Italian Villa menu) -->
+  <section id="menu">
+    <div class="wrap">
+      <h2 class="section-title">Menu</h2>
+      <p class="section-sub">Pick a category to order instantly through our online ordering.</p>
 
-    <div class="blueprint-shell">
-      <div class="blueprint-head">
-        <div class="title">If you control the code: what you need</div>
-        <p class="note">An ordering system is basically 4 parts — frontend, backend, payments, and ops.</p>
-      </div>
-
-      <div class="blueprint-grid" aria-label="Ordering system components">
-        <div class="bp-card">
-          <div class="bp-kicker">1) Menu + Cart (frontend)</div>
-          <h3>Customer selects + customizes</h3>
-          <ul class="bp-list">
-            <li>Items, modifiers, quantities, notes, tips</li>
-            <li>Pickup/delivery selector + time slots</li>
-          </ul>
+      <div class="category-shell">
+        <div class="category-head">
+          <div class="title">Choose a Category</div>
+          <p class="note">Tap a card to open online ordering.</p>
         </div>
 
-        <div class="bp-card">
-          <div class="bp-kicker">2) Order API (backend)</div>
-          <h3>Server validates + records</h3>
-          <ul class="bp-list">
-            <li>Validate prices + availability (never trust client)</li>
-            <li>Create an “Order” record in DB</li>
-            <li>Compute taxes/fees/tips correctly</li>
-          </ul>
-        </div>
+        <div class="category-grid" aria-label="Menu categories">
+          <a class="cat-card" href="#" data-order aria-label="Pizza & Calzones">
+            <div class="img">
+              <img src="assets/cat-pizza-calzone.png" alt="Pizza and calzones"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Pizza & Calzones</div>
+            <div class="meta">Sicilian, hand tossed, thick/thin + specialty pies.</div>
+          </a>
 
-        <div class="bp-card">
-          <div class="bp-kicker">3) Payment Processor</div>
-          <h3>Collect money safely</h3>
-          <ul class="bp-list">
-            <li>Use something like Stripe (most common) or Square Payments</li>
-            <li>Create a Payment Intent for the cart total</li>
-            <li>Confirm payment (client)</li>
-            <li>Use webhooks (server) to mark orders “paid” / handle failures/refunds</li>
-          </ul>
-        </div>
+          <a class="cat-card" href="#" data-order aria-label="Gyros & Greek Specialties">
+            <div class="img">
+              <img src="assets/cat-gyros.png" alt="Gyros and Greek specialties"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Gyros & Greek</div>
+            <div class="meta">Home of the gyro — souvlaki, platters, Greek favorites.</div>
+          </a>
 
-        <div class="bp-card">
-          <div class="bp-kicker">4) Admin / Kitchen view</div>
-          <h3>Fulfillment + operations</h3>
-          <ul class="bp-list">
-            <li>Order list, status updates (new → preparing → ready)</li>
-            <li>Printer/KDS integration if needed</li>
-          </ul>
-        </div>
-      </div>
+          <a class="cat-card" href="#" data-order aria-label="Hoagies, Sandwiches & Wraps">
+            <div class="img">
+              <img src="assets/cat-hoagies-wraps.png" alt="Hoagies and wraps"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Hoagies & Wraps</div>
+            <div class="meta">12” hoagies, grilled sandwiches, wraps & more.</div>
+          </a>
 
-      <div class="bp-footer">
-        <div class="bp-mini">
-          <span class="bp-badge"><strong>Tip:</strong> Toast/Square/Owner can handle payments + orders, but custom code gives full control.</span>
-        </div>
-        <div class="bp-cta">
-          <a class="pill primary" href="#categories">Start Order Flow</a>
-          <a class="pill" href="menu.html">Open Full Menu</a>
+          <a class="cat-card" href="#" data-order aria-label="Wings, Fries & Finger Foods">
+            <div class="img">
+              <img src="assets/cat-wings-fries.png" alt="Wings and fries"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Wings & Finger Foods</div>
+            <div class="meta">Wings, fries, loaded fries, mozzarella sticks, apps.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Salads & Soups">
+            <div class="img">
+              <img src="assets/cat-salads-soups.png" alt="Salads and soups"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Salads & Soups</div>
+            <div class="meta">Greek feta, chef/gyro/chicken/steak salads + soup & chili.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Breakfast & Daily Specials">
+            <div class="img">
+              <img src="assets/cat-breakfast.png" alt="Breakfast and specials"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Breakfast & Specials</div>
+            <div class="meta">Omelets, pancakes/french toast + daily specials.</div>
+          </a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ✅ EMAIL SIGNUP (NEW) -->
-<div class="signup-wrap" id="signup">
-  <div class="wrap">
-    <div class="signup-shell">
-      <div class="signup-inner">
-        <div class="signup-title">Get Deals & Updates</div>
-        <p class="signup-note">Be the first to hear about specials, rewards, and new items.</p>
-      </div>
+  <section id="favorites">
+    <div class="wrap">
+      <h2 class="section-title">House Favorites</h2>
+      <p class="section-sub">Best sellers — simple, satisfying, always consistent.</p>
 
-      <form class="signup-form" id="emailSignupForm" novalidate>
-        <input
-          class="signup-input"
-          id="emailInput"
-          type="email"
-          inputmode="email"
-          autocomplete="email"
-          placeholder="Enter your email"
-          aria-label="Email address"
-          required
-        />
-        <button class="signup-btn" type="submit">Sign Up</button>
-      </form>
-
-      <div class="signup-msg" id="signupMsg" aria-live="polite"></div>
-
-      <div class="signup-fineprint">
-        No spam. Just good food and occasional deals.
+      <div class="grid grid-3">
+        <div class="card"><b>Classic Gyro</b><p>Pita, seasoned meat, onions, tomatoes, tzatziki.</p></div>
+        <div class="card"><b>Chicken Souvlaki</b><p>Grilled chicken, lemony flavor, fresh sides.</p></div>
+        <div class="card"><b>Loaded Fries</b><p>Cheese, seasoning, and add-ons that slap.</p></div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+
+  <section id="hours">
+    <div class="wrap">
+      <div class="split">
+        <div class="panel">
+          <div class="kicker">Hours & Location</div>
+          <h2 class="section-title" style="margin-top:10px;">Find Us</h2>
+          <p><b>1710 Duss Avenue, Ambridge, PA 15003</b></p>
+          <p>Mon–Fri 10AM–9PM • Sat 12PM–9PM • Sun Closed</p>
+          <p>Call: <a href="tel:+17242661919"><b>(724) 266-1919</b></a></p>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;">
+            <a class="pill" href="#" id="directionsHours" target="_blank" rel="noopener">Directions</a>
+            <a class="pill red" href="#" id="orderHours" target="_blank" rel="noopener">Order Online</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="kicker">Greek Vibe</div>
+          <h2 class="section-title" style="margin-top:10px;">Kali Orexi</h2>
+          <p>
+            That means “enjoy your meal.”
+            We keep it simple: fresh ingredients, bold flavor, and food that feels like home.
+          </p>
+          <p>
+            Order online for pickup — or come in and we’ll take care of you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
-  © Philly Originals · 400 Third St, Beaver PA · (724) 728-3011
+  © Ambridge Italian Villa · Ambridge, PA
 </footer>
 
-<!-- ✅ HERO SLIDESHOW JS -->
 <script>
 (function(){
-  const slides = document.querySelectorAll(".hero-slider .slide");
-  const dots = document.querySelectorAll(".hero-slider .hero-dot");
-  if(!slides.length) return;
+  const orderUrl = window.TOAST_ORDER_URL;
+  const mapsUrl = window.GMAPS_DIRECTIONS_URL;
 
-  let current = 0;
-  const INTERVAL_MS = 5000;
+  // Order links
+  ["orderTop","orderHero","orderHours"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.href = orderUrl;
+  });
 
-  function setSlide(i){
-    slides[current].classList.remove("active");
-    if(dots[current]) dots[current].classList.remove("active");
+  // Directions links
+  ["directionsTop","directionsHero","directionsHours"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el){ el.href = mapsUrl; el.target="_blank"; el.rel="noopener"; }
+  });
 
-    current = i;
-
-    slides[current].classList.add("active");
-    if(dots[current]) dots[current].classList.add("active");
-  }
-
-  setInterval(() => {
-    setSlide((current + 1) % slides.length);
-  }, INTERVAL_MS);
-})();
-</script>
-
-<!-- ✅ EMAIL SIGNUP JS (NEW) -->
-<script>
-(function(){
-  // ✅ Change this to your real inbox if you want signups emailed to you.
-  // Fastest zero-backend approach: opens user's email app with the signup email.
-  const DESTINATION_EMAIL = "phillyoriginalsbeaver@gmail.com";
-
-  const form = document.getElementById("emailSignupForm");
-  const input = document.getElementById("emailInput");
-  const msg = document.getElementById("signupMsg");
-
-  function setMsg(text, ok){
-    msg.textContent = text;
-    msg.className = "signup-msg " + (ok ? "ok" : "err");
-  }
-
-  function isValidEmail(email){
-    // Simple, safe validation (not over-strict)
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email).trim());
-  }
-
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    const email = (input.value || "").trim();
-
-    if(!isValidEmail(email)){
-      setMsg("Please enter a valid email address.", false);
-      input.focus();
-      return;
-    }
-
-    // Open mail client with email included (reliable, no server needed)
-    const subject = encodeURIComponent("Email Signup - Philly Originals");
-    const body = encodeURIComponent("Please add this email to the list:\n\n" + email + "\n");
-    window.location.href = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${body}`;
-
-    setMsg("Thanks! You’re all set.", true);
-    form.reset();
+  // Any element with data-order opens ordering
+  document.querySelectorAll("[data-order]").forEach(el=>{
+    el.addEventListener("click", (e)=>{
+      e.preventDefault();
+      window.open(orderUrl, "_blank", "noopener");
+    });
   });
 })();
 </script>
 
 </body>
 </html>
-
